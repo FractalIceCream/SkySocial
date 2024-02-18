@@ -1,37 +1,43 @@
 const express = require('express');
-// Run npm install mongodb and require mongodb and MongoClient class
-const { MongoClient } = require('mongodb');
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
+const path = require('path');
+const { authMiddleware } = require('./utils/auth');
+
+const db = require('./config/connection');
+const { typeDefs, resolvers } = require('./schemas');
 
 const app = express();
-const port = 3001;
+const PORT = process.env.PORT || 3001;
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+})
 
-// Connection string to local instance of MongoDB
-const connectionStringURI = `mongodb://127.0.0.1:27017`;
+const startApolloServer = async () => {
+  await server.start();
 
-// Initialize a new instance of MongoClient
-const client = new MongoClient(connectionStringURI);
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
 
-// Declare a variable to hold the connection
-let db;
+  app.use('/graphql', expressMiddleware(server, {
+    context: authMiddleware
+  }));
 
-// Create variable to hold our database name
-const dbName = 'SkySocialDB';
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
 
-// Use connect method to connect to the mongo server
-client.connect()
-  .then(() => {
-    console.log('Connected successfully to MongoDB');
-    // Use client.db() constructor to add new db instance
-    db = client.db(dbName);
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    })
+  }
 
-    // start up express server
-    app.listen(port, () => {
-      console.log(`Example app listening at http://localhost:${port}`);
-    });
+  db.once('open', () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`);
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+    })
   })
-  .catch((err) => {
-    console.error('Mongo connection error: ', err.message);
-  });
+}
 
-// Built in Express function that parses incoming requests to JSON
-app.use(express.json());
+startApolloServer();
