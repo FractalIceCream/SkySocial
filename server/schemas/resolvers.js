@@ -22,7 +22,7 @@ const resolvers = {
         },
 
         // used to load the users profile that is logged in
-        // need to test
+        // need to testt
         me: async (parent, args, context) => {
             if (context.user) {
                 return Profile.findOne({ _id: context.user._id });
