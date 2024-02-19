@@ -1,11 +1,17 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const { Schema } = mongoose;
+// INSERT TRIP ENTIRETY? DESINATION? FLIGHT? ACCOMODATIONS?
+const favoriteSchema = new Schema(
+    {
+        tripName: {
+            type: String,
+        },
+        tripDescription: {
+            type: String,
+        },
+    }
+)
 
-const favoriteSchema = new Schema({
-    // INSERT TRIP ENTIRETY? DESINATION? FLIGHT? ACCOMODATIONS?
-})
-
-const Favorite = mongoose.model('Favorite', favoriteSchema);
+const Favorite = model('Favorite', favoriteSchema)
 
 module.exports = Favorite;
