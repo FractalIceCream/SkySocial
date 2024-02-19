@@ -9,10 +9,9 @@ const resolvers = {
         // used to get data in graphql playground only
         // works correctly 
         profiles: async () => {
-            return Profile.find();
+            return Profile.find().populate('posts');
         },
 
-        // used to find a specific user by name
         // works correctly 
         profile: async (parent, { name }) => {
             return Profile.findOne({ name });
@@ -23,7 +22,7 @@ const resolvers = {
         },
 
         // used to load the users profile that is logged in
-        // need to test
+        // need to testt
         me: async (parent, args, context) => {
             if (context.user) {
                 return Profile.findOne({ _id: context.user._id });
@@ -33,12 +32,11 @@ const resolvers = {
     },
 
     Mutation: {
-        // works correctly but not returning profile information after adding profile
+        // works correctly 
         addProfile: async (parent, { name, email, password }) => {
 
             try {
                 const profile = await Profile.create({ name, email, password });
-                // console.log(user)
 
                 const token = signToken(profile);
 
@@ -51,7 +49,7 @@ const resolvers = {
             }
         },
 
-        // works correctly but not returning profile information after logged in
+        // works correctly 
         login: async (parent, { email, password }) => {
             const profile = await Profile.findOne({ email });
 
@@ -70,9 +68,7 @@ const resolvers = {
             return { token, profile };
         },
 
-        // post is being created and saved to profile but
-        // the text is showing up as null
-
+        // works correctly 
         createPost: async (parent, { postText }, context) => {
             console.log(context.user)
             if (context.user) {
@@ -98,7 +94,6 @@ const resolvers = {
             throw AuthenticationError;
             ('You need to be logged in!');
         },
-
     }
 }
 
