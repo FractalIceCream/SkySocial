@@ -9,22 +9,43 @@ const amadeus = new Amadeus({
 });
 
 
-amadeus.referenceData.urls.checkinLinks.get({ airlineCode: 'BA' }).then(function(res) {
-    console.log(res.data);
-}).catch((res) => console.log(res.code));
+// amadeus.referenceData.urls.checkinLinks.get({ airlineCode: 'BA' }).then(function(res) {
+//     console.log(res.data);
+// }).catch((res) => console.log(res.code));
 
-// amadeus.shopping.flightOffersSearch.get({
-//     originLocationCode: 'SYD',
-//     destinationLocationCode: 'BKK',
-//     departureDate: '2024-02-19',
-//     adults: '2'
-// }).then(function(response){
-//   console.log(response.data);
-// }).catch(function(responseError){
-//   console.log(responseError.code);
-// });
+// const { originLocationCode,
+//         destinationLocationCode,
+//         departureDate,
+//         returnDate, 
+//         adults, 
+//         children, 
+//         infants, 
+//         nonStop, 
+//         includedAirlines, 
+//         excludedAirines, 
+//         maxPrice, 
+//         travelClass, 
+//         currencyCode, 
+//         max } = amadeusParams;
 
-// module.exports = searchFlightOffer = function () {
+// amadeus.client.get('/v2/shopping/flight-offers', {
+//     originLocationCode: 'DFW',
+//     destinationLocationCode: 'NYC',
+//     departureDate: '2024-02-20',
+//     adults: 1,
+//     max: 2
+//     }).then((res) => console.log(JSON.stringify(res.data)))
+//     .catch((err) => console.error(err.code));
+
+amadeus.client.get('/v1/reference-data/locations/cities', {
+    keyword: 'dallas', max: 10, include: 'AIRPORTS'})
+    .then(res => console.log(res.data))
+    .catch(err => console.error(err));
+
+// res.data[0].iataCode  DFW
+//  res.data[0].name    Dallas
+
+    // module.exports = searchFlightOffer = function () {
 
 //     const currentDate = new Date.now();
 //     const year = currentDate.getFullYear();
@@ -39,3 +60,138 @@ amadeus.referenceData.urls.checkinLinks.get({ airlineCode: 'BA' }).then(function
 //     // return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
 //   };
   
+//res.data
+// [
+//     {
+//       type: 'flight-offer',
+//       id: '1',
+//       source: 'GDS',
+//       instantTicketingRequired: false,
+//       nonHomogeneous: false,
+//       oneWay: false,
+//       lastTicketingDate: '2024-02-20',
+//       lastTicketingDateTime: '2024-02-20',
+//       numberOfBookableSeats: 9,
+//       itineraries: [ [Object] ],
+//       price: {
+//         currency: 'EUR',
+//         total: '482.96',
+//         base: '409.00',
+//         fees: [Array],
+//         grandTotal: '482.96'
+//       },
+//       pricingOptions: { fareType: [Array], includedCheckedBagsOnly: true },
+//       validatingAirlineCodes: [ 'MH' ],
+//       travelerPricings: [ [Object] ]
+//     },
+//     {
+//       type: 'flight-offer',
+//       id: '2',
+//       source: 'GDS',
+//       instantTicketingRequired: false,
+//       nonHomogeneous: false,
+//       oneWay: false,
+//       lastTicketingDate: '2024-02-20',
+//       lastTicketingDateTime: '2024-02-20',
+//       numberOfBookableSeats: 9,
+//       itineraries: [ [Object] ],
+//       price: {
+//         currency: 'EUR',
+//         total: '482.96',
+//         base: '409.00',
+//         fees: [Array],
+//         grandTotal: '482.96'
+//       },
+//       pricingOptions: { fareType: [Array], includedCheckedBagsOnly: true },
+//       validatingAirlineCodes: [ 'MH' ],
+//       travelerPricings: [ [Object] ]
+//     }
+//   ]
+
+
+
+// const tripInfoSchema = new Schema(
+//     {
+//         name: {
+//             type: String,
+//             required: true,
+
+//         },
+//         originLocationCode: {
+//             type: String,
+//             required: true,
+//         },
+//         destinationLocationCode: {
+//             type: String,
+//             required: true,
+//         },
+//         departureDate: {
+//             type: Date,
+//             required: true,
+//             // Dates specified in ISO 8601 YYYY-MM-DD format
+//         },
+//         returnDate: {
+//             type: Date,
+//             // Dates specified in ISO 8601 YYYY-MM-DD format
+//             validate: {
+//                 validator: function(value) {
+//                     return this.departureDate === undefined || value >= this.departureDate;
+//                 },
+//                 message: 'Return date should be equal to or after the departure date',
+//             }
+//         },
+//         adults: {
+//             type: Number,
+//             required: true,
+//         },
+//         children: {
+//             type: Number,
+//             maxLength: 9,
+//         },
+//         infants: {
+//             type: Number,
+//             // maxLength not exceeding amount of adults
+//             validate: {
+//                 validator: function(value) {
+//                     return this.adults === undefined || value <= this.adults;
+//                 },
+//                 message: 'Number of infants should not exceed the number of adults',
+//             },
+//         },
+//         travelClass: {
+//             type: String,
+//             // available options: ECONOMY, PREMIUM_ECONOMY, BUSINESS, FIRST
+//             enum: ['ECONOMY', 'PREMIUM_ECONOMY', 'BUSINESS', 'FIRST'],
+//         },
+//         includedAirlineCodes: {
+//             type: String,
+//             // IATA airline codes and comma-separated
+//         },
+//         excludedAirlineCodes: {
+//             type: String,
+//             // IATA airline codes and comma-separated
+//         },
+//         nonStop: {
+//             type: Boolean,
+//             default: false,
+//         },
+//         currencyCode: {
+//             type: String,
+//             // ISO 4217 format
+//         },
+//         maxPrice: {
+//             type: Number,
+//             // should be a positive number with no decimals
+//         },
+//         max: {
+//             type: Number,
+//             // max number of returned flights, default value 250, should be greater than or equal to 1
+//         },
+//         profile: [
+//             {
+//                 type: Schema.Types.ObjectId,
+//                 ref: 'Profile',
+//             }
+//         ]
+//     }
+// )

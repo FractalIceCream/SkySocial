@@ -1,21 +1,12 @@
 const { Profile, Post } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
-<<<<<<< HEAD
-
-// get all profiles query working but postData coming back null
-=======
->>>>>>> 7252d31ab03e4369ae6660464af7793cb656df6c
 
 const resolvers = {
     Query: {
         // used to get data in graphql playground only
         // works correctly 
         profiles: async () => {
-<<<<<<< HEAD
-            return Profile.find().populate('posts');
-=======
             return Profile.find().populate('posts').populate('friends');
->>>>>>> 7252d31ab03e4369ae6660464af7793cb656df6c
         },
 
         // works correctly
