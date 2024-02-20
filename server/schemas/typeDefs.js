@@ -6,12 +6,14 @@
 // add query to get all wishlist trips specific to a logged in users trips
 // add query to get all scheduled users trips
 
-// add mutation to add friend
-// add mutation to unadd friend
+// put aside until main func is created
+
 // add mutation to like post
 // add mutation to unlike post
 // add mutation to like comment 
 // add mutation to unlike comment
+
+// delete type favorite
 
 const typeDefs = `
     type Profile {
@@ -52,10 +54,29 @@ const typeDefs = `
         secondLevelcreatedAt: String
     }
 
-    type Favorite {
+    type Wishlist {
         _id: ID
-        tripName: String
-        tripDescription: String
+        name: String
+        tripInfo: [TripInfo]
+    }
+
+    type TripInfo {
+        name: String
+        originLocationCode: String
+        destinationLocationCode: String
+        departureDate: String
+        returnDate: String 
+        adults: Int
+        children: Int
+        infants: Int
+        travelClass: String
+        includedAirlineCodes: String
+        excludedAirlineCodes: String
+        nonStop: Boolean
+        currencyCode: String
+        maxPrice: Int
+        max: Int
+        profile: [Profile]
     }
 
     type Auth {
@@ -78,6 +99,9 @@ const typeDefs = `
         createComment(postId: ID!, commentText: String!): Post
         removeComment(postId: ID!, commentId: String!): Post
         createSecondLevelComment(postId:ID!, commentId: ID!, commentText: String!): Post
+        removeSecondLevelComment(postId: ID!, commentId: ID!, secondLevelCommentId: ID!): Post
+        addFriend(friendId: ID!): Profile
+        removeFriend(friendId: ID!): Profile
     }
 `;
 
