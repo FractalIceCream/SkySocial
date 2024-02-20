@@ -1,6 +1,9 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
+// create virtual for like count
+// add ref to wishlist
+
 const postSchema = new Schema(
     {
         postAuthor: {
@@ -40,7 +43,26 @@ const postSchema = new Schema(
                     default: Date.now,
                     get: (timestamp) => dateFormat(timestamp),
                 },
-            }
+                secondLevelComments: [
+                    {
+                        secondLevelcommentText: {
+                            type: String,
+                            required: true,
+                            minlength: 1,
+                            maxlength: 280,
+                        },
+                        secondLevelcommentAuthor: {
+                            type: String,
+                            required: true,
+                        },
+                        secondLevelcreatedAt: {
+                            type: Date,
+                            default: Date.now,
+                            get: (timestamp) => dateFormat(timestamp),
+                        },
+                    },
+                ],
+            },
         ],
     },
 )

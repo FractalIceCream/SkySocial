@@ -1,16 +1,17 @@
 // what other fields should favorite trip have
 
 // add query to get all favorite trips specific to a users profile
-// add query to get all posts from friends for home page
+// add query to get all posts for home page
 // add query to get all posts specific to a users profile for profile page
+// add query to get all wishlist trips specific to a logged in users trips
+// add query to get all scheduled users trips
 
-// add mutation to comment on post
 // add mutation to add friend
 // add mutation to unadd friend
 // add mutation to like post
 // add mutation to unlike post
-
-// able to addUser and login but i am not getting my profile information back
+// add mutation to like comment 
+// add mutation to unlike comment
 
 const typeDefs = `
     type Profile {
@@ -41,6 +42,14 @@ const typeDefs = `
         commentText: String
         commentAuthor: String
         createdAt: String
+        secondLevelComments: [secondLevelComment]
+    }
+
+    type secondLevelComment {
+        _id: ID
+        secondLevelcommentText: String
+        secondLevelcommentAuthor: String
+        secondLevelcreatedAt: String
     }
 
     type Favorite {
@@ -65,6 +74,10 @@ const typeDefs = `
         addProfile(name: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         createPost(postText: String!): Post
+        removePost(postId: ID!): Post
+        createComment(postId: ID!, commentText: String!): Post
+        removeComment(postId: ID!, commentId: String!): Post
+        createSecondLevelComment(postId:ID!, commentId: ID!, commentText: String!): Post
     }
 `;
 
