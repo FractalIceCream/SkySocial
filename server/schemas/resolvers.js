@@ -6,12 +6,12 @@ const resolvers = {
         // used to get data in graphql playground only
         // works correctly 
         profiles: async () => {
-            return Profile.find().populate('posts');
+            return Profile.find().populate('posts').populate('friends');
         },
 
         // works correctly
         profile: async (parent, { name }) => {
-            return Profile.findOne({ name }).populate('posts');
+            return Profile.findOne({ name }).populate('posts').populate('friends');
         },
 
         // works correctly 
@@ -180,8 +180,95 @@ const resolvers = {
                 console.error('Error creating second-level comment:', error);
                 throw error;
             }
+        },
+
+        // works correctly
+        removeSecondLevelComment: async (parent, { postId, commentId, secondLevelCommentId }, context) => {
+            try {
+
+                const post = await Post.findById(postId);
+
+                if (!post) {
+                    throw new Error('Post not found')
+                }
+
+                const commentIndex = post.comments.findIndex(comment => comment._id.equals(commentId));
+                if (commentIndex === -1) {
+                    throw new Error('Comment not found');
+                }
+
+                const comment = post.comments[commentIndex];
+
+                const secondLevelCommentIndex = comment.secondLevelComments.findIndex(comment => comment._id.equals(secondLevelCommentId));
+                if (secondLevelCommentIndex === -1) {
+                    throw new Error('Second-level comment not found');
+                }
+
+                comment.secondLevelComments.splice(secondLevelCommentIndex, 1);
+
+                await post.save();
+
+                return post;
+
+            } catch (error) {
+                console.error('Error removing second-level comment:', error);
+                throw error;
+            }
+        },
+
+        // works correctly
+        addFriend: async (parent, { friendId }, context) => {
+            try {
+                if (!context.user) {
+                    throw new AuthenticationError('Must be logged in to add friends');
+                }
+
+                const profile = await Profile.findById(context.user._id);
+
+                if (!profile) {
+                    throw new Error('Profile not found');
+                }
+
+                if (!profile.friends.includes(friendId)) {
+                    profile.friends.push(friendId);
+                    await profile.save();
+                }
+
+                return profile;
+
+            } catch (error) {
+                console.error('Error adding friend:', error);
+                throw error;
+            };
+        },
+
+        // works correctly 
+        removeFriend: async (parent, { friendId }, context) => {
+            try {
+                if (!context.user) {
+                    throw new AuthenticationError('You must be logged into remove a friend');
+                }
+
+                const profile = await Profile.findById(context.user._id);
+
+                if (!profile) {
+                    throw new Error('Profile not found');
+                }
+
+                const index = profile.friends.indexOf(friendId);
+                if (index !== -1) {
+                    profile.friends.splice(index, 1);
+                    await profile.save();
+                }
+
+                return profile;
+
+            } catch (error) {
+                console.error('Error removing friend:', error);
+                throw error
+            }
         }
-    }
-}
+    },
+};
 
 module.exports = resolvers;

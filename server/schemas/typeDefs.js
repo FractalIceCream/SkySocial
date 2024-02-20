@@ -6,8 +6,8 @@
 // add query to get all wishlist trips specific to a logged in users trips
 // add query to get all scheduled users trips
 
-// add mutation to add friend
-// add mutation to unadd friend
+// put aside until main func is created
+
 // add mutation to like post
 // add mutation to unlike post
 // add mutation to like comment 
@@ -78,6 +78,9 @@ const typeDefs = `
         createComment(postId: ID!, commentText: String!): Post
         removeComment(postId: ID!, commentId: String!): Post
         createSecondLevelComment(postId:ID!, commentId: ID!, commentText: String!): Post
+        removeSecondLevelComment(postId: ID!, commentId: ID!, secondLevelCommentId: ID!): Post
+        addFriend(friendId: ID!): Profile
+        removeFriend(friendId: ID!): Profile
     }
 `;
 
