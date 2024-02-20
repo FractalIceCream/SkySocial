@@ -32,10 +32,10 @@ const profileSchema = new Schema(
         ref: 'Profile'
       }
     ],
-    favorites: [
+    wishlist: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Profile'
+        ref: 'Wishlist'
       }
     ],
 
