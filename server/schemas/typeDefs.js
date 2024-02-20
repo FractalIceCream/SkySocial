@@ -13,6 +13,8 @@
 // add mutation to like comment 
 // add mutation to unlike comment
 
+// delete type favorite
+
 const typeDefs = `
     type Profile {
         _id: ID
@@ -52,10 +54,29 @@ const typeDefs = `
         secondLevelcreatedAt: String
     }
 
-    type Favorite {
+    type Wishlist {
         _id: ID
-        tripName: String
-        tripDescription: String
+        name: String
+        tripInfo: [TripInfo]
+    }
+
+    type TripInfo {
+        name: String
+        originLocationCode: String
+        destinationLocationCode: String
+        departureDate: String
+        returnDate: String 
+        adults: Int
+        children: Int
+        infants: Int
+        travelClass: String
+        includedAirlineCodes: String
+        excludedAirlineCodes: String
+        nonStop: Boolean
+        currencyCode: String
+        maxPrice: Int
+        max: Int
+        profile: [Profile]
     }
 
     type Auth {
