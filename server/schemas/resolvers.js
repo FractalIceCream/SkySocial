@@ -1,6 +1,5 @@
 const { Profile, Post } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
-const { ObjectId } = require('mongoose').Types
 
 // get all profiles query working but postData coming back null
 
@@ -9,7 +8,7 @@ const resolvers = {
         // used to get data in graphql playground only
         // works correctly 
         profiles: async () => {
-            return Profile.find();
+            return Profile.find().populate('posts');
         },
 
         // used to find a specific user by name
