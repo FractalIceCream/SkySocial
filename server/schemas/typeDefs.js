@@ -1,13 +1,8 @@
 // what other fields should favorite trip have
 
-// add query to get all favorite trips specific to a users profile
-// add query to get all posts specific to a users profile for profile page
-// add query to get all wishlist trips specific to a logged in users trips
 // add query to get all scheduled users trips
 
-// add mutation to add trips to wishlist
 // add mutation to save tripinfo into model from api
-// add mutation to update profile
 
 // put aside until main func is created
 // add mutation to like post
@@ -104,7 +99,6 @@ const typeDefs = `
         removeFriend(friendId: ID!): Profile
         addWishlist(name: String!): Wishlist
         removeWishlist(wishlistId: ID!): Wishlist
-       
     }
 `;
 
