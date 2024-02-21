@@ -5,6 +5,9 @@ const friendSchema = new Schema(
         name: {
             type: String,
         },
+        iataCode: {
+            type: String,
+        }
     },
 )
 
