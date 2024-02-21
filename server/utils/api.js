@@ -4,15 +4,53 @@
 const Amadeus = require('amadeus');
 
 const amadeus = new Amadeus({
-    clientId: 'd9z5xUM7qGiZA1gGdhLEc8zSfNe32sD8',
-    clientSecret: 'U6qZP8oQtRLjLSyU'
+    clienId: process.env.API_KEY || 'd9z5xUM7qGiZA1gGdhLEc8zSfNe32sD8',
+    clientSecret: process.env.SECRET || 'U6qZP8oQtRLjLSyU'
 });
 
+//query contains keyword like a city name
+//keyword only required to fetch 
+module.exports = {
+    getIataCode: async (query, res) => {
+    try {
+        const data = await amadeus.client.get('/v1/reference-data/locations/cities', {
+            keyword: query,
+            max: 1,
+            include: 'AIRPORTS'
+        });
+        console.log(data);
+        if (!data) {
+            res.status(400).json({ message: "Something went wrong"});
+        }
 
-// amadeus.referenceData.urls.checkinLinks.get({ airlineCode: 'BA' }).then(function(res) {
-//     console.log(res.data);
-// }).catch((res) => console.log(res.code));
+        const iataCode = data[0].iataCode;
+        const name = data[0].name;
 
+        return res.status(500).json({ name, iataCode });
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+    
+},
+
+//queryArgs object needs at minimum
+//originLocationCode, destinationLocationCode, departureDate
+// additional args returnData, adults, children, infants, nonStop, includeAirlines, excludeAirlines,
+// maxPrice, travelClass, currencyCode, max
+    getFlightOffers: async ( queryArgs , res) => {
+    try {
+        const data = await amadeus.client.get('/v2/shopping/flight-offers', {
+            queryArgs
+        });
+        if (!data) {
+            res.status(400).json({ message: "Something went wrong"});
+        }
+        
+    } catch (error) {
+        
+    }
+}
+};
 // const { originLocationCode,
 //         destinationLocationCode,
 //         departureDate,
@@ -37,10 +75,10 @@ const amadeus = new Amadeus({
 //     }).then((res) => console.log(JSON.stringify(res.data)))
 //     .catch((err) => console.error(err.code));
 
-amadeus.client.get('/v1/reference-data/locations/cities', {
-    keyword: 'dallas', max: 10, include: 'AIRPORTS'})
-    .then(res => console.log(res.data))
-    .catch(err => console.error(err));
+// amadeus.client.get('/v1/reference-data/locations/cities', {
+//     keyword: 'dallas', max: 10, include: 'AIRPORTS'})
+//     .then(res => console.log(res.data))
+//     .catch(err => console.error(err));
 
 // res.data[0].iataCode  DFW
 //  res.data[0].name    Dallas
