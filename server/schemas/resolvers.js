@@ -1,6 +1,8 @@
 const { Profile, Post, Wishlist } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
+const { getIataCode, getFlightOffers} = require('../utils/api');
+
 const resolvers = {
     Query: {
         // used to get data in graphql playground only
