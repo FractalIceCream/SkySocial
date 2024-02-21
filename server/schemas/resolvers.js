@@ -1,4 +1,4 @@
-const { Profile, Post, Wishlist } = require('../models');
+const { Profile, Post } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const { getIataCode, getFlightOffers} = require('../utils/api');
@@ -321,9 +321,9 @@ const resolvers = {
                     name,
                 });
 
-                await Wishlist.findOneAndUpdate(
+                await Profile.findOneAndUpdate(
                     { _id: (context.user._id) },
-                    { $addToSet: { tripinfo: tripInfoItem._id } }
+                    { $addToSet: { wishlist: tripInfoItem._id } }
                 );
 
                 return tripInfoItem;
