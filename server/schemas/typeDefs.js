@@ -1,7 +1,5 @@
 // what other fields should favorite trip have
 
-
-
 // add query to get all scheduled users trips
 
 // add mutation to save tripinfo into model from api
@@ -108,4 +106,3 @@ const typeDefs = `
 `;
 
 module.exports = typeDefs;
-

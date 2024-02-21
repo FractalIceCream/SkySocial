@@ -279,6 +279,7 @@ const resolvers = {
         },
 
         // works correctly
+        // need to edit code since wishlist is not a model anymore
         addWishlist: async (parent, { name }, context) => {
 
             if (context.user) {
@@ -297,6 +298,7 @@ const resolvers = {
         },
 
         // works correctly
+        // need to edit code since wishlist is not a model anymore
         removeWishlist: async (parent, { wishlistId }, context) => {
             if (context.user) {
 
