@@ -1,4 +1,4 @@
-const { Profile, Post } = require('../models');
+const { Profile, Post, Wishlist } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -6,12 +6,12 @@ const resolvers = {
         // used to get data in graphql playground only
         // works correctly 
         profiles: async () => {
-            return Profile.find().populate('posts').populate('friends');
+            return Profile.find().populate('posts').populate('friends').populate('wishlist');
         },
 
         // works correctly
         profile: async (parent, { name }) => {
-            return Profile.findOne({ name }).populate('posts').populate('friends');
+            return Profile.findOne({ name }).populate('posts').populate('friends').populate('wishlist');
         },
 
         // works correctly 
@@ -79,7 +79,7 @@ const resolvers = {
 
                 await Profile.findOneAndUpdate(
                     { _id: (context.user._id) },
-                    { $addToSet: { posts: post._id} },
+                    { $addToSet: { posts: post._id } },
                     {
                         // new: true,
                         // ask about runValidators
@@ -105,7 +105,7 @@ const resolvers = {
 
                 await Profile.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $pull: { posts: post._id}}
+                    { $pull: { posts: post._id } }
                 );
 
                 return post;
@@ -116,17 +116,17 @@ const resolvers = {
         // Works correctly 
         createComment: async (parent, { postId, commentText }, context) => {
             if (context.user) {
-               return Post.findOneAndUpdate(
-                { _id: postId },
-                {
-                    $addToSet: {
-                        comments: { commentText, commentAuthor: context.user.name },
+                return Post.findOneAndUpdate(
+                    { _id: postId },
+                    {
+                        $addToSet: {
+                            comments: { commentText, commentAuthor: context.user.name },
+                        },
                     },
-                },
-                {
-                    new: true,
-                },
-               );
+                    {
+                        new: true,
+                    },
+                );
             }
             throw AuthenticationError
         },
@@ -267,7 +267,43 @@ const resolvers = {
                 console.error('Error removing friend:', error);
                 throw error
             }
-        }
+        },
+
+        // works correctly
+        addWishlist: async (parent, { name }, context) => {
+
+            if (context.user) {
+                const wishlistItem = await Wishlist.create({
+                    name,
+                });
+
+                await Profile.findOneAndUpdate(
+                    { _id: (context.user._id) },
+                    { $addToSet: { wishlist: wishlistItem._id } }
+                );
+
+                return wishlistItem
+            }
+            throw AuthenticationError
+        },
+
+        // works correctly
+        removeWishlist: async (parent, { wishlistId }, context) => {
+            if (context.user) {
+
+                const wishlistItem = await Wishlist.findOneAndDelete({
+                    _id: wishlistId,
+                });
+
+                await Profile.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { wishlist: wishlistItem._id } }
+                );
+
+                return wishlistItem;
+            }
+            throw AuthenticationError
+        },
     },
 };
 
