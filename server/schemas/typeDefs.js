@@ -1,5 +1,7 @@
 // what other fields should favorite trip have
 
+
+
 // add query to get all scheduled users trips
 
 // add mutation to save tripinfo into model from api
@@ -56,6 +58,7 @@ const typeDefs = `
     }
 
     type TripInfo {
+        _id: ID
         name: String
         originLocationCode: String
         destinationLocationCode: String
@@ -84,6 +87,7 @@ const typeDefs = `
         profile(name: String!): Profile
         me: Profile
         posts: [Post]
+        tripinfo: [TripInfo]
     }
 
     type Mutation {
@@ -99,6 +103,7 @@ const typeDefs = `
         removeFriend(friendId: ID!): Profile
         addWishlist(name: String!): Wishlist
         removeWishlist(wishlistId: ID!): Wishlist
+        createTrip(name: String!): TripInfo
     }
 `;
 
