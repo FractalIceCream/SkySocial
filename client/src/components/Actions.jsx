@@ -11,21 +11,13 @@ const Actions = () => {
 return (
 
 
-<div className=''>
-<div className=''>
-<Link to="Profile" className="">
-          Profile
-        </Link>
-</div>
-
-<button className='LogOut' onClick={Auth.logout}>
-
-</button>
-
-
-
-</div>
-
+<div class="h-actionsWidget w-actionsWidget shadow-inner-strongest font-custom box-border flex flex-wrap items-center justify-center rounded-custom bg-gray">
+    <div class="flex flex-col text-5xl font-thin text-white">
+      <button class="">Home</button>
+      <button class="mt-9">Profile</button>
+      <button class="mt-9">Log Out</button>
+    </div>
+  </div>
 
 
 

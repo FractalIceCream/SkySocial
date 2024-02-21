@@ -11,11 +11,13 @@ module.exports = {
     extend: {
      height: {
        'wishlist-height': '35rem',
-       'inner-wishlist-height': '28rem'
+       'inner-wishlist-height': '28rem',
+       'actionsWidget': '25rem'
      },
      width: {
        'wishlist-width': '20rem',
-       'inner-wishlist-width': '17rem'
+       'inner-wishlist-width': '17rem',
+       'actionsWidget': '25rem'
      },
      backgroundColor: {
        "gray-dark": "#2E2F31",
@@ -27,7 +29,11 @@ module.exports = {
      },
      boxShadow: {
         'inner-strong': 'inset 0 0 5px rgba(0, 0, 0, 0.4)', 
+        'inner-strongest': 'inset 0 0 20px rgba(0, 0, 0, 0.8)', 
       },
+      fontFamily: {
+        'custom': 'Raleway'
+      }
     },
   },
   plugins: [],
