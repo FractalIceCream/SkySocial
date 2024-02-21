@@ -1,19 +1,19 @@
 // what other fields should favorite trip have
 
 // add query to get all favorite trips specific to a users profile
-// add query to get all posts for home page
 // add query to get all posts specific to a users profile for profile page
 // add query to get all wishlist trips specific to a logged in users trips
 // add query to get all scheduled users trips
 
-// put aside until main func is created
+// add mutation to add trips to wishlist
+// add mutation to save tripinfo into model from api
+// add mutation to update profile
 
+// put aside until main func is created
 // add mutation to like post
 // add mutation to unlike post
 // add mutation to like comment 
 // add mutation to unlike comment
-
-// delete type favorite
 
 const typeDefs = `
     type Profile {
@@ -22,7 +22,7 @@ const typeDefs = `
         email: String
         posts: [Post]
         friends: [Friend]
-        favorites: [Favorite]
+        wishlist: [Wishlist]
     }
 
     type Friend {
@@ -102,6 +102,9 @@ const typeDefs = `
         removeSecondLevelComment(postId: ID!, commentId: ID!, secondLevelCommentId: ID!): Post
         addFriend(friendId: ID!): Profile
         removeFriend(friendId: ID!): Profile
+        addWishlist(name: String!): Wishlist
+        removeWishlist(wishlistId: ID!): Wishlist
+       
     }
 `;
 

@@ -6,7 +6,6 @@ const tripInfoSchema = new Schema(
         name: {
             type: String,
             required: true,
-
         },
         originLocationCode: {
             type: String,
