@@ -35,7 +35,7 @@ const profileSchema = new Schema(
     wishlist: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Wishlist'
+        ref: 'TripInfo'
       }
     ],
 
