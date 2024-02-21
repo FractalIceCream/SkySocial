@@ -79,6 +79,14 @@ const typeDefs = `
         profile: [Profile]
     }
 
+    type FlightOffer {
+        departureDate: String
+        departureCode: String
+        arrivalDate: String
+        arrivalCode: String
+        price: Float
+    }
+
     type Auth {
         token: ID!
         profile: Profile
@@ -90,6 +98,11 @@ const typeDefs = `
         me: Profile
         posts: [Post]
         tripinfo: [TripInfo]
+        flightOffer(
+            originLocationCode: String!,
+            destinationLocationCode: String!,
+            departureDate: String!,
+            adults: Int!): FlightOffer
     }
 
     type Mutation {

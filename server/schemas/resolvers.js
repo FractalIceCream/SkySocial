@@ -5,6 +5,24 @@ const { getIataCode, getFlightOffers} = require('../utils/api');
 
 const resolvers = {
     Query: {
+
+        //takes args{originLocationCode, destinationCode, departureDate}
+        //reassigns to get corresponding IataCodes from user-input
+        //returns {departureCode, departureDate, arrivalCode, arrivalDate, price} so far!
+
+        //want to see name's of to and from cities
+        flightOffer: async (parent, args) => {
+            const origin = await getIataCode(args.originLocationCode);
+            const originLocationCode = origin.iataCode;
+
+            const destination = await getIataCode(args.destinationLocationCode);
+            const destinationLocationCode = destination.iataCode;
+
+            const offer = await getFlightOffers({...args, originLocationCode, destinationLocationCode, max:1});
+
+            return offer; 
+        },
+
         // used to get data in graphql playground only
         // works correctly 
         profiles: async () => {
@@ -39,6 +57,7 @@ const resolvers = {
     },
 
     Mutation: {
+
         // works correctly 
         addProfile: async (parent, { name, email, password }) => {
 
