@@ -23,9 +23,16 @@ const resolvers = {
         // works correctly
         me: async (parent, args, context) => {
             if (context.user) {
-                return Profile.findOne({ _id: context.user._id }).populate('posts');
+                return Profile.findOne({ _id: context.user._id }).populate('posts').populate('friends').populate('wishlist');
             }
             throw AuthenticationError
+        },
+
+        // untested
+        tripinfo: async (parent, args, context) => {
+            if (context.user) {
+                return Profile.findOne({ _id: context.user._id }).populate('tripinfo');
+            }
         },
     },
 
@@ -303,6 +310,23 @@ const resolvers = {
                 return wishlistItem;
             }
             throw AuthenticationError
+        },
+
+        // untested
+        createTrip: async (parent, { name }, context) => {
+            if (context.user) {
+                const tripInfoItem = await TripInfo.create({
+                    name,
+                });
+
+                await Wishlist.findOneAndUpdate(
+                    { _id: (context.user._id) },
+                    { $addToSet: { tripinfo: tripInfoItem._id } }
+                );
+
+                return tripInfoItem;
+            }
+            throw AuthenticationError;
         },
     },
 };
