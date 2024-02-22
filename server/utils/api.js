@@ -4,7 +4,7 @@
 const Amadeus = require('amadeus');
 
 const amadeus = new Amadeus({
-    clienId: process.env.API_KEY || 'd9z5xUM7qGiZA1gGdhLEc8zSfNe32sD8',
+    clientId: process.env.API_KEY || 'd9z5xUM7qGiZA1gGdhLEc8zSfNe32sD8',
     clientSecret: process.env.SECRET || 'U6qZP8oQtRLjLSyU'
 });
 

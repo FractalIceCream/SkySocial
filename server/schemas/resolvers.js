@@ -3,6 +3,12 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const { getIataCode, getFlightOffers} = require('../utils/api');
 
+// NEED TO CREATE MUTATION FOR ACCEPT FRIEND
+// addFriend will add a friend and save the added friend to the profile that sent the friend request
+// need to either add another mutation that will be linked to a accept friend button
+// or edit my addFriend code so that a friend is added to both the sender and the reciever
+// for example test5 user adds test56 user. test 5 user has a friend and test56 does not
+
 const resolvers = {
     Query: {
         // used to get data in graphql playground only
@@ -225,7 +231,7 @@ const resolvers = {
             }
         },
 
-        // works correctly
+        // look at comments above to see if these needs to be edited or a whole other mutation needs to be created.
         addFriend: async (parent, { friendId }, context) => {
             try {
                 if (!context.user) {
@@ -251,7 +257,9 @@ const resolvers = {
             };
         },
 
-        // works correctly 
+        // will most likely need to edit this code to so that if a user removes a friend
+        // it does not just remove it from one profile and not the other similar to the issue 
+        // on addFriend
         removeFriend: async (parent, { friendId }, context) => {
             try {
                 if (!context.user) {
@@ -278,18 +286,15 @@ const resolvers = {
             }
         },
 
-        // works correctly
+        // untested
         // need to edit code since wishlist is not a model anymore
         addWishlist: async (parent, { name }, context) => {
 
             if (context.user) {
-                const wishlistItem = await Wishlist.create({
-                    name,
-                });
-
+                const wishlistItem = { name }
                 await Profile.findOneAndUpdate(
                     { _id: (context.user._id) },
-                    { $addToSet: { wishlist: wishlistItem._id } }
+                    { $addToSet: { wishlist: wishlistItem } }
                 );
 
                 return wishlistItem
@@ -297,21 +302,20 @@ const resolvers = {
             throw AuthenticationError
         },
 
-        // works correctly
+        // untested
         // need to edit code since wishlist is not a model anymore
         removeWishlist: async (parent, { wishlistId }, context) => {
             if (context.user) {
 
-                const wishlistItem = await Wishlist.findOneAndDelete({
-                    _id: wishlistId,
-                });
-
-                await Profile.findOneAndUpdate(
+                const profile = await Profile.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $pull: { wishlist: wishlistItem._id } }
+                    { $pull: { wishlist: { _id: wishlistId } } },
+                    { new: true }
                 );
 
-                return wishlistItem;
+                const removedWishlistItem = profile.wishlist.find(item => item._id === wishlistId);
+
+                return removedWishlistItem;
             }
             throw AuthenticationError
         },

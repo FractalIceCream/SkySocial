@@ -99,8 +99,8 @@ const typeDefs = `
         removeSecondLevelComment(postId: ID!, commentId: ID!, secondLevelCommentId: ID!): Post
         addFriend(friendId: ID!): Profile
         removeFriend(friendId: ID!): Profile
-        addWishlist(name: String!): Wishlist
-        removeWishlist(wishlistId: ID!): Wishlist
+        addWishlist(name: String!): Profile
+        removeWishlist(wishlistId: ID!): Profile
         createTrip(name: String!): TripInfo
     }
 `;
