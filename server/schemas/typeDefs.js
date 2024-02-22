@@ -16,13 +16,8 @@ const typeDefs = `
         name: String
         email: String
         posts: [Post]
-        friends: [Friend]
-        wishlist: [Wishlist]
-    }
-
-    type Friend {
-        _id: ID
-        name: String
+        following: [Profile]
+        wishlist: [TripInfo]
     }
 
     type Post {
@@ -47,12 +42,6 @@ const typeDefs = `
         secondLevelcommentText: String
         secondLevelcommentAuthor: String
         secondLevelcreatedAt: String
-    }
-
-    type Wishlist {
-        _id: ID
-        name: String
-        tripInfo: [TripInfo]
     }
 
     type TripInfo {
@@ -110,11 +99,10 @@ const typeDefs = `
         removeComment(postId: ID!, commentId: String!): Post
         createSecondLevelComment(postId:ID!, commentId: ID!, commentText: String!): Post
         removeSecondLevelComment(postId: ID!, commentId: ID!, secondLevelCommentId: ID!): Post
-        addFriend(friendId: ID!): Profile
-        removeFriend(friendId: ID!): Profile
-        addWishlist(name: String!): Profile
-        removeWishlist(wishlistId: ID!): Profile
+        followProfile(profileId: ID!): Profile
+        unfollowProfile(profileId: ID!): Profile
         createTrip(name: String!): TripInfo
+        removeTrip(tripId: ID!): TripInfo
     }
 `;
 
