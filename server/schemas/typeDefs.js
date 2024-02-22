@@ -61,7 +61,25 @@ const typeDefs = `
         currencyCode: String
         maxPrice: Int
         max: Int
-        profile: [Profile]
+    }
+
+    input TripInput {
+        _id: ID
+        name: String
+        originLocationCode: String!
+        destinationLocationCode: String!
+        departureDate: String!
+        returnDate: String
+        adults: Int!
+        children: Int
+        infants: Int
+        travelClass: String
+        includeAirlineCodes: String
+        excludeAirlineCodes: String
+        nonStop: Boolean
+        currecnyCode: String
+        maxPrice: Int
+        max: Int
     }
 
     type FlightOffer {
@@ -83,6 +101,7 @@ const typeDefs = `
         me: Profile
         posts: [Post]
         tripinfo: [TripInfo]
+        #flightOffer(tripId: ID!, tripInfo: TripInput!): FlightOffer
         flightOffer(
             originLocationCode: String!,
             destinationLocationCode: String!,
@@ -103,6 +122,7 @@ const typeDefs = `
         unfollowProfile(profileId: ID!): Profile
         createTrip(name: String!): TripInfo
         removeTrip(tripId: ID!): TripInfo
+        #updateTrip(tripId: ID!, tripInfo: TripInput!): TripInfo
     }
 `;
 

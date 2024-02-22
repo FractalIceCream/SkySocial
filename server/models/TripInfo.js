@@ -77,12 +77,6 @@ const tripInfoSchema = new Schema(
             type: Number,
             // max number of returned flights, default value 250, should be greater than or equal to 1
         },
-        profile: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Profile',
-            }
-        ]
     }
 )
 
