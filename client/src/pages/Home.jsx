@@ -16,7 +16,7 @@ const Home = () => {
       <Wishlist />
       <Friends />
       <Actions />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
