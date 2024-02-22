@@ -11,7 +11,13 @@ const resolvers = {
         //returns {departureCode, departureDate, arrivalCode, arrivalDate, price} so far!
 
         //want to see name's of to and from cities
-        flightOffer: async (parent, args) => {
+        
+        flightOffer: async (parent, {tripId, ...tripInfo}, context) => {
+            
+            // if (context.user) {
+            //     const userTrip = await 
+            // }
+            
             const origin = await getIataCode(args.originLocationCode);
             const originLocationCode = origin.iataCode;
 
