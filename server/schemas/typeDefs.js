@@ -1,7 +1,3 @@
-// what other fields should favorite trip have
-
-// add query to get all scheduled users trips
-
 // add mutation to save tripinfo into model from api
 
 // put aside until main func is created
@@ -9,6 +5,7 @@
 // add mutation to unlike post
 // add mutation to like comment 
 // add mutation to unlike comment
+// fix comment mutation to not have to create multiple level mutations
 
 const typeDefs = `
     type Profile {
@@ -102,6 +99,7 @@ const typeDefs = `
         posts: [Post]
         tripinfo: [TripInfo]
         #flightOffer(tripId: ID!, tripInfo: TripInput!): FlightOffer
+        myTripinfo: [TripInfo]
         flightOffer(
             originLocationCode: String!,
             destinationLocationCode: String!,
