@@ -22,14 +22,14 @@ const router = createBrowserRouter([
         path: '/profiles/:profileId',
         element: <Profile />,
       },
-      {
-        path: '/index',
-        element: <LandingPage/>,
-      },
-      {
-        path: '/login',
-        element: <Login />,
-      },
+      // {
+      //   path: '/index',
+      //   element: <LandingPage/>,
+      // },
+      // {
+      //   path: '/login',
+      //   element: <Login />,
+      // },
     ],
   },
 ]);
