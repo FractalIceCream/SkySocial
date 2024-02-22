@@ -9,15 +9,15 @@ const tripInfoSchema = new Schema(
         },
         originLocationCode: {
             type: String,
-            required: true,
+            // required: true,
         },
         destinationLocationCode: {
             type: String,
-            required: true,
+            // required: true,
         },
         departureDate: {
             type: Date,
-            required: true,
+            // required: true,
             // Dates specified in ISO 8601 YYYY-MM-DD format
         },
         returnDate: {
@@ -32,7 +32,7 @@ const tripInfoSchema = new Schema(
         },
         adults: {
             type: Number,
-            required: true,
+            // required: true,
         },
         children: {
             type: Number,

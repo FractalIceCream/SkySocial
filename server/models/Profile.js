@@ -26,7 +26,7 @@ const profileSchema = new Schema(
         ref: 'Post',
       }
     ],
-    friends: [
+    following: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Profile'

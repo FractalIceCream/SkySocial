@@ -1,7 +1,23 @@
-const { Profile, Post } = require('../models');
+const { Profile, Post, TripInfo } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
-const { getIataCode, getFlightOffers} = require('../utils/api');
+const { getIataCode, getFlightOffers } = require('../utils/api');
+
+// NEED TO CREATE MUTATION FOR ACCEPT FRIEND
+// addFriend will add a friend and save the added friend to the profile that sent the friend request
+// need to either add another mutation that will be linked to a accept friend button
+// or edit my addFriend code so that a friend is added to both the sender and the reciever
+// for example test5 user adds test56 user. test 5 user has a friend and test56 does not
+
+// find all posts should populate all comments as well
+
+// edit profile query so that logged out users cant see everything only show post and comments
+// edit trip info so that if you are context or a friend of context
+
+// rename addFriend to followProfile 
+
+// do not need wishlist mutations because when we use createTrip that will populate the wishlist by name
+// after the user clicks on said trip to book it then 
 
 const resolvers = {
     Query: {
@@ -18,21 +34,22 @@ const resolvers = {
             const destination = await getIataCode(args.destinationLocationCode);
             const destinationLocationCode = destination.iataCode;
 
-            const offer = await getFlightOffers({...args, originLocationCode, destinationLocationCode, max:1});
+            const offer = await getFlightOffers({ ...args, originLocationCode, destinationLocationCode, max: 1 });
 
-            return offer; 
+            return offer;
         },
 
         // used to get data in graphql playground only
         // works correctly 
         profiles: async () => {
-            return Profile.find().populate('posts').populate('friends').populate('wishlist');
+            return Profile.find().populate('posts').populate('following').populate('wishlist');
         },
 
         // works correctly
         profile: async (parent, { name }) => {
-            return Profile.findOne({ name }).populate('posts').populate('friends').populate('wishlist');
+            return Profile.findOne({ name }).populate('posts').populate('following').populate('wishlist');
         },
+
 
         // works correctly 
         posts: async () => {
@@ -43,7 +60,7 @@ const resolvers = {
         // works correctly
         me: async (parent, args, context) => {
             if (context.user) {
-                return Profile.findOne({ _id: context.user._id }).populate('posts').populate('friends').populate('wishlist');
+                return Profile.findOne({ _id: context.user._id }).populate('posts').populate('following').populate('wishlist');
             }
             throw AuthenticationError
         },
@@ -52,7 +69,7 @@ const resolvers = {
         tripinfo: async (parent, args, context) => {
             
             if (context.user) {
-                return Profile.findOne({ _id: context.user._id }).populate('tripinfo');
+                return Profile.findOne({ _id: context.user._id }).populate('tripinfo').populate('wishlist');
             }
         },
     },
@@ -245,11 +262,11 @@ const resolvers = {
             }
         },
 
-        // works correctly
-        addFriend: async (parent, { friendId }, context) => {
+        // look at comments above to see if these needs to be edited or a whole other mutation needs to be created.
+        followProfile: async (parent, { profileId }, context) => {
             try {
                 if (!context.user) {
-                    throw new AuthenticationError('Must be logged in to add friends');
+                    throw new AuthenticationError('Must be logged in to follow profile');
                 }
 
                 const profile = await Profile.findById(context.user._id);
@@ -258,24 +275,23 @@ const resolvers = {
                     throw new Error('Profile not found');
                 }
 
-                if (!profile.friends.includes(friendId)) {
-                    profile.friends.push(friendId);
+                if (!profile.following.includes(profileId)) {
+                    profile.following.push(profileId);
                     await profile.save();
                 }
 
                 return profile;
 
             } catch (error) {
-                console.error('Error adding friend:', error);
+                console.error('Error adding following profile:', error);
                 throw error;
             };
         },
 
-        // works correctly 
-        removeFriend: async (parent, { friendId }, context) => {
+        unfollowProfile: async (parent, { profileId }, context) => {
             try {
                 if (!context.user) {
-                    throw new AuthenticationError('You must be logged into remove a friend');
+                    throw new AuthenticationError('You must be logged into unfollow that profile');
                 }
 
                 const profile = await Profile.findById(context.user._id);
@@ -284,57 +300,41 @@ const resolvers = {
                     throw new Error('Profile not found');
                 }
 
-                const index = profile.friends.indexOf(friendId);
+                const index = profile.following.indexOf(profileId);
                 if (index !== -1) {
-                    profile.friends.splice(index, 1);
+                    profile.following.splice(index, 1);
                     await profile.save();
                 }
 
                 return profile;
 
             } catch (error) {
-                console.error('Error removing friend:', error);
+                console.error('Error unfollowing profile:', error);
                 throw error
             }
         },
 
-        // works correctly
-        addWishlist: async (parent, { name }, context) => {
+        // // untested
+        // // need to edit code since wishlist is not a model anymore
+        // removeWishlist: async (parent, { wishlistId }, context) => {
+        //     if (context.user) {
 
-            if (context.user) {
-                const wishlistItem = await Wishlist.create({
-                    name,
-                });
+        //         const profile = await Profile.findOneAndUpdate(
+        //             { _id: context.user._id },
+        //             { $pull: { wishlist: { _id: wishlistId } } },
+        //             { new: true }
+        //         );
 
-                await Profile.findOneAndUpdate(
-                    { _id: (context.user._id) },
-                    { $addToSet: { wishlist: wishlistItem._id } }
-                );
+        //         const removedWishlistItem = profile.wishlist.find(item => item._id === wishlistId);
 
-                return wishlistItem
-            }
-            throw AuthenticationError
-        },
-
-        // works correctly
-        removeWishlist: async (parent, { wishlistId }, context) => {
-            if (context.user) {
-
-                const wishlistItem = await Wishlist.findOneAndDelete({
-                    _id: wishlistId,
-                });
-
-                await Profile.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $pull: { wishlist: wishlistItem._id } }
-                );
-
-                return wishlistItem;
-            }
-            throw AuthenticationError
-        },
+        //         return removedWishlistItem;
+        //     }
+        //     throw AuthenticationError
+        // },
 
         // untested
+        // removed addWishlist mutation because we will be able to populate the wishlist ui with
+        // this mutation
         createTrip: async (parent, { name }, context) => {
             if (context.user) {
                 const tripInfoItem = await TripInfo.create({
@@ -343,12 +343,29 @@ const resolvers = {
 
                 await Profile.findOneAndUpdate(
                     { _id: (context.user._id) },
-                    { $addToSet: { wishlist: tripInfoItem._id } }
+                    { $addToSet: { wishlist: tripInfoItem._id } },
+                    { new: true }
                 );
 
                 return tripInfoItem;
             }
             throw AuthenticationError;
+        },
+
+        removeTrip: async (parent, { tripId }, context) => {
+            if (context.user) {
+
+                const profile = await Profile.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { wishlist: { _id: tripId } } },
+                    { new: true }
+                );
+
+                const removedWishlistItem = profile.wishlist.find(item => item._id === wishlistId);
+
+                return removedWishlistItem;
+            }
+            throw AuthenticationError
         },
     },
 };

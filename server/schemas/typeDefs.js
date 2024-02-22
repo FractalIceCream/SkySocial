@@ -1,12 +1,8 @@
 // what other fields should favorite trip have
 
-
-
 // add query to get all scheduled users trips
 
-// add mutation to add trips to wishlist
 // add mutation to save tripinfo into model from api
-// add mutation to update profile
 
 // put aside until main func is created
 // add mutation to like post
@@ -20,13 +16,8 @@ const typeDefs = `
         name: String
         email: String
         posts: [Post]
-        friends: [Friend]
-        wishlist: [Wishlist]
-    }
-
-    type Friend {
-        _id: ID
-        name: String
+        following: [Profile]
+        wishlist: [TripInfo]
     }
 
     type Post {
@@ -51,12 +42,6 @@ const typeDefs = `
         secondLevelcommentText: String
         secondLevelcommentAuthor: String
         secondLevelcreatedAt: String
-    }
-
-    type Wishlist {
-        _id: ID
-        name: String
-        tripInfo: [TripInfo]
     }
 
     type TripInfo {
@@ -114,13 +99,11 @@ const typeDefs = `
         removeComment(postId: ID!, commentId: String!): Post
         createSecondLevelComment(postId:ID!, commentId: ID!, commentText: String!): Post
         removeSecondLevelComment(postId: ID!, commentId: ID!, secondLevelCommentId: ID!): Post
-        addFriend(friendId: ID!): Profile
-        removeFriend(friendId: ID!): Profile
-        addWishlist(name: String!): Wishlist
-        removeWishlist(wishlistId: ID!): Wishlist
+        followProfile(profileId: ID!): Profile
+        unfollowProfile(profileId: ID!): Profile
         createTrip(name: String!): TripInfo
+        removeTrip(tripId: ID!): TripInfo
     }
 `;
 
 module.exports = typeDefs;
-
