@@ -50,6 +50,7 @@ const resolvers = {
 
         // untested
         tripinfo: async (parent, args, context) => {
+            
             if (context.user) {
                 return Profile.findOne({ _id: context.user._id }).populate('tripinfo');
             }
