@@ -1,8 +1,11 @@
 const { Schema, model } = require('mongoose');
+const itinerarySchema = require('./Itinerary');
 const dateFormat = require('../utils/dateFormat');
 
 const tripInfoSchema = new Schema(
     {
+        itinerary: itinerarySchema,
+
         name: {
             type: String,
             required: true,
@@ -16,19 +19,19 @@ const tripInfoSchema = new Schema(
             // required: true,
         },
         departureDate: {
-            type: Date,
+            type: String,
             // required: true,
             // Dates specified in ISO 8601 YYYY-MM-DD format
         },
         returnDate: {
-            type: Date,
+            type: String,
             // Dates specified in ISO 8601 YYYY-MM-DD format
-            validate: {
-                validator: function(value) {
-                    return this.departureDate === undefined || value >= this.departureDate;
-                },
-                message: 'Return date should be equal to or after the departure date',
-            }
+            // validate: {
+            //     validator: function(value) {
+            //         return this.departureDate === undefined || value >= this.departureDate;
+            //     },
+            //     message: 'Return date should be equal to or after the departure date',
+            // }
         },
         adults: {
             type: Number,

@@ -38,7 +38,6 @@ const profileSchema = new Schema(
         ref: 'TripInfo'
       }
     ],
-
   },
   {
     toJSON: {
