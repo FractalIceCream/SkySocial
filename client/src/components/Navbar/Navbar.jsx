@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
+import Auth from "../../utils/auth";
 import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 import { Modal, Tab, Nav } from "react-bootstrap";

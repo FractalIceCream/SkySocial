@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { LOGIN } from "../utils/mutations";
-import Auth from "../utils/auth";
+import { LOGIN } from "../../utils/mutation";
+import Auth from "../../utils/auth";
 
 
 

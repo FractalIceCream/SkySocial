@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/./Navbar/Navbar";
 import Footer from "../components/Footer";
 import PostContainer from "../components/Posts/PostContainer";
 import Friends from "../components/Friends";
