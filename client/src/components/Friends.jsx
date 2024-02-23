@@ -1,27 +1,38 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const FriendsList = ({ friends }) => {
-  if (!friends.length) {
-    return <h3>No Friendss Yet</h3>;
-  }
+import QUERY_FOLLOWERS from "../utils/queries"
+
+
+
+
+
+
+
+const Followers = ({ followers }) => {
+
 
   return (
-    <div>
-      <h3>Friends</h3>
-      <div className= "">
-      {friends &&
-        friends.map((friends) => (
-          <div key={friends._id} className="">
-            <Link
-              className=""
-              to={`/profile/${friends._id}`}
-            > {friends.username}
+    <div class="w-followers h-followers flex flex-col items-center justify-center rounded-custom bg-gray font-custom shadow-custom">
+    <div class="text-center text-2xl text-white">Followers</div>
+    <div class="w-innerFollowers h-innerFollowers mt-2 overflow-y-auto rounded-custom bg-gray-light shadow-inner-strongest">
+      <ul class="flex flex-col text-center text-white">
+        {followers &&
+          followers.map((followers) => (
+            <div key={followers._id} className="">
+               <li key={follower.profileId}>
+            <Link to={`/profile/${follower.profileId}`}>
+              {follower.profile.name}
             </Link>
-          </div>
-        ))}</div>
+            </li>
+            </div>
+          ))}
+      </ul>
     </div>
+  </div>
+  
   );
 };
 
-export default FriendsList;
+export default Followers;
+
