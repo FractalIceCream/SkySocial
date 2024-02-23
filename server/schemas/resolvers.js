@@ -40,7 +40,6 @@ const resolvers = {
             return Profile.findOne({ name }).populate('posts').populate('following').populate('wishlist');
         },
 
-
         // works correctly 
         posts: async () => {
             return Post.find();
