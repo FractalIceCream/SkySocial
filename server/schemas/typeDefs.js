@@ -58,6 +58,7 @@ const typeDefs = `
         currencyCode: String
         maxPrice: Int
         max: Int
+        itinerary: FlightOffer
     }
 
     input TripInput {
@@ -70,16 +71,24 @@ const typeDefs = `
         adults: Int!
         children: Int
         infants: Int
-        travelClass: String
-        includeAirlineCodes: String
-        excludeAirlineCodes: String
-        nonStop: Boolean
-        currecnyCode: String
-        maxPrice: Int
-        max: Int
+        #travelClass: String
+        #includeAirlineCodes: String
+        #excludeAirlineCodes: String
+        #nonStop: Boolean
+        #currecnyCode: String
+        #maxPrice: Int
+        #max: Int
     }
 
     type FlightOffer {
+        departureDate: String
+        departureCode: String
+        arrivalDate: String
+        arrivalCode: String
+        price: Float
+    }
+
+    input ItineraryInput {
         departureDate: String
         departureCode: String
         arrivalDate: String
@@ -101,11 +110,11 @@ const typeDefs = `
         tripinfo: [TripInfo]
         #flightOffer(tripId: ID!, tripInfo: TripInput!): FlightOffer
         myTripinfo: [TripInfo]
-        flightOffer(
-            originLocationCode: String!,
-            destinationLocationCode: String!,
-            departureDate: String!,
-            adults: Int!): FlightOffer
+        #flightOffer(
+            #originLocationCode: String!,
+            #destinationLocationCode: String!,
+            #departureDate: String!,
+            #adults: Int!): FlightOffer
     }
 
     type Mutation {
@@ -121,7 +130,8 @@ const typeDefs = `
         unfollowProfile(profileId: ID!): Profile
         createTrip(name: String!): TripInfo
         removeTrip(tripId: ID!): TripInfo
-        #updateTrip(tripId: ID!, tripInfo: TripInput!): TripInfo
+        updateTrip(tripId: ID!, tripInfo: TripInput!): FlightOffer
+        addItinerary(tripId: ID!, itinerary: ItineraryInput!): TripInfo
     }
 `;
 
