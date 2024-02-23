@@ -113,4 +113,14 @@ query Query {
   }
 `;
 
+export const QUERY_FOLLOWING = gql`
+  query Query {
+    following {
+      _id
+      email
+      name
+    }
+  }
+`;
+
 export const QUERY_TRIP_INFO = gql``
