@@ -51,14 +51,14 @@ const typeDefs = `
         adults: Int
         children: Int
         infants: Int
-        travelClass: String
-        includedAirlineCodes: String
-        excludedAirlineCodes: String
-        nonStop: Boolean
-        currencyCode: String
-        maxPrice: Int
-        max: Int
-        itinerary: FlightOffer
+        #travelClass: String
+        #includedAirlineCodes: String
+        #excludedAirlineCodes: String
+        #nonStop: Boolean
+        #currencyCode: String
+        #maxPrice: Int
+        #max: Int
+        #itinerary: FlightOffer
     }
 
     input TripInput {

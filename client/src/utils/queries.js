@@ -113,14 +113,28 @@ query Query {
   }
 `;
 
-// export const QUERY_TRIP_INFO = gql``
-
 export const QUERY_FOLLOWING = gql`
   query Query {
     following {
       _id
       email
       name
+    }
+  }
+`;
+
+export const MY_TRIPINFO = gql`
+query MyTripinfo {
+    myTripinfo {
+      _id
+      name
+      departureDate
+      returnDate
+      originLocationCode
+      destinationLocationCode
+      adults
+      children
+      infants
     }
   }
 `;

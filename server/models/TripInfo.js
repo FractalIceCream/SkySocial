@@ -51,35 +51,35 @@ const tripInfoSchema = new Schema(
                 message: 'Number of infants should not exceed the number of adults',
             },
         },
-        travelClass: {
-            type: String,
-            // available options: ECONOMY, PREMIUM_ECONOMY, BUSINESS, FIRST
-            enum: ['ECONOMY', 'PREMIUM_ECONOMY', 'BUSINESS', 'FIRST'],
-        },
-        includedAirlineCodes: {
-            type: String,
-            // IATA airline codes and comma-separated
-        },
-        excludedAirlineCodes: {
-            type: String,
-            // IATA airline codes and comma-separated
-        },
-        nonStop: {
-            type: Boolean,
-            default: false,
-        },
-        currencyCode: {
-            type: String,
-            // ISO 4217 format
-        },
-        maxPrice: {
-            type: Number,
-            // should be a positive number with no decimals
-        },
-        max: {
-            type: Number,
-            // max number of returned flights, default value 250, should be greater than or equal to 1
-        },
+        // travelClass: {
+        //     type: String,
+        //     // available options: ECONOMY, PREMIUM_ECONOMY, BUSINESS, FIRST
+        //     enum: ['ECONOMY', 'PREMIUM_ECONOMY', 'BUSINESS', 'FIRST'],
+        // },
+        // includedAirlineCodes: {
+        //     type: String,
+        //     // IATA airline codes and comma-separated
+        // },
+        // excludedAirlineCodes: {
+        //     type: String,
+        //     // IATA airline codes and comma-separated
+        // },
+        // nonStop: {
+        //     type: Boolean,
+        //     default: false,
+        // },
+        // currencyCode: {
+        //     type: String,
+        //     // ISO 4217 format
+        // },
+        // maxPrice: {
+        //     type: Number,
+        //     // should be a positive number with no decimals
+        // },
+        // max: {
+        //     type: Number,
+        //     // max number of returned flights, default value 250, should be greater than or equal to 1
+        // },
     }
 )
 
