@@ -11,23 +11,23 @@ const resolvers = {
         //returns {departureCode, departureDate, arrivalCode, arrivalDate, price} so far!
 
         //want to see name's of to and from cities
-        
-        flightOffer: async (parent, {tripId, ...tripInfo}, context) => {
-            
-            // if (context.user) {
-            //     const userTrip = await 
-            // }
-            
-            const origin = await getIataCode(args.originLocationCode);
-            const originLocationCode = origin.iataCode;
 
-            const destination = await getIataCode(args.destinationLocationCode);
-            const destinationLocationCode = destination.iataCode;
+        // flightOffer: async (parent, { tripId, ...tripInfo }, context) => {
 
-            const offer = await getFlightOffers({ ...args, originLocationCode, destinationLocationCode, max: 1 });
+        //     if (context.user) {
+        //         const userTrip = await 
+        //     }
 
-            return offer;
-        },
+        //     const origin = await getIataCode(args.originLocationCode);
+        //     const originLocationCode = origin.iataCode;
+
+        //     const destination = await getIataCode(args.destinationLocationCode);
+        //     const destinationLocationCode = destination.iataCode;
+
+        //     const offer = await getFlightOffers({ ...args, originLocationCode, destinationLocationCode, max: 1 });
+
+        //     return offer;
+        // },
 
         // used to get data in graphql playground only
         // works correctly 
@@ -56,7 +56,7 @@ const resolvers = {
 
         // works correctly
         tripinfo: async () => {
-            return TripInfo.find().populate('profile');
+            return TripInfo.find();
         },
 
         // works correctly
@@ -344,12 +344,47 @@ const resolvers = {
 
                 await Profile.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $pull: { wishlist: tripInfoItem._id }}
+                    { $pull: { wishlist: tripInfoItem._id } }
                 );
 
                 return tripInfoItem;
             }
         },
+        updateTrip: async (parent, { tripId, tripInfo }, context) => {
+            if (context.user) {
+                const origin = await getIataCode(tripInfo.originLocationCode);
+                const dest = await getIataCode(tripInfo.destinationLocationCode);
+
+                const originLocationCode =  origin.iataCode;
+                const destinationLocationCode =  dest.iataCode;
+                await TripInfo.findOneAndUpdate(
+                    { _id: tripId },
+                    { ...tripInfo, originLocationCode, destinationLocationCode }
+                );
+
+                const offer = await getFlightOffers( { ...tripInfo, originLocationCode, destinationLocationCode, max: 1 });
+
+                console.log(offer);
+                return offer;
+            }
+
+            throw AuthenticationError
+        },
+        // store API response from the flightoffer
+        addItinerary: async (parent, { tripId, itinerary }, context) => {
+            if (context.user) {
+                const addItinerary = await TripInfo.findOneAndUpdate(
+                    { _id: tripId },
+                    { $set: { itinerary }},
+                    { new:true}
+                );
+
+                console.log(addItinerary);
+                return addItinerary;
+            }
+
+            throw AuthenticationError;
+        }
     },
 };
 

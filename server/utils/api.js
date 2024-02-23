@@ -2,8 +2,8 @@ const Amadeus = require('amadeus');
 require('dotenv').config();
 
 const amadeus = new Amadeus({
-    clientId: process.env.API_KEY, //|| 'd9z5xUM7qGiZA1gGdhLEc8zSfNe32sD8',
-    clientSecret: process.env.API_SECRET //|| 'U6qZP8oQtRLjLSyU'
+    clientId: 'd9z5xUM7qGiZA1gGdhLEc8zSfNe32sD8',
+    clientSecret: 'U6qZP8oQtRLjLSyU'
 });
 
 // query contains keyword like a city name
@@ -16,8 +16,7 @@ module.exports = {
                 max: 1,
                 include: 'AIRPORTS'
             });
-            // console.log(data);
-            if (!res) {
+             if (!res) {
                 console.log("Something went wrong");
             }
 
