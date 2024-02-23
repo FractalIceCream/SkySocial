@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { LOGIN } from "../../utils/mutation";
+import { LOGIN_PROFILE } from "../../utils/mutation";
 import Auth from "../../utils/auth";
 
 
@@ -11,9 +11,9 @@ import Auth from "../../utils/auth";
 const LoginForm = () => {
 
 
-  const [login, { error }] = useMutation(LOGIN);
+  const [login, { error }] = useMutation(LOGIN_PROFILE);
 
-  const [userFormData, setUserFormData] = useState({
+  const [profileFormData, setProfileFormData] = useState({
     email: "",
     password: "",
   });
@@ -22,23 +22,23 @@ const LoginForm = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+    setProfileFormData({ ...profileFormData, [name]: value });
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await createUser({
-        variables: userFormData,
+      const { data } = await createProfile({
+        variables: profileFormData,
       });
 
-      Auth.login(data.addUser.token);
+      Auth.login(data.addProfile.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
 
-    setUserFormData({
+    setProfileFormData({
       email: "",
       password: "",
     });
@@ -109,7 +109,7 @@ return (
                   </label>
                   <input
                     type="email"
-                    value={userFormData.email}
+                    value={profileFormData.email}
                     name="email"
                     onChange={handleInputChange}
                     id="email"
@@ -131,7 +131,7 @@ return (
                     type="password"
                     name="password"
                     onChange={handleInputChange}
-                    value={userFormData.password}
+                    value={profileFormData.password}
                     id="password"
                     placeholder="••••••••"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
