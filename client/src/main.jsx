@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-
+import Home from './pages/Home.jsx'
 import App from './App.jsx'
 
 import Profile from './pages/Profile'
