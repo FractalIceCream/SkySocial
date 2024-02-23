@@ -196,9 +196,9 @@ mutation Mutation($profileId: ID!) {
   }
 `;
 
-export const CREATE_TRIP = gql`
-`;
+// export const CREATE_TRIP = gql`
+// `;
 
 
-export const REMOVE_TRIP = gql`
-`;
+// export const REMOVE_TRIP = gql`
+// `;

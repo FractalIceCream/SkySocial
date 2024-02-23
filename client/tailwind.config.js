@@ -1,10 +1,7 @@
 module.exports = {
   // Specify the paths to all of the files in your project
-  purge: [
-    'index.html',
-    'main.jsx',
-    // Add more paths as needed
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+ 
 
   // Other configuration options...
   theme: {

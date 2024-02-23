@@ -1,9 +1,9 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer";
-import Itinerary from "../components/Itinerary";
+// import Itinerary from "../components/Itinerary";
 import PostContainer from "../components/Posts/PostContainer";
-import Friends from "../components/Friends";
-import Wishlist from "../components/Wishlist";
+import Following from "../components/Following";
+// import Wishlist from "../components/Wishlist";
 import Actions from "../components/Actions"
 
 
@@ -11,10 +11,10 @@ const Home = () => {
   return (
     <div className="container">
       <Navbar />
-      <Itinerary />
+      {/* <Itinerary /> */}
       <PostContainer />
-      <Wishlist />
-      <Friends />
+      {/* <Wishlist /> */}
+      {/* <Friends /> */}
       <Actions />
       {/* <Footer /> */}
     </div>
