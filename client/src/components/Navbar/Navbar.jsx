@@ -15,15 +15,16 @@ const Navbar = () => {
   return (
     <>
       <nav className="">
-        <Link to="Home" className="">
+        {/* name="" */}
+        <Link to="/">
           {" "}
           Home{" "}
         </Link>
-        <SearchBar
+        {/* <SearchBar
           searchInput={searchInput}
           setSearchInput={setSearchInput}
           setSearchResults={setSearchResults}
-        />
+        /> */}
 
         {Auth.loggedIn() ? (
           <>
@@ -60,11 +61,11 @@ const Navbar = () => {
           <Modal.Body>
             <Tab.Content>
               <Tab.Pane eventKey='login'>
-                <LoginForm />
+                <LoginForm handleModalClose={() => setShowModal(false)}/>
                  {/* handleModalClose={() => setShowModal(false)} /> */}
               </Tab.Pane>
               <Tab.Pane eventKey='signup'>
-                <SignUpForm /> 
+                <SignUpForm handleModalClose={() => setShowModal(false)}/> 
                 {/* handleModalClose={() => setShowModal(false)}  */}
               </Tab.Pane>
             </Tab.Content>
