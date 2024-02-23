@@ -12,10 +12,10 @@ const Home = () => {
     <div className="container">
       <Navbar />
       {/* <Itinerary /> */}
-      <PostContainer />
+      {/* <PostContainer /> */}
       {/* <Wishlist /> */}
       {/* <Friends /> */}
-      <Actions />
+      {/* <Actions /> */}
       {/* <Footer /> */}
     </div>
   );
