@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-// import Auth from "../../utils/auth";
+import Auth from "../../utils/auth";
 import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 import { Modal, Tab, Nav } from "react-bootstrap";
@@ -14,17 +14,14 @@ const Navbar = () => {
   
   return (
     <>
-      <nav className="">
+      <nav className="flex mt-3 justify-evenly">
         {/* name="" */}
-        <Link to="/">
-          {" "}
-          Home{" "}
-        </Link>
         <SearchBar
           searchInput={searchInput}
           setSearchInput={setSearchInput}
           setSearchResults={setSearchResults}
         />
+           <Link className="text-decoration-none text-black " to="/"> {" "} Home{" "} </Link>
 
         {Auth.loggedIn() ? (
           <>
@@ -36,7 +33,9 @@ const Navbar = () => {
             {/* Conditionally Renders this Logout Button if the user is already logged in */}
           </>
         ) : (
+          
           <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+          
         )}
       </nav>
       <Modal
