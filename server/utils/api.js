@@ -15,8 +15,7 @@ module.exports = {
                 max: 1,
                 include: 'AIRPORTS'
             });
-            // console.log(data);
-            if (!res) {
+             if (!res) {
                 console.log("Something went wrong");
             }
 
