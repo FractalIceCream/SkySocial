@@ -2,10 +2,9 @@ const Amadeus = require('amadeus');
 require('dotenv').config();
 
 const amadeus = new Amadeus({
-    clientId: 'd9z5xUM7qGiZA1gGdhLEc8zSfNe32sD8',
-    clientSecret: 'U6qZP8oQtRLjLSyU'
+    clientId: process.env.API_KEY ||  'd9z5xUM7qGiZA1gGdhLEc8zSfNe32sD8',
+    clientSecret: process.env.API_SECRET ||  'U6qZP8oQtRLjLSyU',
 });
-
 // query contains keyword like a city name
 // keyword only required to fetch 
 module.exports = {

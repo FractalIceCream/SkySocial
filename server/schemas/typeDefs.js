@@ -106,6 +106,7 @@ const typeDefs = `
         profile(name: String!): Profile
         me: Profile
         posts: [Post]
+        following: [Profile]
         tripinfo: [TripInfo]
         #flightOffer(tripId: ID!, tripInfo: TripInput!): FlightOffer
         myTripinfo: [TripInfo]

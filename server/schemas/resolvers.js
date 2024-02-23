@@ -40,7 +40,6 @@ const resolvers = {
             return Profile.findOne({ name }).populate('posts').populate('following').populate('wishlist');
         },
 
-
         // works correctly 
         posts: async () => {
             return Post.find();
@@ -71,6 +70,20 @@ const resolvers = {
                 }
             } else {
                 throw new Error('User not authenticated')
+            }
+        },
+
+        following: async (parent, args, context) => {
+            if (context.user) {
+                const profile = await Profile.findOne({ _id: context.user._id }).populate('following');
+
+                if (profile) {
+                    return profile.following;
+                } else { 
+                    throw new Error('Profile not found');
+                }
+            }  else {
+                throw new Error('User not authenticated');
             }
         }
     },

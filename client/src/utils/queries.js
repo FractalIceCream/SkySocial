@@ -1,5 +1,8 @@
 import { gql } from '@apollo/client';
 
+// did not do flight offer yet
+// did not do myTripInfo yet until we know what fields we are actually wanting
+
 export const QUERY_SINGLE_PROFILE = gql`
 query Query($name: String!) {
     profile(name: $name) {
@@ -106,6 +109,18 @@ query Query {
           secondLevelcreatedAt
         }
       }
+    }
+  }
+`;
+
+// export const QUERY_TRIP_INFO = gql``
+
+export const QUERY_FOLLOWING = gql`
+  query Query {
+    following {
+      _id
+      email
+      name
     }
   }
 `;

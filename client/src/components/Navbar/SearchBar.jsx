@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { QUERY_PROFILE } from "../utils/queries";
+import { QUERY_SINGLE_PROFILE } from "../../utils/queries";
 
 import SearchResults from "./SearchResults";
 
 const SearchBar = ({ searchInput, setSearchInput, setSearchResults }) => {
-  const [getProfile, { loading, data }] = useLazyQuery(QUERY_PROFILE);
+  const [getSingleProfile, { loading, data }] = useLazyQuery(QUERY_SINGLE_PROFILE);
 
   const handleInputChange = (event) => {
     try {
@@ -20,7 +20,7 @@ const SearchBar = ({ searchInput, setSearchInput, setSearchResults }) => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     // Perform the GraphQL query when the form is submitted
-    getProfile({ variables: { name: searchInput } });
+    getSingleProfile({ variables: { name: searchInput } });
   };
 
   return (
@@ -36,13 +36,7 @@ const SearchBar = ({ searchInput, setSearchInput, setSearchResults }) => {
       </label>
       <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg
-            class="w-4 h-4 text-gray-500 dark:text-gray-400"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 20"
-          >
+         
             <path
               stroke="currentColor"
               stroke-linecap="round"
@@ -50,7 +44,7 @@ const SearchBar = ({ searchInput, setSearchInput, setSearchResults }) => {
               stroke-width="2"
               d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
             />
-          </svg>
+          
         </div>
         <input
           type="search"

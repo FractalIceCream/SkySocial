@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from 'react-router-dom';
 
-import { QUERY_WISHLIST } from '../utils/queries';
+// import { QUERY_WISHLIST } from '../utils/queries';
 import { useQuery } from "@apollo/client";
 
 const Wishlist = ({
