@@ -113,4 +113,4 @@ query Query {
   }
 `;
 
-export const QUERY_TRIP_INFO = gql``
+// export const QUERY_TRIP_INFO = gql``
