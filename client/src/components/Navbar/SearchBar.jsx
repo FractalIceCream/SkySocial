@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { QUERY_PROFILE } from "../utils/queries";
+import { QUERY_PROFILE } from "../../utils/queries";
 
 import SearchResults from "./SearchResults";
 
