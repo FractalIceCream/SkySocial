@@ -8,7 +8,6 @@ import Auth from "../utils/auth";
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_PROFILE, QUERY_ME } from "../utils/queries";
-import Wishlist from '../components/Wishlist';
 import Itinerary from '../components/Itinerary';
 
 
@@ -52,7 +51,7 @@ const Profile = () => {
       <div className="w-full overflow-y-auto flex items-center shadow-custom bg-gray-dark h-postContainer rounded-custom">
       <div className="flex flex-col">
         <Itinerary profile={profile}/>
-        <Wishlist profile={profile}/>
+        <Wishlist wishlist={profile.wishlist}/>
         </div>
       
       <PostContainer profile={profile}/>

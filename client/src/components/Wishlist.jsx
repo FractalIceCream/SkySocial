@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import  AuthService from '../utils/auth'
-
+import { QUERY_ME } from '../utils/queries';
 import { CREATE_TRIP } from "../utils/mutation";
 
 // able to createTrip but not populating wishlist with created trip yet
@@ -10,11 +10,6 @@ import { CREATE_TRIP } from "../utils/mutation";
 const Wishlist = ({
 	wishlist
 }) => {
-<<<<<<< HEAD
-//   if (!wishlist.length) {
-//     return <h3>No Wishlist Yet</h3>
-//   }
-=======
 	// 	encountering error here
 	//   if (!wishlist.length) {
 	//     return <h3>No Wishlist Yet</h3>
@@ -24,7 +19,13 @@ const Wishlist = ({
 	const [inputState, setInputState] = useState('');
 	const [wishListItem, setWishListItem] = useState()
 
-	const [createTrip, { error, data }] = useMutation(CREATE_TRIP);
+	const [createTrip, { error, data }] = useMutation(CREATE_TRIP,
+		{
+			refetchQueries: [
+				QUERY_ME,
+				'me'
+			]
+		});
 
 	const handleInputChange = (event) => {
 		// console.log(event.target.value)
@@ -57,7 +58,6 @@ const Wishlist = ({
 		}
 	}
 
->>>>>>> b10972866eba5eccbac12c9074247c2a7243af73
 
 	return (
 		<div className="box-border flex h-wishlist-height w-wishlist-width flex-wrap items-center justify-center rounded-custom bg-gray shadow-2xl">
@@ -65,35 +65,19 @@ const Wishlist = ({
 				<h2>Wishlist</h2>
 			</div>
 
-<<<<<<< HEAD
 			<div className="mt-2 box-border flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">
-        {wishlist &&
-          wishlist.map((tripinfo) => (
-            <button key={tripinfo._id} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
-            <p className="font-semibold text-black">{tripinfo.name}</p>
-            </button>
-          ))
-        }
-					{/* We will need to add with the Queried Data to this area here and when the button is produced, it should then trigger the Modal to start the Itinerary */}
-			</div>
-			<div className="flex items-center justify-evenly">
-				<button className="h-4 w-4 rounded-full bg-black"></button>
-				<button className="ml-5 h-20 w-20 text-xl font-semibold text-white">
-=======
-			<div class="mt-2 box-border flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">
 				{wishlist &&
 					wishlist.map((tripinfo) => (
-						<button key={tripinfo._id} class="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
-							<p class="font-semibold text-black">{tripinfo.name}</p>
+						<button key={tripinfo._id} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
+							<p className="font-semibold text-black">{tripinfo.name}</p>
 						</button>
 					))
 				}
 				{/* We will need to add with the Queried Data to this area here and when the button is produced, it should then trigger the Modal to start the Itinerary */}
 			</div>
-			<div class="flex items-center justify-evenly">
-				<button class="h-4 w-4 rounded-full bg-black"></button>
-				<button class="ml-5 h-20 w-20 text-xl font-semibold text-white" onClick={() => setShowInputBox(true)}>
->>>>>>> b10972866eba5eccbac12c9074247c2a7243af73
+			<div className="flex items-center justify-evenly">
+				<button className="h-4 w-4 rounded-full bg-black"></button>
+				<button className="ml-5 h-20 w-20 text-xl font-semibold text-white" onClick={() => setShowInputBox(true)}>
 					Add Trip
 				</button>
 

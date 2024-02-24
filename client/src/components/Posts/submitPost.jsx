@@ -30,7 +30,7 @@ const SubmitPosts = ({ posts }) => {
   }
 
   useEffect(() => {
-    console.log("Updated Image URL:", imageURL);
+    console.log("Updated Image URL:", imageUrl);
   }, [imageUrl]);
 
 	const handleFormSubmit = async (event) => {
@@ -72,7 +72,7 @@ const SubmitPosts = ({ posts }) => {
 			<div className="bg-black w-2/3 mt-3 h-line"></div>
 			<div className=" flex-shrink w-inputSubmitPost h-12 mt-4  flex flex-wrap justify-evenly items-center text-white">
 				<div className=" flex justify-around w-5/12">
-					<input type="url" value={imageURL} onChange={handleImageChange} placeholder="Paste image URL" style={{ color: 'black' }}/>
+					<input type="url" value={imageUrl} onChange={handleImageChange} placeholder="Paste image URL" style={{ color: 'black' }}/>
 					<button className=" w-16 h-6 text-lg ">Photo</button>
 				</div>
 				<div className="flex w-5/12 justify-end">
