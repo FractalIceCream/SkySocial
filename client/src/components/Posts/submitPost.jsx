@@ -14,9 +14,8 @@ const SubmitPosts = ({ posts }) => {
   const [createPost, { error }] = useMutation(CREATE_POST, {
     refetchQueries: [
       QUERY_POST,
-      'posts',
       QUERY_ME,
-      'me']
+    ]
   });
 
   const handleInputChange = (event) => {
@@ -29,9 +28,9 @@ const SubmitPosts = ({ posts }) => {
     setImageUrl(url);
   }
 
-  useEffect(() => {
-    console.log("Updated Image URL:", imageUrl);
-  }, [imageUrl]);
+  // useEffect(() => {
+  //   console.log("Updated Image URL:", imageURL);
+  // }, [imageUrl]);
 
 	const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -51,7 +50,7 @@ const SubmitPosts = ({ posts }) => {
         }
       });
 
-      console.log("server response:", data);
+      // console.log("server response:", data);
   
       setPostValue("");
       setImageUrl('');

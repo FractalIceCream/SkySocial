@@ -36,8 +36,9 @@ const resolvers = {
         },
 
         // works correctly
-        profile: async (parent, { name }) => {
-            return Profile.findOne({ name }).populate('posts').populate('following').populate('wishlist');
+        profile: async (parent, { profileId }) => {
+            Profile.fine
+            return Profile.findById(profileId).populate('posts').populate('following').populate('wishlist');
         },
 
         // works correctly 
