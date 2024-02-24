@@ -17,6 +17,7 @@ const Wishlist = ({
 
 	const [showInputBox, setShowInputBox] = useState(false);
 	const [inputState, setInputState] = useState('');
+	const [wishListItem, setWishListItem] = useState()
 
 	const [createTrip, { error, data }] = useMutation(CREATE_TRIP);
 
@@ -37,12 +38,13 @@ const Wishlist = ({
 			if (!authUser) {
 				console.error("User not authenticated");
 			} else {
-				console.log(inputState)
 				const { data } = await createTrip({
 					variables: 
 					{name: inputState} ,
 				});
 
+				setInputState('');
+				setShowInputBox(false)
 			}
 
 		} catch (error) {
