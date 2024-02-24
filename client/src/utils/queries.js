@@ -40,54 +40,67 @@ query Query($name: String!) {
 
 export const QUERY_ME = gql`
 query Query {
-    me {
-      _id
-      name
-      email
-      posts {
-        _id
-        postAuthor
-        postText
-        imageUrl
-        createdAt
-        comments {
-          _id
-          commentText
-          commentAuthor
-          createdAt
-          secondLevelComments {
-            _id
-            secondLevelcommentText
-            secondLevelcommentAuthor
-            secondLevelcreatedAt
-          }
-        }
+  me 
+  {
+    _id
+    email
+    name
+    posts
+    
       }
-      wishlist {
-        _id
-        name
-        originLocationCode
-        destinationLocationCode
-        departureDate
-        returnDate
-        adults
-        children
-        infants
-        travelClass
-        includedAirlineCodes
-        excludedAirlineCodes
-        nonStop
-        currencyCode
-        maxPrice
-        max
-      }
-      following {
-        _id
-        name
-      }
-    }
-  }
-`;
+    } `;
+     
+    // {
+    //   _id
+    //   postAuthor
+    //   postText
+    //   imageUrl
+    //   createdAt
+    //   comments 
+    //   {
+    //     _id
+    //     commentText
+    //     commentAuthor
+    //     createdAt
+    //     secondLevelComments 
+    //     {
+    //       _id
+    //       secondLevelcommentText
+    //       secondLevelcommentAuthor
+    //       secondLevelcreatedAt
+    //     }
+    //   }
+    // }
+    // wishlist 
+    // {
+    //   _id
+    //   name
+    //   originLocationCode
+    //   destinationLocationCode
+    //   departureDate
+    //   returnDate
+    //   adults
+    //   children
+    //   infants
+    //   travelClass
+    //   includedAirlineCodes
+    //   excludedAirlineCodes
+    //   nonStop
+    //   currencyCode
+    //   maxPrice
+    //   max
+    //   itinerary 
+    //   {
+    //     departureDate
+    //     departureCode
+    //     arrivalDate
+    //     arrivalCode
+    //     price
+    //   }
+    // }
+//   }
+// }
+// `;
 
 export const QUERY_POST = gql`
 query Query {

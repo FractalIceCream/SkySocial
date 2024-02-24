@@ -48,7 +48,9 @@ const resolvers = {
         // works correctly
         me: async (parent, args, context) => {
             if (context.user) {
-                return Profile.findOne({ _id: context.user._id }).populate('posts').populate('following').populate('wishlist');
+                const profile = Profile.findOne({ _id: context.user._id }).populate('posts').populate('following').populate('wishlist');
+                console.log(profile)
+                return profile
             }
             throw AuthenticationError
         },

@@ -20,7 +20,8 @@ const Profile = () => {
   // );
 
   const { loading, data } = useQuery(QUERY_ME);
-  const profile = data?.me || {}; 
+  const profile = data?.me || {};
+  console.log(data)
   // const profile = data?.me || data?.profile || {};
 
   if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
