@@ -44,7 +44,7 @@ const Post = ({ posts }) => {
 	return (
 		<div>
 			{posts &&
-				posts.map((Post) => (
+				posts.slice().reverse().map((Post) => (
 					<div
 						key={Post._id}
 						class="w-submitPost shadow-inner-strong flex-grow max-w-custom h-post  bg-gray rounded-custom text-white"
