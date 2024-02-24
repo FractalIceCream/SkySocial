@@ -14,7 +14,7 @@ const Home = () => {
       {/* <Itinerary /> */}
       {/* <PostContainer /> */}
       {/* <Wishlist /> */}
-      {/* <Friends /> */}
+      {/* <Following /> */}
       {/* <Actions /> */}
       {/* <Footer /> */}
     </div>
