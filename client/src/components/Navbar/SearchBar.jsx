@@ -1,31 +1,36 @@
 import { useState } from "react";
-import { useLazyQuery } from "@apollo/client";
 import { QUERY_SINGLE_PROFILE } from "../../utils/queries";
-
 import SearchResults from "./SearchResults";
 
-const SearchBar = ({ searchInput, setSearchInput, setSearchResults }) => {
-  const [getSingleProfile, { loading, data }] = useLazyQuery(QUERY_SINGLE_PROFILE);
+const SearchBar = ({  }) => {
+  const [searchInput, setSearchInput] = useState('')
+  const [modalOpen, setModalOpen] = useState(false)
+
+
+  const onHide = () => {
+      setModalOpen(false)
+  }
+
 
   const handleInputChange = (event) => {
     try {
-      const { value } = event.target;
-
-      setSearchInput(value);
+      const profile = event.target.value;
+      setSearchInput(profile)
     } catch (error) {
-      setSearchInput("No User Found");
+    console.log(error)      
     }
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    // Perform the GraphQL query when the form is submitted
-    getSingleProfile({ variables: { name: searchInput } });
+    setModalOpen(true);
+    
 
     console.log(data);
   };
 
   return (
+    <>
     <form
       className="flex flex-row "
       onSubmit={handleFormSubmit}
@@ -49,7 +54,7 @@ const SearchBar = ({ searchInput, setSearchInput, setSearchResults }) => {
           
         </div>
         <input
-          type="search"
+          type="text"
           onChange={handleInputChange}
           id="default-search"
           className="w-full  text-md text-white border border-gray-300 rounded-custom px-4 py-1 bg-gray-light "
@@ -58,12 +63,35 @@ const SearchBar = ({ searchInput, setSearchInput, setSearchResults }) => {
         />
         <button
           type="submit"
+          onClick={handleFormSubmit}
           className="text-white ml-3 h-7 bg-gray-light rounded-custom w-32"
         >
           Search
         </button>
       </div>
     </form>
+
+
+
+
+{modalOpen && (
+  <div>
+    <SearchResults modalOpen={modalOpen}  onHide = {onHide} />
+  </div>
+)
+
+
+
+}
+        
+
+
+
+
+
+
+
+</>
   );
 };
 
