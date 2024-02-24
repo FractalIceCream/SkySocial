@@ -31,8 +31,8 @@ mutation Mutation($email: String!, $password: String!) {
 `;
 
 export const CREATE_POST = gql`
-mutation Mutation($postText: String!) {
-    createPost(postText: $postText) {
+mutation Mutation($postText: String!, $imageUrl: String) {
+    createPost(postText: $postText, imageUrl: $imageUrl) {
       _id
       postAuthor
       postText
