@@ -2,6 +2,7 @@ import Navbar from "../components/./Navbar/Navbar";
 import Footer from "../components/Footer";
 import PostContainer from "../components/Posts/PostContainer";
 // import Following from "../components/Following";
+import Wishlist from "../components/Wishlist";
 import Actions from "../components/Actions"
 import Auth from "../utils/auth";
 import { Navigate, useParams } from 'react-router-dom';
@@ -23,6 +24,7 @@ const Profile = () => {
 
   const { loading, data } = useQuery(QUERY_ME);
   const profile = data?.me || {}; 
+  console.log(profile.wishlist)
   // const profile = data?.me || data?.profile || {};
   const wishlist = profile?.wishlist;
   // console.log(profile);
@@ -64,6 +66,12 @@ const Profile = () => {
         
       
     
+        {/* {profileId ? `${profile.name}'s` : 'No name retrieved'}  */}
+      {/* </h2>
+      <Wishlist 
+        wishlist={profile.wishlist}
+      /> */}
+    {/* <PostContainer /> */}
     {/* <Actions /> */}
     {/* <Footer /> */}
     </div>

@@ -33,7 +33,7 @@ const Post = ({ posts }) => {
 			});
 
       setComment('');
-      
+
 		} catch (err) {
 			console.error(err);
 		}
