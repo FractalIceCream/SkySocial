@@ -34,7 +34,7 @@ const Post = ({ posts }) => {
 			});
 
       setComment('');
-      
+
 		} catch (err) {
 			console.error(err);
 		}
@@ -46,7 +46,7 @@ const Post = ({ posts }) => {
 			{posts &&
 				posts.map((Post) => (
 					<div
-						key={posts._id}
+						key={Post._id}
 						class="w-submitPost shadow-inner-strong flex-grow max-w-custom h-post  bg-gray rounded-custom text-white"
 					>
 						<div class="flex justify-between ">
