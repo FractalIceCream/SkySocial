@@ -9,12 +9,12 @@ import Actions from "../components/Actions"
 
 const Home = () => {
   return (
-    <div className="container">
+    <div className="w-full">
       <Navbar />
       {/* <Itinerary /> */}
-      {/* <PostContainer /> */}
+      <PostContainer />
       {/* <Wishlist /> */}
-      {/* <Friends /> */}
+      {/* <Following /> */}
       {/* <Actions /> */}
       {/* <Footer /> */}
     </div>
