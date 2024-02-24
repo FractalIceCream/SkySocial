@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import  AuthService from '../utils/auth'
-
+import TripInfoModal from "./TripInfoModal";
 import { CREATE_TRIP } from "../utils/mutation";
+import SignUpForm from "./Navbar/SignUpForm";
 
 // able to createTrip but not populating wishlist with created trip yet
 
@@ -18,8 +19,17 @@ const Wishlist = ({
 	const [showInputBox, setShowInputBox] = useState(false);
 	const [inputState, setInputState] = useState('');
 	const [wishListItem, setWishListItem] = useState()
-
+  const [isOpen, setIsOpen] = useState(false);
 	const [createTrip, { error, data }] = useMutation(CREATE_TRIP);
+
+  // const openModal = () => {
+  //   setIsOpen(true);
+  //   console.log(isOpen)
+  // };
+  // const closeModal = () => {
+  //   setIsOpen(false);
+  // };
+
 
 	const handleInputChange = (event) => {
 		// console.log(event.target.value)
@@ -62,13 +72,14 @@ const Wishlist = ({
 			<div class="mt-2 box-border flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">
 				{wishlist &&
 					wishlist.map((tripinfo) => (
-						<button key={tripinfo._id} class="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
+						<button key={tripinfo._id} onClick={()=> setIsOpen(true)} class="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
 							<p class="font-semibold text-black">{tripinfo.name}</p>
 						</button>
 					))
 				}
 				{/* We will need to add with the Queried Data to this area here and when the button is produced, it should then trigger the Modal to start the Itinerary */}
 			</div>
+      
 			<div class="flex items-center justify-evenly">
 				<button class="h-4 w-4 rounded-full bg-black"></button>
 				<button class="ml-5 h-20 w-20 text-xl font-semibold text-white" onClick={() => setShowInputBox(true)}>
@@ -87,8 +98,19 @@ const Wishlist = ({
 					</form>
 				)}
 
+           {isOpen && (
+        <div>
+          <TripInfoModal onHide= {()=> setIsOpen(false)}  />
+          <button onClick={() => setIsOpen(false)}>Close Modal</button>
+        </div>
+      )} 
+
+
+
+
 			</div>
 		</div>
+    
 	);
 };
 
