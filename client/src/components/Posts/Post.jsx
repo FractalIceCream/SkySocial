@@ -47,39 +47,39 @@ const Post = ({ posts }) => {
 				posts.slice().reverse().map((Post) => (
 					<div
 						key={Post._id}
-						class="w-submitPost shadow-inner-strong flex-grow max-w-custom h-post  bg-gray rounded-custom text-white"
+						className="w-submitPost shadow-inner-strong flex-grow max-w-custom h-post  bg-gray rounded-custom text-white"
 					>
-						<div class="flex justify-between ">
-							<h2 class="ml-7 mt-2">{Post.postAuthor}</h2>
-							<h2 class="mr-7 mt-2">{Post.createdAt}</h2>
+						<div className="flex justify-between ">
+							<h2 className="ml-7 mt-2">{Post.postAuthor}</h2>
+							<h2 className="mr-7 mt-2">{Post.createdAt}</h2>
 						</div>
-						<div class="border ml-2 h-12 w-1/3 flex justify-center items-center">
+						<div className="border ml-2 h-12 w-1/3 flex justify-center items-center">
 							Badges Goes Here
 						</div>
-						<div class="h-48 mt-3 bg-gray ">
-							<div class=" flex justify-evenly flex-wrap w h-3/4">
+						<div className="h-48 mt-3 bg-gray ">
+							<div className=" flex justify-evenly flex-wrap w h-3/4">
 								<img
-									class="max-w-full rounded-custom max-h-full h-auto"
+									className="max-w-full rounded-custom max-h-full h-auto"
 									src={Post.imageUrl}
 								></img>
 							</div>
-							<div class=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
+							<div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
 								<p>{Post.postText}</p>
 							</div>
 						</div>
-						<div class="flex justify-center">
-							<div class="h-line bg-white mt-4 w-submitComment  "></div>
+						<div className="flex justify-center">
+							<div className="h-line bg-white mt-4 w-submitComment  "></div>
 						</div>
-						<div class="h-10  max-w-custom flex justify-evenly">
-							<button class="ml-3">Like</button>
+						<div className="h-10  max-w-custom flex justify-evenly">
+							<button className="ml-3">Like</button>
 							<button>View Comments</button>
 						</div>
-						<div class=" flex  max-w-custom justify-between">
-							<div class="flex w-12 justify-center ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
-								<button onClick={handleFormSubmit} class=" ">Comment</button>
+						<div className=" flex  max-w-custom justify-between">
+							<div className="flex w-12 justify-center ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
+								<button onClick={handleFormSubmit} className=" ">Comment</button>
 							</div>
 							<input
-								value={comment} onChange={handleInputChange} class="h-submitComment flex justify-center text-center text-white bg-gray-light rounded-custom w-submitComment "
+								value={comment} onChange={handleInputChange} className="h-submitComment flex justify-center text-center text-white bg-gray-light rounded-custom w-submitComment "
 								placeholder="Comment here..."
 							></input>
 						</div>
