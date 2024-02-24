@@ -7,7 +7,6 @@ const Post = ({ posts }) => {
 	// if (!posts.length) {
 	// 	return <h3>No Posts Yet!</h3>;
 	// }
-
 	const [createComment, { error }] = useMutation(CREATE_COMMENT);
 
 	const [comment, setComment] = useState("");

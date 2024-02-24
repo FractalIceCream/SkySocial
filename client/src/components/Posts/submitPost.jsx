@@ -2,30 +2,36 @@ import { CREATE_POST } from "../../utils/mutation";
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
-import { QUERY_POST } from "../../utils/queries";
+
+import { QUERY_POST, QUERY_ME } from "../../utils/queries";
+
+
 
 const SubmitPosts = ({ posts }) => {
-	const [postValue, setPostValue] = useState("");
-	const [imageURL, setImageURL] = useState('');
+  const [postValue, setPostValue] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
-	const [createPost, { error }] = useMutation(CREATE_POST, {
-		refetchQueries: [QUERY_POST, "posts"],
-	});
+  const [createPost, { error }] = useMutation(CREATE_POST, {
+    refetchQueries: [
+      QUERY_POST,
+      'posts',
+      QUERY_ME,
+      'me']
+  });
 
-	const handleInputChange = (event) => {
-		const postText = event.target.value;
-		setPostValue(postText);
-	};
+  const handleInputChange = (event) => {
+    const postText = event.target.value;
+    setPostValue(postText);
+  };
 
-	const handleImageChange = (event) => {
-    event.preventDefault();
-		const url = event.target.value;
-    setImageURL(url);
-	};
+  const handleImageChange = (event) => {
+    const url = event.target.value;
+    setImageUrl(url);
+  }
 
   useEffect(() => {
-    console.log("Updated Image URL:", imageURL);
-  }, [imageURL]);
+    console.log("Updated Image URL:", imageUrl);
+  }, [imageUrl]);
 
 	const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -36,21 +42,19 @@ const SubmitPosts = ({ posts }) => {
         console.error("User not authenticated");
         return;
       }
-
-      setImageURL(imageURL);
-      
+      setImageUrl(imageUrl);
       const { data } = await createPost({
         variables: {
           postText: postValue,
           postAuthor: authUser.name,
-          imageUrl: imageURL,
+          imageUrl,
         }
       });
 
       console.log("server response:", data);
   
       setPostValue("");
-      setImageURL('');
+      setImageUrl('');
   
     } catch (err) {
       console.error(err);
@@ -68,7 +72,7 @@ const SubmitPosts = ({ posts }) => {
 			<div className="bg-black w-2/3 mt-3 h-line"></div>
 			<div className=" flex-shrink w-inputSubmitPost h-12 mt-4  flex flex-wrap justify-evenly items-center text-white">
 				<div className=" flex justify-around w-5/12">
-					<input type="url" value={imageURL} onChange={handleImageChange} placeholder="Paste image URL" style={{ color: 'black' }}/>
+					<input type="url" value={imageUrl} onChange={handleImageChange} placeholder="Paste image URL" style={{ color: 'black' }}/>
 					<button className=" w-16 h-6 text-lg ">Photo</button>
 				</div>
 				<div className="flex w-5/12 justify-end">
