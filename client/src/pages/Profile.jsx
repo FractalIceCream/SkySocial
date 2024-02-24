@@ -71,7 +71,7 @@ const Profile = () => {
         wishlist={profile.wishlist}
       /> */}
     {/* <PostContainer /> */}
-    {/* <Actions /> */}
+    <Actions />
     {/* <Footer /> */}
     </div>
 
