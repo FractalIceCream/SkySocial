@@ -4,10 +4,6 @@ import Auth from '../utils/auth';
 
 
 const Actions = () => {
-
-
-
-
   return (
     <>
       {Auth.loggedIn() && ( 
