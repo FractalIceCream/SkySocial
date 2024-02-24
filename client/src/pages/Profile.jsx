@@ -8,7 +8,7 @@ import Auth from "../utils/auth";
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_PROFILE, QUERY_ME } from "../utils/queries";
-
+import Itinerary from '../components/Itinerary';
 
 
 const Profile = () => {
@@ -25,6 +25,8 @@ const Profile = () => {
   const profile = data?.me || {}; 
   console.log(profile.wishlist)
   // const profile = data?.me || data?.profile || {};
+  const wishlist = profile?.wishlist;
+  // console.log(profile);
 
   if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
     return <Navigate to="/me" />;
@@ -46,13 +48,28 @@ const Profile = () => {
     <div>
       {/* this is a test */}
       <Navbar />
-      <h2 className="card-header">
+      <div className="w-full overflow-y-auto flex items-center shadow-custom bg-gray-dark h-postContainer rounded-custom">
+      <div className="flex flex-col">
+        <Itinerary profile={profile}/>
+        <Wishlist wishlist={profile.wishlist}/>
+        </div>
+      
+      <PostContainer profile={profile}/>
+      {/* <h2 className="card-header">
         {profile ? `${profile.name}` : 'No name retrieved'}
+        {profileId ? `${profile.name}'s` : 'No name retrieved'} 
+      </h2> */}
+      
+      </div>
+      {/* profile?.wishlist?.itinerary */}
+        
+      
+    
         {/* {profileId ? `${profile.name}'s` : 'No name retrieved'}  */}
-      </h2>
+      {/* </h2>
       <Wishlist 
         wishlist={profile.wishlist}
-      />
+      /> */}
     {/* <PostContainer /> */}
     {/* <Actions /> */}
     {/* <Footer /> */}

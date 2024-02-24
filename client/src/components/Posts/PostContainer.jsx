@@ -2,22 +2,27 @@ import Post from "./Post";
 import SubmitPosts from "./submitPost";
 //Add Map For Map.Posts
 import AuthService from "../../utils/auth";
-import { QUERY_POST } from "../../utils/queries";
-import { useQuery } from "@apollo/client";
+import { QUERY_POST, QUERY_ME } from "../../utils/queries";
 
-const PostContainer = () => {
+import {useQuery} from '@apollo/client';
 
-  const { loading, error, data } = useQuery(QUERY_POST);
+const PostContainer = ({profile}) => {
 
-  const posts = data?.posts || [];
+	// const { loading, data } = useQuery(
+  //   profileId ? QUERY_SINGLE_PROFILE : QUERY_ME,
+  //   {
+  //     variables: { profileId: profileId }
+  //   }
+  // );
+	const { loading, error, data } = useQuery(
+		profile ? QUERY_ME : QUERY_POST);
 
-  
-
-
-
-	return AuthService.loggedIn() ? (
+	const posts = profile ? data?.me.posts : data?.posts;
+	// AuthService.loggedIn() ?
+	return  (
+		<>
 		<div
-			class="w-postContainer overflow-y-auto flex flex-col items-center shadow-custom bg-gray-dark h-postContainer rounded-custom"
+			className="w-postContainer overflow-y-auto flex flex-col items-center shadow-custom bg-gray-dark h-postContainer rounded-custom"
 			style={{
 				overflow: "auto",
 				scrollbarWidth: "thin",
@@ -26,13 +31,13 @@ const PostContainer = () => {
 			}}
 		>
 			<SubmitPosts />
-			<div class="overflow-y-auto mt-5">
-				<Post posts={posts} />
+			<div className="overflow-y-auto mt-5 align-center">
+				<Post posts={posts}/>
 			</div>
 		</div>
-	) : (
-		<div></div>
-	);
+		</>	
+	) 
+	// : (	<div></div>	);
 };
 
 export default PostContainer;
