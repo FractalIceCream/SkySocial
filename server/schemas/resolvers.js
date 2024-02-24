@@ -133,7 +133,7 @@ const resolvers = {
                 const post = await Post.create({
                     postText,
                     postAuthor: context.user.name,
-                    imageUrl,
+                    imageUrl
                 });
 
                 console.log(post)

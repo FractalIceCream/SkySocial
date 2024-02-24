@@ -11,11 +11,14 @@ const Home = () => {
   return (
     <div className="w-full">
       <Navbar />
-      {/* <Itinerary /> */}
+      
+      <div className="w-full overflow-y-auto flex flex-col items-center shadow-custom bg-gray-dark h-postContainer rounded-custom">
       <PostContainer />
-      <Wishlist />
+      {/* <Itinerary /> */}
+      {/* <Wishlist /> */}
+      </div>
       {/* <Following /> */}
-      {/* <Actions /> */}
+      <Actions />
       {/* <Footer /> */}
     </div>
   );

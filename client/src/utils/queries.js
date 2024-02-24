@@ -40,54 +40,111 @@ query Query($name: String!) {
 
 export const QUERY_ME = gql`
 query Query {
-    me {
+  me 
+  {
+    _id
+    email
+    name
+    posts 
+    {
       _id
-      name
-      email
-      posts {
+      postAuthor
+      postText
+      imageUrl
+      createdAt
+      comments 
+      {
         _id
-        postAuthor
-        postText
-        imageUrl
+        commentText
+        commentAuthor
         createdAt
-        comments {
+        secondLevelComments 
+        {
           _id
-          commentText
-          commentAuthor
-          createdAt
-          secondLevelComments {
-            _id
-            secondLevelcommentText
-            secondLevelcommentAuthor
-            secondLevelcreatedAt
-          }
+          secondLevelcommentText
+          secondLevelcommentAuthor
+          secondLevelcreatedAt
         }
       }
-      wishlist {
-        _id
-        name
-        originLocationCode
-        destinationLocationCode
+    }
+    wishlist 
+    {
+      _id
+      name
+      originLocationCode
+      destinationLocationCode
+      departureDate
+      returnDate
+      adults
+      children
+      infants
+      travelClass
+      includedAirlineCodes
+      excludedAirlineCodes
+      nonStop
+      currencyCode
+      maxPrice
+      max
+      itinerary 
+      {
         departureDate
-        returnDate
-        adults
-        children
-        infants
-        travelClass
-        includedAirlineCodes
-        excludedAirlineCodes
-        nonStop
-        currencyCode
-        maxPrice
-        max
-      }
-      following {
-        _id
-        name
+        departureCode
+        arrivalDate
+        arrivalCode
+        price
       }
     }
   }
-`;
+}`;
+// query Query {
+//     me {
+//       _id
+//       name
+//       email
+//       posts {
+//         _id
+//         postAuthor
+//         postText
+//         imageUrl
+//         createdAt
+//         comments {
+//           _id
+//           commentText
+//           commentAuthor
+//           createdAt
+//           secondLevelComments {
+//             _id
+//             secondLevelcommentText
+//             secondLevelcommentAuthor
+//             secondLevelcreatedAt
+//           }
+//         }
+//       }
+//       wishlist {
+//         _id
+//         name
+//         originLocationCode
+//         destinationLocationCode
+//         departureDate
+//         returnDate
+//         adults
+//         children
+//         infants
+//         travelClass
+//         includedAirlineCodes
+//         excludedAirlineCodes
+//         nonStop
+//         currencyCode
+//         maxPrice
+//         max
+//       }
+//       following {
+//         _id
+//         name
+//       }
+//     }
+//   }
+// `;
 
 export const QUERY_POST = gql`
 query Query {
