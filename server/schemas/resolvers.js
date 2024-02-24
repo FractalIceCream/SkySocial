@@ -127,12 +127,13 @@ const resolvers = {
         },
 
         // works correctly 
-        createPost: async (parent, { postText }, context) => {
+        createPost: async (parent, { postText, imageUrl }, context) => {
             console.log(context.user)
             if (context.user) {
                 const post = await Post.create({
                     postText,
                     postAuthor: context.user.name,
+                    imageUrl
                 });
 
                 console.log(post)
