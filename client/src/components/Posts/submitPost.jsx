@@ -10,7 +10,7 @@
 
 
 
-const submitPost = () => {
+const SubmitPosts = () => {
   return (
     <div class=" flex-shrink h-submitPost w-submitPost mt-5 font-custom  shadow-custom box-border flex flex-wrap items-center justify-center flex-col rounded-custom bg-gray">
     <input class="font-extralight text-white text-2xl shadow-inner-strongest text-center w-inputSubmitPost h-inputSubmitPost  bg-gray-light rounded-custom" placeholder="Share your thoughts...">
@@ -32,4 +32,4 @@ const submitPost = () => {
 
 
 
-export default submitPost;
+export default SubmitPosts;

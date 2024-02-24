@@ -2,52 +2,58 @@ import Navbar from "../components/./Navbar/Navbar";
 import Footer from "../components/Footer";
 import PostContainer from "../components/Posts/PostContainer";
 // import Following from "../components/Following";
-import Actions from "../components/Actions"
 import Wishlist from "../components/Wishlist";
-
+import Actions from "../components/Actions"
+import Auth from "../utils/auth";
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-
-import { QUERY_SINGLE_PROFILE, QUERY_ME } from '../utils/queries';
-
-import Auth from '../utils/auth';
+import { QUERY_SINGLE_PROFILE, QUERY_ME } from "../utils/queries";
 
 const Profile = () => {
+  const {profileId} = useParams();
 
-  const { name: nameParam } = useParams();
+  // const { loading, data } = useQuery(
+  //   profileId ? QUERY_SINGLE_PROFILE : QUERY_ME,
+  //   {
+  //     variables: { profileId: profileId }
+  //   }
+  // );
 
-  const { loading, data } = useQuery(nameParam ? QUERY_SINGLE_PROFILE : QUERY_ME, {
-    variables: { name: nameParam }
-  });
+  const { loading, data } = useQuery(QUERY_ME);
+  const profile = data?.me || {}; 
+  // const profile = data?.me || data?.profile || {};
 
-  const profile  = data?.me || data?.profile || {};
-
-  if (Auth.loggedIn() && Auth.getProfile().data.name === nameParam) {
-    return <Navigate to='/me' />;
+  if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
+    return <Navigate to="/me" />;
   }
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (!profile?.name) {
     return (
-      <h1> Must be logged in to access profile </h1>
+      <h4>
+        You need to be loggen in to see your profile page. Use the navigation links above to sign up or log in!
+      </h4>
     );
   }
 
   return (
     <div>
-    <Navbar />
-    <PostContainer />
-    <Wishlist 
-      wishlist = {profile.wishlist}
-    />
-    <Actions />
-    <Footer />
+      {/* this is a test */}
+      <Navbar />
+      <h2 className="card-header">
+        {profile ? `${profile.name}` : 'No name retrieved'}
+        {/* {profileId ? `${profile.name}'s` : 'No name retrieved'}  */}
+      </h2>
 
-
-
+    {/* <Wishlist 
+      wishlist={profile.wishlist}
+    /> */}
+    {/* <PostContainer /> */}
+    {/* <Actions /> */}
+    {/* <Footer /> */}
     </div>
 
   )
