@@ -196,9 +196,35 @@ mutation Mutation($profileId: ID!) {
   }
 `;
 
-// export const CREATE_TRIP = gql`
-// `;
+export const CREATE_TRIP = gql`
+mutation Mutation($name: String!) {
+    createTrip(name: $name) {
+      _id
+      name
+      departureDate
+      returnDate
+      originLocationCode
+      destinationLocationCode
+      adults
+      children
+      infants
+    }
+  }
+`;
 
 
-// export const REMOVE_TRIP = gql`
-// `;
+export const REMOVE_TRIP = gql`
+  mutation Mutation($tripId: ID!) {
+    removeTrip(tripId: $tripId) {
+      _id
+      name
+      departureDate
+      returnDate
+      originLocationCode
+      destinationLocationCode
+      adults
+      children
+      infants
+    }
+  }
+`;
