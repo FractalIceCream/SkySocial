@@ -4,8 +4,8 @@ import { gql } from '@apollo/client';
 // did not do myTripInfo yet until we know what fields we are actually wanting
 
 export const QUERY_SINGLE_PROFILE = gql`
-query Query($name: String!) {
-    profile(name: $name) {
+query Query($profileId: ID!) {
+    profile(profileId: $profileId) {
       _id
       name
       posts {
@@ -93,6 +93,11 @@ query Query {
         arrivalCode
         price
       }
+    }
+    following
+    {
+      _id
+      name
     }
   }
 }`;

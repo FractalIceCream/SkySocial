@@ -103,7 +103,7 @@ const typeDefs = `
 
     type Query {
         profiles: [Profile]
-        profile(name: String!): Profile
+        profile(profileId: ID!): Profile
         me: Profile
         posts: [Post]
         following: [Profile]

@@ -6,7 +6,7 @@ import { QUERY_POST, QUERY_ME } from "../../utils/queries";
 
 import {useQuery} from '@apollo/client';
 
-const PostContainer = ({profile}) => {
+const PostContainer = ({userPosts}) => {
 
 	// const { loading, data } = useQuery(
   //   profileId ? QUERY_SINGLE_PROFILE : QUERY_ME,
@@ -14,10 +14,11 @@ const PostContainer = ({profile}) => {
   //     variables: { profileId: profileId }
   //   }
   // );
+	
 	const { loading, error, data } = useQuery(
-		profile ? QUERY_ME : QUERY_POST);
+		QUERY_POST);
 
-	const posts = profile ? data?.me.posts : data?.posts;
+	const posts = userPosts || data?.posts;
 	// AuthService.loggedIn() ?
 	return  (
 		<>
