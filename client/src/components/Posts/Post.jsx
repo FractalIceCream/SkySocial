@@ -1,13 +1,26 @@
 import { CREATE_COMMENT } from "../../utils/mutation";
+import { REMOVE_POST } from "../../utils/mutation";
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
+import { QUERY_POST } from "../../utils/queries";
 
 const Post = ({ posts }) => {
 	// if (!posts.length) {
 	// 	return <h3>No Posts Yet!</h3>;
 	// }
 	const [createComment, { error }] = useMutation(CREATE_COMMENT);
+	const [removePost, { err }] = useMutation(REMOVE_POST,
+		{
+			refetchQueries: [
+				QUERY_POST,
+				'posts'
+			]
+		}
+	);
+
+	const authProfile = AuthService.getProfile();
+	const loggedInProfile = authProfile ? authProfile.data.name : null;
 
 	const [comment, setComment] = useState("");
 
@@ -32,12 +45,24 @@ const Post = ({ posts }) => {
 				},
 			});
 
-      setComment('');
+			setComment('');
 
 		} catch (err) {
 			console.error(err);
 		}
 	};
+
+	const handleRemovePost = async (postId) => {
+		console.log(postId)
+
+		try {
+			const { data } = await removePost({
+				variables: { postId },
+			});
+		} catch (error) {
+			console.error('Error removing post',error)
+		}
+	}
 
 	// This component will need to be updated to include the submitted info
 	return (
@@ -51,6 +76,11 @@ const Post = ({ posts }) => {
 						<div className="flex justify-between ">
 							<h2 className="ml-7 mt-2">{Post.postAuthor}</h2>
 							<h2 className="mr-7 mt-2">{Post.createdAt}</h2>
+
+							{loggedInProfile === Post.postAuthor && (
+							<button onClick={() => handleRemovePost(Post._id)}><i class="fa-regular fa-trash-can"></i></button>
+							)}  
+
 						</div>
 						<div className="border ml-2 h-12 w-1/3 flex justify-center items-center">
 							Badges Goes Here
