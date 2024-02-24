@@ -30,17 +30,18 @@ const Profile = () => {
   //   }
   //   return QUERY_ME;
   // }
-  const [dataQuery, setProfile] = useState({});
+  // const [dataQuery, setProfile] = useState({});
 
   const { loading, data } = useQuery(profileId ? QUERY_SINGLE_PROFILE : QUERY_ME, {
     variables: { profileId },
-  onCompleted: setProfile});
-  // const profile = data?.profile || data?.me || {};
-  const profile = dataQuery?.profile || dataQuery?.me || {}
+  // onCompleted: setProfile});
+  });
+  const profile = data?.profile || data?.me || {};
+  // const profile = dataQuery?.me || dataQuery?.profile || {}
   // const profile = data?.me || data?.profile || {};
   // const wishlist = profile?.wishlist;
   // console.log(profile);
-
+  // console.log(profile.posts);
   if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
     return <Navigate to="/me" />;
   }
@@ -67,7 +68,8 @@ const Profile = () => {
           {Auth.getProfile().data._id === profile._id && (<Wishlist wishlist={profile.wishlist.filter((trip) => !trip.itinerary)} />)}
         </div>
         <div>
-        <PostContainer profile={profile} />
+        {/* <PostContainer profile={profile} /> */}
+        <PostContainer userPosts={profile.posts} />
         </div>
         <div>
         {Auth.getProfile().data._id === profile._id && (<Following following={profile.following} />)}

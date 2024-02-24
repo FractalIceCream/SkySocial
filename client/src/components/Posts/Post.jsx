@@ -3,7 +3,7 @@ import { REMOVE_POST } from "../../utils/mutation";
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
-import { QUERY_POST } from "../../utils/queries";
+import { QUERY_POST, QUERY_ME } from "../../utils/queries";
 
 const Post = ({ posts }) => {
 	// if (!posts.length) {
@@ -12,10 +12,11 @@ const Post = ({ posts }) => {
 	const [createComment, { error }] = useMutation(CREATE_COMMENT);
 	const [removePost, { err }] = useMutation(REMOVE_POST,
 		{
-			refetchQueries: [
-				QUERY_POST,
-				'posts'
-			]
+			refetchQueries: window.location.pathname === '/me' ? [QUERY_ME] : [QUERY_POST]
+			//  [
+			// 	QUERY_POST, 
+			// 	QUERY_ME,
+			// ]
 		}
 	);
 
@@ -53,14 +54,13 @@ const Post = ({ posts }) => {
 	};
 
 	const handleRemovePost = async (postId) => {
-		console.log(postId)
-
+		// console.log(postId)
 		try {
 			const { data } = await removePost({
 				variables: { postId },
 			});
 		} catch (error) {
-			console.error('Error removing post',error)
+			console.error('Error removing post', error)
 		}
 	}
 
@@ -78,8 +78,8 @@ const Post = ({ posts }) => {
 							<h2 className="mr-7 mt-2">{Post.createdAt}</h2>
 
 							{loggedInProfile === Post.postAuthor && (
-							<button onClick={() => handleRemovePost(Post._id)}><i class="fa-regular fa-trash-can"></i></button>
-							)}  
+								<button onClick={() => handleRemovePost(Post._id)}><i className="fa-regular fa-trash-can"></i></button>
+							)}
 
 						</div>
 						<div className="border ml-2 h-12 w-1/3 flex justify-center items-center">

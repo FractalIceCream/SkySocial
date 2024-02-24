@@ -143,7 +143,7 @@ const resolvers = {
                     { _id: (context.user._id) },
                     { $addToSet: { posts: post._id } },
                     {
-                        // new: true,
+                        new: true,
                         // ask about runValidators
                         // runValidators: true,
                     },
