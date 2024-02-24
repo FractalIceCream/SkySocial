@@ -1,11 +1,12 @@
 import { CREATE_POST } from "../../utils/mutation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
 import { QUERY_POST } from "../../utils/queries";
 
 const SubmitPosts = ({ posts }) => {
 	const [postValue, setPostValue] = useState("");
+	const [imageURL, setImageURL] = useState('');
 
 	const [createPost, { error }] = useMutation(CREATE_POST, {
 		refetchQueries: [QUERY_POST, "posts"],
@@ -16,46 +17,64 @@ const SubmitPosts = ({ posts }) => {
 		setPostValue(postText);
 	};
 
-	const handleFormSubmit = async (event) => {
-		event.preventDefault();
-
-		try {
-			const authUser = AuthService.getProfile();
-			if (!authUser) {
-				console.error("User not authenticated");
-				return;
-			}
-
-			const { data } = await createPost({
-				variables: {
-					postText: postValue,
-					postAuthor: authUser.name, // Adjust based on your token payload
-				},
-			});
-
-			setPostValue("");
-		} catch (err) {
-			console.error(err);
-		}
+	const handleImageChange = (event) => {
+    event.preventDefault();
+		const url = event.target.value;
+    setImageURL(url);
 	};
 
+  useEffect(() => {
+    console.log("Updated Image URL:", imageURL);
+  }, [imageURL]);
+
+	const handleFormSubmit = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const authUser = AuthService.getProfile();
+      if (!authUser) {
+        console.error("User not authenticated");
+        return;
+      }
+
+      setImageURL(imageURL);
+      
+      const { data } = await createPost({
+        variables: {
+          postText: postValue,
+          postAuthor: authUser.name,
+          imageUrl: imageURL,
+        }
+      });
+
+      console.log("server response:", data);
+  
+      setPostValue("");
+      setImageURL('');
+  
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 	return (
-		<div class=" flex-shrink h-submitPost w-submitPost mt-5 font-custom  shadow-custom box-border flex flex-wrap items-center justify-center flex-col rounded-custom bg-gray">
+		<div className=" flex-shrink h-submitPost w-submitPost mt-5 font-custom  shadow-custom box-border flex flex-wrap items-center justify-center flex-col rounded-custom bg-gray">
 			<input
 				value={postValue}
 				onChange={handleInputChange}
-				class="font-extralight text-white text-2xl shadow-inner-strongest text-center w-inputSubmitPost h-inputSubmitPost  bg-gray-light rounded-custom"
+				className="font-extralight text-white text-2xl shadow-inner-strongest text-center w-inputSubmitPost h-inputSubmitPost  bg-gray-light rounded-custom"
 				placeholder="Share your thoughts..."
 			></input>
-			<div class="bg-black w-2/3 mt-3 h-line"></div>
-			<div class=" flex-shrink w-inputSubmitPost h-12 mt-4  flex flex-wrap justify-evenly items-center text-white">
-				<div class=" flex justify-around w-5/12">
-					<button class=" w-16 h-6 text-lg ">Photo</button>
+			<div className="bg-black w-2/3 mt-3 h-line"></div>
+			<div className=" flex-shrink w-inputSubmitPost h-12 mt-4  flex flex-wrap justify-evenly items-center text-white">
+				<div className=" flex justify-around w-5/12">
+					<input type="url" value={imageURL} onChange={handleImageChange} placeholder="Paste image URL" style={{ color: 'black' }}/>
+					<button className=" w-16 h-6 text-lg ">Photo</button>
 				</div>
-				<div class="flex w-5/12 justify-end">
+				<div className="flex w-5/12 justify-end">
 					<button
 						onClick={handleFormSubmit}
-						class=" w-32 text-lg rounded-custom bg-button-dark hover:bg-slate-600"
+						className=" w-32 text-lg rounded-custom bg-button-dark hover:bg-slate-600"
 					>
 						Send
 					</button>
