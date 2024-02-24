@@ -1,19 +1,52 @@
+import { CREATE_POST } from "../../utils/mutation";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import AuthService from "../../utils/auth";
 
 
 
 
 
 
+const SubmitPosts = ({ posts }) => {
+
+  const [postValue, setPostValue] = useState('');
+
+  const [createPost, { error }] = useMutation(CREATE_POST);
+
+  const handleInputChange = (event) => {
+    const postText = event.target.value;
+    setPostValue(postText);
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const authUser = AuthService.getProfile();
+			if (!authUser) {
+				console.error("User not authenticated");
+				return;
+			}
+
+      const { data } = await createPost({
+				variables: {
+					postText: postValue,
+					postAuthor: authUser.name, // Adjust based on your token payload
+				},
+			});
+
+      setPostValue('');
+      
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
 
-
-
-
-
-const SubmitPosts = () => {
   return (
     <div class=" flex-shrink h-submitPost w-submitPost mt-5 font-custom  shadow-custom box-border flex flex-wrap items-center justify-center flex-col rounded-custom bg-gray">
-    <input class="font-extralight text-white text-2xl shadow-inner-strongest text-center w-inputSubmitPost h-inputSubmitPost  bg-gray-light rounded-custom" placeholder="Share your thoughts...">
+    <input value={postValue} onChange={handleInputChange} class="font-extralight text-white text-2xl shadow-inner-strongest text-center w-inputSubmitPost h-inputSubmitPost  bg-gray-light rounded-custom" placeholder="Share your thoughts...">
 
     </input>
     <div class="bg-black w-2/3 mt-3 h-line"></div>
@@ -22,7 +55,7 @@ const SubmitPosts = () => {
      <button class=" w-16 h-6 text-lg ">Photo</button>
      </div>
      <div class="flex w-5/12 justify-end">
-            <button class= " w-32 text-lg rounded-custom bg-button-dark hover:bg-slate-600">Send</button>
+            <button onClick={handleFormSubmit} class= " w-32 text-lg rounded-custom bg-button-dark hover:bg-slate-600">Send</button>
     </div>
   </div>
   </div>

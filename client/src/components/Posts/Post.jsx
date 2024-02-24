@@ -4,9 +4,9 @@ import { useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
 
 const Post = ({ posts }) => {
-	if (!posts.length) {
-		return <h3>No Posts Yet!</h3>;
-	}
+	// if (!posts.length) {
+	// 	return <h3>No Posts Yet!</h3>;
+	// }
 
 	const [createComment, { error }] = useMutation(CREATE_COMMENT);
 
@@ -32,6 +32,9 @@ const Post = ({ posts }) => {
 					commentAuthorId: authUser.userId, // Adjust based on your token payload
 				},
 			});
+
+      setComment('');
+      
 		} catch (err) {
 			console.error(err);
 		}
