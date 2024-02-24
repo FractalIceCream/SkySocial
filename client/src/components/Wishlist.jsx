@@ -5,7 +5,8 @@ import  AuthService from '../utils/auth'
 import { QUERY_ME } from '../utils/queries';
 import { CREATE_TRIP } from "../utils/mutation";
 
-// able to createTrip but not populating wishlist with created trip yet
+// create button to close input box to add trip
+// add css to input form
 
 const Wishlist = ({
 	wishlist
@@ -17,7 +18,6 @@ const Wishlist = ({
 
 	const [showInputBox, setShowInputBox] = useState(false);
 	const [inputState, setInputState] = useState('');
-	const [wishListItem, setWishListItem] = useState()
 
 	const [createTrip, { error, data }] = useMutation(CREATE_TRIP,
 		{

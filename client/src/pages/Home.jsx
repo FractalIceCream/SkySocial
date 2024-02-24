@@ -18,7 +18,7 @@ const Home = () => {
       {/* <Wishlist /> */}
       </div>
       {/* <Following /> */}
-      {/* <Actions /> */}
+      <Actions />
       {/* <Footer /> */}
     </div>
   );
