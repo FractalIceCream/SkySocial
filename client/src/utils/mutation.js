@@ -228,3 +228,14 @@ export const REMOVE_TRIP = gql`
     }
   }
 `;
+
+export const UPDATE_TRIP = gql ` 
+mutation Mutation($tripId: ID!, $tripInfo: TripInput!) {
+  updateTrip(tripId: $tripId, tripInfo: $tripInfo) {
+    departureDate
+    departureCode
+    arrivalDate
+    arrivalCode
+    price
+  }
+}`;
