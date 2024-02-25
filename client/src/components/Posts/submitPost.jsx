@@ -75,28 +75,30 @@ const SubmitPosts = () => {
 
 	return (
 		<div className=" flex-shrink h-submitPost w-submitPost mt-5 font-custom  shadow-custom box-border flex flex-wrap items-center justify-center flex-col rounded-custom bg-gray">
-			<input
-				value={postValue}
-				onChange={handleInputChange}
-				className="font-extralight text-white text-2xl shadow-inner-strongest text-center w-inputSubmitPost h-inputSubmitPost  bg-gray-light rounded-custom"
-				placeholder="Share your thoughts..."
-			></input>
+		<input
+  value={postValue}
+  onChange={handleInputChange}
+  className="font-extralight text-white text-2xl shadow-inner-strongest text-center w-inputSubmitPost h-inputSubmitPost  bg-gray-light rounded-custom"
+  placeholder="Share your thoughts..."
+/>
 			<div className="bg-black w-2/3 mt-3 h-line"></div>
 			<div className=" flex-shrink w-inputSubmitPost h-12 mt-4  flex flex-wrap justify-evenly items-center text-white">
 				<div className=" flex justify-around w-5/12">
-					<input type="url" value={imageUrl} onChange={handleImageChange} placeholder="Paste image URL" style={{ color: 'black' }}/>
-					<button className=" w-16 h-6 text-lg ">Photo</button>
+					<input type="url" value={imageUrl} onChange={handleImageChange} placeholder="Image URL" className="text-center rounded-custom w-32" style={{ color: 'black' }}/>
+					<button className=" w-16 border rounded-custom flex justify-center items-center bg-gray-light h-6 text-lg">Photo</button>
 				</div>
+
 				<div className="flex w-5/12 justify-end">
 					<button
 						onClick={handleFormSubmit}
-						className=" w-32 text-lg rounded-custom bg-button-dark hover:bg-slate-600"
-					>
+						className= "w-32 text-lg rounded-custom bg-button-dark hover:bg-slate-600">
 						Send
 					</button>
 				</div>
 			</div>
 		</div>
+    
+
 	);
 };
 
