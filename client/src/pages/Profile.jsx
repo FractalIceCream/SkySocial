@@ -1,4 +1,5 @@
-import Navbar from "../components/./Navbar/Navbar";
+import React from "react";
+import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer";
 import PostContainer from "../components/Posts/PostContainer";
 // import Following from "../components/Following";
@@ -6,11 +7,11 @@ import Wishlist from "../components/Wishlist";
 import Actions from "../components/Actions";
 import Auth from "../utils/auth";
 import { Navigate, useParams } from "react-router-dom";
+import { useQuery, useMutation } from "@apollo/client";
+import { useState } from "react";
 import { QUERY_SINGLE_PROFILE, QUERY_ME, QUERY_FOLLOWING } from "../utils/queries";
 import Itinerary from "../components/Itinerary";
 import Following from "../components/Following";
-import { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
 import { FOLLOW_PROFILE, UNFOLLOW_PROFILE } from "../utils/mutation";
 
 const Profile = () => {
@@ -33,7 +34,7 @@ const Profile = () => {
 	// }
 	// const [dataQuery, setProfile] = useState({});
 
-	const { loading, error, data, refetch } = useQuery(
+	const { loading, error, data } = useQuery(
 		profileId ? QUERY_SINGLE_PROFILE : QUERY_ME,
 		{
 			variables: { profileId },
@@ -62,45 +63,6 @@ const Profile = () => {
 			</h4>
 		);
 	}
-
-	// will refetch the profile after the follow profile logic has executed
-	// const [followProfile] = useMutation(FOLLOW_PROFILE, {
-  //   refetchQueries: [
-  //     QUERY_FOLLOWING,
-  //     'following'
-  //   ]
-	// });
-
-	// const [unfollowProfile] = useMutation(UNFOLLOW_PROFILE, {
-  //   refetchQueries: [
-  //     QUERY_FOLLOWING,
-  //     'following'
-  //   ]
-	// });
-
-	// const {
-	// 	loading: followLoading,
-	// 	error: followError,
-	// 	data: followData,
-	// } = useQuery(QUERY_FOLLOWING);
-	// const followingIds = followData?.following.map((user) => user._id) || [];
-	// const isFollowing = followingIds.includes(profile._id);
-
-	// const handleFollow = async () => {
-	// 	try {
-	// 		await followProfile({ variables: { profileId: profile._id } });
-	// 	} catch (err) {
-	// 		console.error("Error following user:", err);
-	// 	}
-	// };
-
-	// const handleUnfollow = async () => {
-	// 	try {
-	// 		await unfollowProfile({ variables: { profileId: profile._id } });
-	// 	} catch (error) {
-	// 		console.error("Error unfollowing user:", error);
-	// 	}
-	// };
 
 	return (
 		<div>
@@ -131,22 +93,6 @@ const Profile = () => {
 				{/* <h2 className="card-header">
 					{profile ? `${profile.name}` : "No name retrieved"}
 					{profileId ? `${profile.name}'s` : "No name retrieved"}
-					{!Auth.loggedIn() ||
-					Auth.getProfile().data._id === profile._id ? null : isFollowing ? (
-						<button
-							onClick={handleUnfollow}
-							className="ml-3 px-2 py-1 bg-red-500 text-white rounded"
-						>
-							Unfollow
-						</button>
-					) : (
-						<button
-							onClick={handleFollow}
-							className="ml-3 px-2 py-1 bg-blue-500 text-white rounded"
-						>
-							Follow
-						</button>
-					)}
 				</h2> */}
 			</div>
 			{/* profile?.wishlist?.itinerary */}
