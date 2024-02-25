@@ -1002,6 +1002,14 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(70 77 78 / var(--tw-bg-opacity));
 }
+.bg-modal {
+  --tw-bg-opacity: 1;
+  background-color: rgb(192 204 195 / var(--tw-bg-opacity)) ;
+}
+.bg-modalbg {
+  --tw-bg-opacity: 1;
+  background-color: rgb(169 169 169 / var(--tw-bg-opacity)) ;
+}
 
 .bg-gray {
   --tw-bg-opacity: 1;

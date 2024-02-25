@@ -32,6 +32,7 @@ module.exports = {
         'gray': '#33363C',
          'gray-light': '#535050',
          'button-dark': '#464D4E',
+         'modal': '#9D8884',
      },
      borderRadius: {
        "custom": "30px",

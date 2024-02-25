@@ -5,7 +5,8 @@ import PostContainer from "../components/Posts/PostContainer";
 import Following from "../components/Following";
 import Wishlist from "../components/Wishlist";
 import Actions from "../components/Actions"
-
+import { useQuery } from "@apollo/client";
+import { useState } from "react";
 
 const Home = () => {
   return (
@@ -18,7 +19,7 @@ const Home = () => {
       {/* <Wishlist /> */}
       </div>
       {/* <Following /> */}
-      {/* <Actions /> */}
+      <Actions />
       {/* <Footer /> */}
     </div>
   );

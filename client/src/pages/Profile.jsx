@@ -9,10 +9,11 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_PROFILE, QUERY_ME } from "../utils/queries";
 import Itinerary from '../components/Itinerary';
-
+import Following from '../components/Following';
+import { useState } from "react";
 
 const Profile = () => {
-  const {profileId} = useParams();
+  const { profileId } = useParams();
 
   // const { loading, data } = useQuery(
   //   profileId ? QUERY_SINGLE_PROFILE : QUERY_ME,
@@ -20,14 +21,27 @@ const Profile = () => {
   //     variables: { profileId: profileId }
   //   }
   // );
+  // console.log(profileId);
+  // const querySwap = (profileId) => {
+  //   if (profileId) {
+  //     return (QUERY_SINGLE_PROFILE, {
+  //       variables: {_id: profileId}
+  //     });
+  //   }
+  //   return QUERY_ME;
+  // }
+  // const [dataQuery, setProfile] = useState({});
 
-  const { loading, data } = useQuery(QUERY_ME);
-  const profile = data?.me || {}; 
-  console.log(profile.wishlist)
+  const { loading, data } = useQuery(profileId ? QUERY_SINGLE_PROFILE : QUERY_ME, {
+    variables: { profileId },
+  // onCompleted: setProfile});
+  });
+  const profile = data?.profile || data?.me || {};
+  // const profile = dataQuery?.me || dataQuery?.profile || {}
   // const profile = data?.me || data?.profile || {};
-  const wishlist = profile?.wishlist;
+  // const wishlist = profile?.wishlist;
   // console.log(profile);
-
+  // console.log(profile.posts);
   if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
     return <Navigate to="/me" />;
   }
@@ -49,30 +63,35 @@ const Profile = () => {
       {/* this is a test */}
       <Navbar />
       <div className="w-full overflow-y-auto flex items-center shadow-custom bg-gray-dark h-postContainer rounded-custom">
-      <div className="flex flex-col">
-        <Itinerary profile={profile}/>
-        <Wishlist wishlist={profile.wishlist}/>
+        <div className="flex flex-col">
+          {Auth.getProfile().data._id === profile._id && (<Itinerary itinerary={profile.wishlist.filter((trip) => trip.itinerary)} />)}
+          {Auth.getProfile().data._id === profile._id && (<Wishlist wishlist={profile.wishlist.filter((trip) => !trip.itinerary)} />)}
         </div>
-      
-      <PostContainer profile={profile}/>
-      {/* <h2 className="card-header">
+        <div>
+        {/* <PostContainer profile={profile} /> */}
+        <PostContainer userPosts={profile.posts} />
+        </div>
+        <div>
+        {Auth.getProfile().data._id === profile._id && (<Following following={profile.following} />)}
+        </div>
+        {/* <h2 className="card-header">
         {profile ? `${profile.name}` : 'No name retrieved'}
         {profileId ? `${profile.name}'s` : 'No name retrieved'} 
       </h2> */}
-      
+
       </div>
       {/* profile?.wishlist?.itinerary */}
-        
-      
-    
-        {/* {profileId ? `${profile.name}'s` : 'No name retrieved'}  */}
+
+
+
+      {/* {profileId ? `${profile.name}'s` : 'No name retrieved'}  */}
       {/* </h2>
       <Wishlist 
         wishlist={profile.wishlist}
       /> */}
-    {/* <PostContainer /> */}
-    {/* <Actions /> */}
-    {/* <Footer /> */}
+      {/* <PostContainer /> */}
+      {/* <Actions /> */}
+      {/* <Footer /> */}
     </div>
 
   )
