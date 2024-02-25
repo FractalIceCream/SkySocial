@@ -65,6 +65,7 @@ const Post = ({ posts }) => {
 	}
 
 	// This component will need to be updated to include the submitted info
+  
 	return (
 		<div>
 			{posts &&

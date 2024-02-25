@@ -23,7 +23,7 @@ const PostContainer = ({userPosts}) => {
 	return  (
 		<>
 		<div
-			className="w-postContainer overflow-y-auto flex flex-col items-center shadow-custom bg-gray-dark h-postContainer rounded-custom"
+			className="w-postContainer overflow-y-auto flex flex-col items-center shadow-custom  bg-gray-dark h-postContainer rounded-custom"
 			style={{
 				overflow: "auto",
 				scrollbarWidth: "thin",
@@ -32,7 +32,7 @@ const PostContainer = ({userPosts}) => {
 			}}
 		>
 			<SubmitPosts />
-			<div className="overflow-y-auto mt-5 align-center">
+			<div className=" flex justify-evenly items-start overflow-y-auto mt-5 ">
 				<Post posts={posts}/>
 			</div>
 		</div>

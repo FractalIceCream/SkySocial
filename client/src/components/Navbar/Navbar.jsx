@@ -15,7 +15,10 @@ const Navbar = () => {
   return (
     <>
       <div className="w-full p-2 flex justify-evenly items-center">
-          <h2 className="">skySocial</h2>
+      <Nav.Link as={Link} to="/">
+      <h2 className="">skySocial</h2>
+              </Nav.Link>
+       
         <div className="p-2">
           <SearchBar
             searchInput={searchInput}
@@ -32,8 +35,7 @@ const Navbar = () => {
           {Auth.loggedIn() ? (
             <>
               <Nav.Link as={Link} to="/me">
-                {" "}
-                Profile{" "}
+                Profile
               </Nav.Link>
               <Nav.Link className="min-w-72" onClick={Auth.logout}>
                 Logout

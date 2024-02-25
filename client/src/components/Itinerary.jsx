@@ -60,12 +60,12 @@ const Itinerary = ({
 
 
 	return (
-		<div className="box-border flex h-itinerary-height w-itinerary-width flex-wrap items-center justify-center rounded-custom bg-gray shadow-2xl">
+		<div className="box-border flex h-post flex-wrap items-center justify-center rounded-custom bg-gray shadow-2xl">
 			<div className="text-2xl font-semibold text-white">
 				<h2>Itinerary</h2>
 			</div>
 
-			<div className="mt-2 box-border flex h-inner-itinerary-height w-inner-itinerary-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">
+			<div className="mt-2 box-border flex h-post w-post flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">
 				{itinerary &&
 					itinerary.map((tripinfo) => (
 						<button key={tripinfo._id} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">

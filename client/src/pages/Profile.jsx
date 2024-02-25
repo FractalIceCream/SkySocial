@@ -62,7 +62,7 @@ const Profile = () => {
     <div>
       {/* this is a test */}
       <Navbar />
-      <div className="w-full overflow-y-auto flex items-center shadow-custom bg-gray-dark h-postContainer rounded-custom">
+      <div className="w-full  flex items-center shadow-custom bg-gray-dark h-postContainer rounded-custom">
         <div className="flex flex-col">
           {Auth.getProfile().data._id === profile._id && (<Itinerary itinerary={profile.wishlist.filter((trip) => trip.itinerary)} />)}
           {Auth.getProfile().data._id === profile._id && (<Wishlist wishlist={profile.wishlist.filter((trip) => !trip.itinerary)} />)}
@@ -73,6 +73,7 @@ const Profile = () => {
         </div>
         <div>
         {Auth.getProfile().data._id === profile._id && (<Following following={profile.following} />)}
+        <Actions />
         </div>
         {/* <h2 className="card-header">
         {profile ? `${profile.name}` : 'No name retrieved'}
