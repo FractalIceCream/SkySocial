@@ -7,7 +7,7 @@ import TripInfoModal from "./TripInfoModal";
 
 import { QUERY_ME } from '../utils/queries';
 
-import { CREATE_TRIP } from "../utils/mutation";
+import { CREATE_TRIP, REMOVE_TRIP } from "../utils/mutation";
 import SignUpForm from "./Navbar/SignUpForm";
 
 // create button to close input box to add trip
@@ -33,7 +33,17 @@ const Wishlist = ({
 				QUERY_ME,
 				'me'
 			]
-		});
+		}
+	);
+
+	const [removeTrip, { err, Data}] = useMutation(REMOVE_TRIP,
+		{
+			refetchQueries: [
+				QUERY_ME,
+				'me'
+			]
+		}
+	);
 
 
 	// const openModal = () => {
@@ -90,9 +100,12 @@ const Wishlist = ({
 			<div className="mt-2 box-border flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">
 				{wishlist &&
 					wishlist.map((tripinfo) => (
+						<div>
 						<button key={tripinfo._id} onClick={() => setIsOpen(true)} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
 							<p className="font-semibold text-black">{tripinfo.name}</p>
 						</button>
+						<button><i class="fa-solid fa-x"/></button>
+						</div>
 					))}
 				{/* {wishlist &&
 					wishlist.map((tripinfo) => (
