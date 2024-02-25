@@ -15,8 +15,16 @@ import Following from "../components/Following";
 import { FOLLOW_PROFILE, UNFOLLOW_PROFILE } from "../utils/mutation";
 
 const FollowProfileButton = ({ profileId }) => {
-  const [followProfile] = useMutation(FOLLOW_PROFILE);
-  const [unfollowProfile] = useMutation(UNFOLLOW_PROFILE);
+  const [followProfile] = useMutation(FOLLOW_PROFILE, {
+    onCompleted: () => {
+      window.location.reload();
+    },
+  });
+  const [unfollowProfile] = useMutation(UNFOLLOW_PROFILE, {
+    onCompleted: () => {
+      window.location.reload();
+    },
+  });
 
   const { data: followData } = useQuery(QUERY_FOLLOWING);
   const followingIds = followData?.following.map((user) => user._id) || [];
@@ -104,7 +112,7 @@ const Profile = () => {
 	if (!profile?.name) {
 		return (
 			<h4>
-				You need to be loggen in to see your profile page. Use the navigation
+				You need to be logged in to see your profile page. Use the navigation
 				links above to sign up or log in!
 			</h4>
 		);
