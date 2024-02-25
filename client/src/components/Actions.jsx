@@ -15,8 +15,6 @@ const Actions = () => {
         </div>
       </div>
      )}
-
-
     </>
   );
 };
