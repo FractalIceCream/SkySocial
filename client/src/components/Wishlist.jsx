@@ -25,7 +25,7 @@ const Wishlist = ({
 	const [inputState, setInputState] = useState('');
 	const [wishListItem, setWishListItem] = useState()
 	const [isOpen, setIsOpen] = useState(false);
-	
+
 
 	const [createTrip, { error, data }] = useMutation(CREATE_TRIP,
 		{
@@ -36,7 +36,7 @@ const Wishlist = ({
 		}
 	);
 
-	const [removeTrip, { err, Data}] = useMutation(REMOVE_TRIP,
+	const [removeTrip, { err, Data }] = useMutation(REMOVE_TRIP,
 		{
 			refetchQueries: [
 				QUERY_ME,
@@ -101,10 +101,11 @@ const Wishlist = ({
 				{wishlist &&
 					wishlist.map((tripinfo) => (
 						<div>
-						<button key={tripinfo._id} onClick={() => setIsOpen(true)} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
-							<p className="font-semibold text-black">{tripinfo.name}</p>
-						</button>
-						<button><i class="fa-solid fa-x"/></button>
+							{/* need help styling this to the correct position */}
+							<button><i class="fa-solid fa-x" style={{ color: 'white' }} /></button>
+							<button key={tripinfo._id} onClick={() => setIsOpen(true)} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
+								<p className="font-semibold text-black">{tripinfo.name}</p>
+							</button>
 						</div>
 					))}
 				{/* {wishlist &&
@@ -141,9 +142,9 @@ const Wishlist = ({
 
 								<div className="flex justify-end">
 									<button onClick={handleFormSubmit} className="bg-green-200 text-black rounded-custom px-4 py-2 rounded-md mr-2">Submit</button>
-									
+
 									<button className="bg-gray-300 text-black px-4 py-2 rounded-md" onClick={handleClose}>Cancel</button>
-									
+
 								</div>
 							</div>
 						</div>
