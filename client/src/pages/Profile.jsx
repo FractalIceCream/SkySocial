@@ -15,8 +15,16 @@ import Following from "../components/Following";
 import { FOLLOW_PROFILE, UNFOLLOW_PROFILE } from "../utils/mutation";
 
 const FollowProfileButton = ({ profileId }) => {
-  const [followProfile] = useMutation(FOLLOW_PROFILE);
-  const [unfollowProfile] = useMutation(UNFOLLOW_PROFILE);
+  const [followProfile] = useMutation(FOLLOW_PROFILE, {
+    onCompleted: () => {
+      window.location.reload();
+    },
+  });
+  const [unfollowProfile] = useMutation(UNFOLLOW_PROFILE, {
+    onCompleted: () => {
+      window.location.reload();
+    },
+  });
 
   const { data: followData } = useQuery(QUERY_FOLLOWING);
   const followingIds = followData?.following.map((user) => user._id) || [];
