@@ -71,7 +71,7 @@ const Post = ({ posts, wishlist }) => {
 				posts.slice().reverse().map((Post) => (
 					<div
 						key={Post._id}
-						className="w-submitPost shadow-inner-strong flex-grow max-w-custom h-post  bg-gray rounded-custom text-white"
+						className="w-submitPost flex-grow max-w-custom h-post mt-4  bg-gray rounded-custom text-white"
 					>
 						<div className="flex justify-between ">
 							<h2 className="ml-7 mt-2">{Post.postAuthor}</h2>
@@ -88,7 +88,7 @@ const Post = ({ posts, wishlist }) => {
 
 
 						<div className="h-48 mt-3 bg-gray ">
-							<div className=" flex justify-evenly flex-wrap w h-3/4">
+							<div className=" flex justify-evenly flex-wrap  w h-3/4">
 								<img
 									className="max-w-full rounded-custom max-h-full h-auto"
 									src={Post.imageUrl}
@@ -105,12 +105,12 @@ const Post = ({ posts, wishlist }) => {
 							<button className="ml-3">Like</button>
 							<button>View Comments</button>
 						</div>
-						<div className=" flex  max-w-custom justify-between">
-							<div className="flex w-12 justify-center ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
-								<button onClick={handleFormSubmit} className=" ">Comment</button>
+						<div className=" flex  max-w-custom justify-evenly">
+							<div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
+								<button onClick={handleFormSubmit} className="text-center text-black ">Comment</button>
 							</div>
 							<input
-								value={comment} onChange={handleInputChange} className="h-submitComment flex justify-center text-center text-white bg-gray-light rounded-custom w-submitComment "
+								value={comment} onChange={handleInputChange} className="h-8 flex justify-center text-center text-white bg-gray-light rounded-custom w-2/3 "
 								placeholder="Comment here..."
 							></input>
 						</div>
