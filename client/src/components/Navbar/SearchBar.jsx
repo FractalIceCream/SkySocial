@@ -23,6 +23,7 @@ const SearchBar = ({  }) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    
     setModalOpen(true);
     
 
