@@ -3,16 +3,18 @@ import { Link, Navigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { UNFOLLOW_PROFILE } from "../utils/mutation";
 import { QUERY_FOLLOWING } from "../utils/queries"
+import { useQuery } from "@apollo/client";
 
 
 
 
 const Following = ({ following }) => {
-  const { loading, error, data, refetch } = useQuery(QUERY_FOLLOWING);
+  const { loading, error, data } = useQuery(QUERY_FOLLOWING);
   const [unfollowProfile] = useMutation(UNFOLLOW_PROFILE, {
-    onCompleted: () => {
-      refetch();
-    }
+    refetchQueries: [
+      QUERY_FOLLOWING,
+      'following'
+    ]
   });
 
   const handleUnfollow = async (profileId) => {
@@ -40,7 +42,7 @@ const Following = ({ following }) => {
     );
   }
 
-  const following = data.following;
+  // const following = data.following;
 
   return (
     <div className="box-border flex h-wishlist-height w-wishlist-width flex-wrap items-center justify-center rounded-custom bg-gray shadow-2xl">
