@@ -25,6 +25,7 @@ const Wishlist = ({
 	const [inputState, setInputState] = useState('');
 	const [wishListItem, setWishListItem] = useState()
 	const [isOpen, setIsOpen] = useState(false);
+	
 
 	const [createTrip, { error, data }] = useMutation(CREATE_TRIP,
 		{
@@ -75,6 +76,10 @@ const Wishlist = ({
 		}
 	}
 
+	const handleClose = () => {
+		setShowInputBox(false);
+	}
+
 
 	return (
 		<div className="box-border flex h-wishlist-height w-wishlist-width flex-wrap items-center justify-center rounded-custom bg-gray shadow-2xl">
@@ -111,15 +116,34 @@ const Wishlist = ({
 					</button>
 
 					{showInputBox && (
-						<form >
-							<input
-								type="text"
-								placeholder="Enter wishlist destination"
-								value={inputState}
-								onChange={handleInputChange}
-							/>
-							<button onClick={handleFormSubmit}> Add Trip </button>
-						</form>
+
+						<div className="absolute top-0 right-0 w-full flex items-center justify-center">
+							<div className="absolute inset-0 bg-modal"></div>
+							<div className="relative text-center bg-modalbg rounded-custom shadow-custom max-w-md w-full">
+								<h2 className="text-2xl text-center text-white font-semibold mb-4">Add a city to your wishlist!</h2>
+
+								<div className="mb-4">
+									<input onChange={handleInputChange} placeholder="City Name" type="text" className="mt-1 rounded-custom bg-white text-black text-center p-2 border rounded-md w-full" />
+								</div>
+
+								<div className="flex justify-end">
+									<button onClick={handleFormSubmit} className="bg-green-200 text-black rounded-custom px-4 py-2 rounded-md mr-2">Submit</button>
+									
+									<button className="bg-gray-300 text-black px-4 py-2 rounded-md" onClick={handleClose}>Cancel</button>
+									
+								</div>
+							</div>
+						</div>
+
+						// <form >
+						// 	<input
+						// 		type="text"
+						// 		placeholder="Enter wishlist destination"
+						// 		value={inputState}
+						// 		onChange={handleInputChange}
+						// 	/>
+						// 	<button onClick={handleFormSubmit}> Add Trip </button>
+						// </form>
 					)}
 
 					{isOpen && (
@@ -134,8 +158,8 @@ const Wishlist = ({
 
 				</div>
 			</div>
-</div>
-			);
+		</div>
+	);
 };
 
 export default Wishlist;
