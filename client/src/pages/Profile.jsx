@@ -6,7 +6,7 @@ import Wishlist from "../components/Wishlist";
 import Actions from "../components/Actions";
 import Auth from "../utils/auth";
 import { Navigate, useParams } from "react-router-dom";
-import { QUERY_SINGLE_PROFILE, QUERY_ME } from "../utils/queries";
+import { QUERY_SINGLE_PROFILE, QUERY_ME, QUERY_FOLLOWING } from "../utils/queries";
 import Itinerary from "../components/Itinerary";
 import Following from "../components/Following";
 import { useState } from "react";
@@ -64,41 +64,43 @@ const Profile = () => {
 	}
 
 	// will refetch the profile after the follow profile logic has executed
-	const [followProfile] = useMutation(FOLLOW_PROFILE, {
-		onCompleted: () => {
-			refetch();
-		},
-	});
+	// const [followProfile] = useMutation(FOLLOW_PROFILE, {
+  //   refetchQueries: [
+  //     QUERY_FOLLOWING,
+  //     'following'
+  //   ]
+	// });
 
-	const [unfollowProfile] = useMutation(UNFOLLOW_PROFILE, {
-		onCompleted: () => {
-			refetch();
-		},
-	});
+	// const [unfollowProfile] = useMutation(UNFOLLOW_PROFILE, {
+  //   refetchQueries: [
+  //     QUERY_FOLLOWING,
+  //     'following'
+  //   ]
+	// });
 
-	const {
-		loading: followLoading,
-		error: followError,
-		data: followData,
-	} = useQuery(QUERY_FOLLOWING);
-	const followingIds = followData?.following.map((user) => user._id) || [];
-	const isFollowing = followingIds.includes(profile._id);
+	// const {
+	// 	loading: followLoading,
+	// 	error: followError,
+	// 	data: followData,
+	// } = useQuery(QUERY_FOLLOWING);
+	// const followingIds = followData?.following.map((user) => user._id) || [];
+	// const isFollowing = followingIds.includes(profile._id);
 
-	const handleFollow = async () => {
-		try {
-			await followProfile({ variables: { profileId: profile._id } });
-		} catch (err) {
-			console.error("Error following user:", err);
-		}
-	};
+	// const handleFollow = async () => {
+	// 	try {
+	// 		await followProfile({ variables: { profileId: profile._id } });
+	// 	} catch (err) {
+	// 		console.error("Error following user:", err);
+	// 	}
+	// };
 
-	const handleUnfollow = async () => {
-		try {
-			await unfollowProfile({ variables: { profileId: profile._id } });
-		} catch (error) {
-			console.error("Error unfollowing user:", error);
-		}
-	};
+	// const handleUnfollow = async () => {
+	// 	try {
+	// 		await unfollowProfile({ variables: { profileId: profile._id } });
+	// 	} catch (error) {
+	// 		console.error("Error unfollowing user:", error);
+	// 	}
+	// };
 
 	return (
 		<div>
