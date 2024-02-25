@@ -129,7 +129,7 @@ const Profile = () => {
 				</div>
 				<div>
 					{/* <PostContainer profile={profile} /> */}
-					<PostContainer userPosts={profile.posts} />
+					<PostContainer userPosts={profile.posts} userTrips={profile.wishlist} />
 				</div>
 				<div>
 					{Auth.getProfile().data._id === profile._id && (

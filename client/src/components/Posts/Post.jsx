@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
 import { QUERY_POST, QUERY_ME } from "../../utils/queries";
 
-const Post = ({ posts }) => {
+const Post = ({ posts, wishlist }) => {
 	// if (!posts.length) {
 	// 	return <h3>No Posts Yet!</h3>;
 	// }
@@ -82,9 +82,13 @@ const Post = ({ posts }) => {
 							)}
 
 						</div>
-						<div className="border ml-2 h-12 w-1/3 flex justify-center items-center">
-							Badges Goes Here
-						</div>
+						{wishlist &&
+							wishlist.map((tripinfo) => (
+								<div className="border ml-2 h-12 w-1/3 flex justify-center items-center" key={tripinfo._id}>
+									Badges Goes Here
+								</div>
+							))
+						}
 						<div className="h-48 mt-3 bg-gray ">
 							<div className=" flex justify-evenly flex-wrap w h-3/4">
 								<img
