@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { UNFOLLOW_PROFILE } from "../utils/mutation";
 import { QUERY_FOLLOWING } from "../utils/queries"
+import { useQuery } from "@apollo/client";
 
 
 
@@ -40,7 +41,7 @@ const Following = ({ following }) => {
     );
   }
 
-  const following = data.following;
+  // const following = data.following;
 
   return (
     <div className="box-border flex h-wishlist-height w-wishlist-width flex-wrap items-center justify-center rounded-custom bg-gray shadow-2xl">
