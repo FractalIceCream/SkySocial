@@ -7,7 +7,7 @@ import TripInfoModal from "./TripInfoModal";
 
 import { QUERY_ME } from '../utils/queries';
 
-import { CREATE_TRIP } from "../utils/mutation";
+import { CREATE_TRIP, REMOVE_TRIP } from "../utils/mutation";
 import SignUpForm from "./Navbar/SignUpForm";
 
 // create button to close input box to add trip
@@ -25,7 +25,7 @@ const Wishlist = ({
 	const [inputState, setInputState] = useState('');
 	const [wishListItem, setWishListItem] = useState()
 	const [isOpen, setIsOpen] = useState(false);
-	
+
 
 	const [createTrip, { error, data }] = useMutation(CREATE_TRIP,
 		{
@@ -33,7 +33,17 @@ const Wishlist = ({
 				QUERY_ME,
 				'me'
 			]
-		});
+		}
+	);
+
+	const [removeTrip, { err, Data }] = useMutation(REMOVE_TRIP,
+		{
+			refetchQueries: [
+				QUERY_ME,
+				'me'
+			]
+		}
+	);
 
 
 	// const openModal = () => {
@@ -76,6 +86,17 @@ const Wishlist = ({
 		}
 	}
 
+	const handleRemoveTrip = async (tripId) => {
+
+		try {
+			const { data } = await removeTrip({
+				variables: { tripId },
+			});
+		} catch (error) {
+			console.error('Error removing trip', error);
+		}
+	}
+
 	const handleClose = () => {
 		setShowInputBox(false);
 	}
@@ -90,9 +111,13 @@ const Wishlist = ({
 			<div className="mt-2 box-border flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">
 				{wishlist &&
 					wishlist.map((tripinfo) => (
-						<button key={tripinfo._id} onClick={() => setIsOpen(true)} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
-							<p className="font-semibold text-black">{tripinfo.name}</p>
-						</button>
+						<div key={tripinfo._id}>
+							{/* need help styling this to the correct position */}
+							<button onClick={() => handleRemoveTrip(tripinfo._id)}><i class="fa-solid fa-x" style={{ color: 'white' }} /></button>
+							<button key={tripinfo._id} onClick={() => setIsOpen(true)} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
+								<p className="font-semibold text-black">{tripinfo.name}</p>
+							</button>
+						</div>
 					))}
 				{/* {wishlist &&
 					wishlist.map((tripinfo) => (
@@ -128,9 +153,9 @@ const Wishlist = ({
 
 								<div className="flex justify-end">
 									<button onClick={handleFormSubmit} className="bg-green-200 text-black rounded-custom px-4 py-2 rounded-md mr-2">Submit</button>
-									
+
 									<button className="bg-gray-300 text-black px-4 py-2 rounded-md" onClick={handleClose}>Cancel</button>
-									
+
 								</div>
 							</div>
 						</div>
