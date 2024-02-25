@@ -86,6 +86,17 @@ const Wishlist = ({
 		}
 	}
 
+	const handleRemoveTrip = async (tripId) => {
+
+		try {
+			const { data } = await removeTrip({
+				variables: { tripId },
+			});
+		} catch (error) {
+			console.error('Error removing trip', error);
+		}
+	}
+
 	const handleClose = () => {
 		setShowInputBox(false);
 	}
@@ -100,9 +111,9 @@ const Wishlist = ({
 			<div className="mt-2 box-border flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">
 				{wishlist &&
 					wishlist.map((tripinfo) => (
-						<div>
+						<div key={tripinfo._id}>
 							{/* need help styling this to the correct position */}
-							<button><i class="fa-solid fa-x" style={{ color: 'white' }} /></button>
+							<button onClick={() => handleRemoveTrip(tripinfo._id)}><i class="fa-solid fa-x" style={{ color: 'white' }} /></button>
 							<button key={tripinfo._id} onClick={() => setIsOpen(true)} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
 								<p className="font-semibold text-black">{tripinfo.name}</p>
 							</button>
