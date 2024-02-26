@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import SignUpForm from "./SignUpForm";
@@ -31,7 +31,8 @@ const Navbar = () => {
           </div>
           {Auth.loggedIn() ? (
             <>
-              <Nav.Link as={Link} to="/me">
+              <Nav.Link as={Link} onClick={()=>window.location.href = '/me'}>
+              {/* ///to="/me"> */}
                 {" "}
                 Profile{" "}
               </Nav.Link>
