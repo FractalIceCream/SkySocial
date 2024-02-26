@@ -123,7 +123,7 @@ const Profile = () => {
 		<div>
 			{/* this is a test */}
 			<Navbar />
-			<div className="w-full overflow-y-auto flex items-center shadow-custom bg-gray-dark h-postContainer rounded-custom">
+			<div className="w-full overflow-y-auto items-center flex shadow-custom bg-gray-dark justify-evenly h-postContainer rounded-custom">
 				<div className="flex flex-col">
 					{Auth.getProfile().data._id === profile._id && (
 						<Itinerary
@@ -136,19 +136,20 @@ const Profile = () => {
 						/>
 					)}
 				</div>
-				<div>
+				<div className="flex justify-center">
 					{/* <PostContainer profile={profile} /> */}
 					<PostContainer userPosts={profile.posts} allPosts={Post} />
 				</div>
-				<div>
+				<div className="flex justify-center">
 					{Auth.getProfile().data._id === profile._id && (
 						<Following following={profile.following} />
 					)}
 				</div>
 				<h2 className="card-header">
-          {profile ? `${profile.name}` : "No name retrieved"}
-          {profileId ? `${profile.name}'s` : "No name retrieved"}
+          {/* {profile ? `${profile.name}` : "No name retrieved"}
+          {profileId ? `${profile.name}'s` : "No name retrieved"} */}
           <FollowProfileButton profileId={profile._id} />
+		  <Actions />
         </h2>
 			</div>
 			{/* profile?.wishlist?.itinerary */}

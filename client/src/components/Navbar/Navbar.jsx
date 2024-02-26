@@ -23,20 +23,20 @@ const Navbar = () => {
             setSearchResults={setSearchResults}
           />
         </div>
-        <div className="flex justify-evenly">
-          <div className="">
+        <div className="w-md mx-4 p-2 flex justify-evenly">
+          <div className="p-4 ">
             <Link className="text-decoration-none text-black " to="/">
               Home
             </Link>
           </div>
           {Auth.loggedIn() ? (
             <>
-              <Nav.Link as={Link} onClick={()=>window.location.href = '/me'}>
+              <Nav.Link className="p-4" as={Link} onClick={()=>window.location.href = '/me'}>
               {/* ///to="/me"> */}
                 {" "}
                 Profile{" "}
               </Nav.Link>
-              <Nav.Link className="min-w-72" onClick={Auth.logout}>
+              <Nav.Link className="p-4" onClick={Auth.logout}>
                 Logout
               </Nav.Link>{" "}
               {/* Conditionally Renders this Logout Button if the user is already logged in */}
