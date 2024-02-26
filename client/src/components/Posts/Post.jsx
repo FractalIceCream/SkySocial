@@ -12,6 +12,7 @@ const Post = ({ post }) => {
     //  return <h3>No Posts Yet!</h3>;
     // }
     const [profileId, setProfileId] = useState('');
+    const [commentShow, setCommentShow] = useState(false)
     const [createComment, { error }] = useMutation(CREATE_COMMENT);
     const [removePost, { err }] = useMutation(REMOVE_POST, {
         refetchQueries:
@@ -42,7 +43,9 @@ const Post = ({ post }) => {
             console.error(err);
         }
     };
-	
+    const showComments = () => {
+      setCommentShow((prevCommentShow) => !prevCommentShow);
+    }
     const authProfile = AuthService.getProfile();
     const loggedInProfile = authProfile ? authProfile.data.name : null;
     const [comment, setComment] = useState("");
@@ -92,7 +95,7 @@ const Post = ({ post }) => {
 
 				<div
 					key={post._id}
-					className="w-submitPost flex-grow max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
+					className="w-submitPost overflow-y max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
 				>
 					<div className="flex justify-between ">
 					<button onClick={() => handleFetchedUser(post.postAuthor)} value={post.postAuthor}>
@@ -132,17 +135,50 @@ const Post = ({ post }) => {
 					</div>
 					<div className="h-10  max-w-custom flex justify-evenly">
 						<button className="ml-3">Like</button>
-						<button>View Comments</button>
+						<button onClick={showComments}>View Comments</button>
 					</div>
 					<div className=" flex  max-w-custom justify-evenly">
 							<div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
-								<button onClick={handleFormSubmit} className="text-center text-black ">Comment</button>
+								<button onClick={handleFormSubmit} className="text-center text-black ">Comment
+                </button>
 							</div>
 							<input
 								value={comment} onChange={handleInputChange} className="h-8 flex justify-center text-center text-white bg-gray-light rounded-custom w-2/3 "
 								placeholder="Comment here..."
 							></input>
 						</div>
+                      
+                      
+
+
+                  {commentShow && post.comments &&
+                          (
+                    post.comments.map((commentOfPost) => (
+                      <div key={commentOfPost._id} 
+                      className="max-h-6 mt-2 overflow-auto">
+                        <div className="flex flex-col ">
+                          <div className="bg-gray-light flex justify-center items-center flex-wrap w-auto rounded-custom">
+                       <p className="p-2 m-1"> {commentOfPost.commentText} </p>
+                        </div>
+                        <p className="text-end"> commented by {commentOfPost.commentAuthor}</p>
+                      
+</div>
+</div>
+                      )
+                    )
+                  )}
+                
+                  
+                  
+                  
+                  
+
+
+
+
+
+
+
 				</div>
 			// </div>
 		);
