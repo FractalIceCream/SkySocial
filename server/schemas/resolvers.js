@@ -67,6 +67,14 @@ const resolvers = {
             return TripInfo.find();
         },
 
+        aggregateTrips: async () => {
+            return TripInfo.aggregate([
+                { $group: { _id: "$name", count: { $sum: 1 } } },
+                { $project: { name: "$_id", count: "$count" } },
+                { $sort: { count: -1 } }
+              ]);
+        },
+
         // works correctly
         myTripinfo: async (parent, args, context) => {
             if (context.user) {

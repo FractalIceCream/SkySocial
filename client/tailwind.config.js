@@ -8,7 +8,9 @@ module.exports = {
     extend: {
      height: {
        'wishlist-height': '35rem',
+       'itinerary-height': '35rem',
        'inner-wishlist-height': '28rem',
+       'inner-itinerary-height': '28rem',
        'actionsWidget': '25rem',
        'submitPost': '15rem',
        'inputSubmitPost': '9rem',
@@ -20,7 +22,9 @@ module.exports = {
      },
      width: {
        'wishlist-width': '20rem',
+       'itinerary-width': '20rem',
        'inner-wishlist-width': '17rem',
+       'inner-itinerary-width': '17rem',
        'actionsWidget': '25rem',
        'submitPost': '42rem',
        'inputSubmitPost': '39rem',
