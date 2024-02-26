@@ -64,6 +64,12 @@ const Post = ({ posts }) => {
 		}
 	}
 
+	const handleFindProfile(event) => {
+		const profileName = event.target.value;
+
+		
+	}
+
 	// This component will need to be updated to include the submitted info
 	return (
 		<div>
@@ -74,7 +80,7 @@ const Post = ({ posts }) => {
 						className="w-submitPost flex-grow max-w-custom h-post mt-4  bg-gray rounded-custom text-white"
 					>
 						<div className="flex justify-between ">
-							<h2 className="ml-7 mt-2">{Post.postAuthor}</h2>
+							<button onClick={handleFindProfile} value={Post.postAuthor}><h2 className="ml-7 mt-2">{Post.postAuthor}</h2></button>
 							<h2 className="mr-7 mt-2">{Post.createdAt}</h2>
 
 							{loggedInProfile === Post.postAuthor && (
@@ -119,3 +125,12 @@ const Post = ({ posts }) => {
 };
 
 export default Post;
+
+
+// click a postAuthor name, and be re-directed to that postAuthor's profile
+
+// click a button, triggering an onClick function
+
+// onClick function will trigger a query for that user's profile based off of the postAuthor variable
+
+// re-direct user to postAuthor profile
