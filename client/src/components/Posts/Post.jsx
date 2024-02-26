@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
 import { QUERY_POST, QUERY_ME } from "../../utils/queries";
 
-const Post = ({ posts, wishlist }) => {
+const Post = ({ posts }) => {
 	// if (!posts.length) {
 	// 	return <h3>No Posts Yet!</h3>;
 	// }
