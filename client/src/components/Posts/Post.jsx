@@ -5,10 +5,11 @@ import { useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
 import { QUERY_POST, QUERY_ME } from "../../utils/queries";
 
-const Post = ({ posts }) => {
+const Post = ({ post }) => {
 	// if (!posts.length) {
 	// 	return <h3>No Posts Yet!</h3>;
 	// }
+
 	const [createComment, { error }] = useMutation(CREATE_COMMENT);
 	const [removePost, { err }] = useMutation(REMOVE_POST,
 		{
@@ -41,8 +42,9 @@ const Post = ({ posts }) => {
 
 			const { data } = await createComment({
 				variables: {
+					postId: post._id,
 					commentText: comment,
-					commentAuthorId: authUser.userId, // Adjust based on your token payload
+					commentAuthorId: authUser._id, // Adjust based on your token payload
 				},
 			});
 
@@ -52,9 +54,7 @@ const Post = ({ posts }) => {
 			console.error(err);
 		}
 	};
-
 	const handleRemovePost = async (postId) => {
-		// console.log(postId)
 		try {
 			const { data } = await removePost({
 				variables: { postId },
@@ -62,50 +62,52 @@ const Post = ({ posts }) => {
 		} catch (error) {
 			console.error('Error removing post', error)
 		}
-	}
+	};
+		// 	}
+		// {/* {posts && */}
+		// 				{/* posts.slice().reverse().map((post) => ( */}
+		// This component will need to be updated to include the submitted info
+		return (
+			// <div className='text-white h-12'> {userPost.postText} </div>
+			// <div> 
 
-	// This component will need to be updated to include the submitted info
-	return (
-		<div>
-			{posts &&
-				posts.slice().reverse().map((Post) => (
-					<div
-						key={Post._id}
-						className="w-submitPost flex-grow max-w-custom h-post mt-4  bg-gray rounded-custom text-white"
-					>
-						<div className="flex justify-between ">
-							<h2 className="ml-7 mt-2">{Post.postAuthor}</h2>
-							<h2 className="mr-7 mt-2">{Post.createdAt}</h2>
+				<div
+					key={post._id}
+					className="w-submitPost flex-grow max-w-custom h-post mt-4  bg-gray rounded-custom text-white"
+				>
+					<div className="flex justify-between ">
+						<h2 className="ml-7 mt-2">{post.postAuthor}</h2>
+						<h2 className="mr-7 mt-2">{post.createdAt}</h2>
 
-							{loggedInProfile === Post.postAuthor && (
-								<button onClick={() => handleRemovePost(Post._id)}><i className="fa-regular fa-trash-can"></i></button>
-							)}
+						{loggedInProfile === post.postAuthor && (
+							<button onClick={() => handleRemovePost(post._id)}><i className="fa-regular fa-trash-can"></i></button>
+						)}
 
-						</div>
-						<div className="border ml-2 h-12 w-1/3 flex justify-center items-center">
-							Badge goes here
-						</div>
+					</div>
+					<div className="border ml-2 h-12 w-1/3 flex justify-center items-center">
+						Badge goes here
+					</div>
 
 
-						<div className="h-48 mt-3 bg-gray ">
-							<div className=" flex justify-evenly flex-wrap  w h-3/4">
-								<img
-									className="max-w-full rounded-custom max-h-full h-auto"
-									src={Post.imageUrl}
-								></img>
-							</div>
-							<div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
-								<p>{Post.postText}</p>
-							</div>
+					<div className="h-48 mt-3 bg-gray ">
+						<div className=" flex justify-evenly flex-wrap  w h-3/4">
+							<img
+								className="max-w-full rounded-custom max-h-full h-auto"
+								src={post.imageUrl}
+							></img>
 						</div>
-						<div className="flex justify-center">
-							<div className="h-line bg-white mt-4 w-submitComment  "></div>
+						<div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
+							<p>{post.postText}</p>
 						</div>
-						<div className="h-10  max-w-custom flex justify-evenly">
-							<button className="ml-3">Like</button>
-							<button>View Comments</button>
-						</div>
-						<div className=" flex  max-w-custom justify-evenly">
+					</div>
+					<div className="flex justify-center">
+						<div className="h-line bg-white mt-4 w-submitComment  "></div>
+					</div>
+					<div className="h-10  max-w-custom flex justify-evenly">
+						<button className="ml-3">Like</button>
+						<button>View Comments</button>
+					</div>
+					<div className=" flex  max-w-custom justify-evenly">
 							<div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
 								<button onClick={handleFormSubmit} className="text-center text-black ">Comment</button>
 							</div>
@@ -114,10 +116,9 @@ const Post = ({ posts }) => {
 								placeholder="Comment here..."
 							></input>
 						</div>
-					</div>
-				))}
-		</div>
-	);
-};
+				</div>
+			// </div>
+		);
+	};
 
-export default Post;
+	export default Post;
