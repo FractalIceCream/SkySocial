@@ -41,6 +41,14 @@ const resolvers = {
             return Profile.findById(profileId).populate('posts').populate('following').populate('wishlist');
         },
 
+        profileByName: async (parent, { name }) => {
+            try {
+                return Profile.findOne({name}).populate('posts').populate('following').populate('wishlist');
+            } catch (error) {
+                console.error(error);
+            }
+        },
+
         // works correctly 
         posts: async () => {
             return Post.find();

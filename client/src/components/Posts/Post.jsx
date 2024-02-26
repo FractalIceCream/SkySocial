@@ -89,8 +89,10 @@ const Post = ({ posts }) => {
 
 						</div>
 						<div className="border ml-2 h-12 w-1/3 flex justify-center items-center">
-							Badges Goes Here
+							Badge goes here
 						</div>
+
+
 						<div className="h-48 mt-3 bg-gray ">
 							<div className=" flex justify-evenly flex-wrap  w h-3/4">
 								<img
