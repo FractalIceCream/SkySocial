@@ -594,6 +594,10 @@ video {
   pointer-events: none;
 }
 
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
@@ -641,6 +645,11 @@ video {
 
 .z-50 {
   z-index: 50;
+}
+
+.mx-12 {
+  margin-left: 3rem;
+  margin-right: 3rem;
 }
 
 .mx-4 {
@@ -722,6 +731,10 @@ video {
 
 .mt-9 {
   margin-top: 2.25rem;
+}
+
+.mr-12 {
+  margin-right: 3rem;
 }
 
 .box-border {
@@ -872,6 +885,10 @@ video {
   width: 10rem;
 }
 
+.w-48 {
+  width: 12rem;
+}
+
 .w-5\/12 {
   width: 41.666667%;
 }
@@ -886,6 +903,10 @@ video {
 
 .w-8 {
   width: 2rem;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .w-actionsWidget {
@@ -1131,6 +1152,11 @@ video {
 
 .p-4 {
   padding: 1rem;
+}
+
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 .px-2 {

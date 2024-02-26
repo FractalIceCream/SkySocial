@@ -7,16 +7,17 @@ import Wishlist from "../components/Wishlist";
 import Actions from "../components/Actions"
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
+import TripContainer from "../components/Trips/TripContainer";
 
 const Home = () => {
   return (
     <div className="w-full">
       <Navbar />
-      
-      <div className="w-full overflow-y-auto flex flex-col items-center shadow-custom bg-gray-dark h-postContainer rounded-custom">
+      {/* removed flex flex-col */}
+      <div className="w-full overflow-y-auto flex justify-center items-center shadow-custom bg-gray-dark h-postContainer rounded-custom">
+      <TripContainer />
       <PostContainer />
       {/* <Itinerary /> */}
-      {/* <Wishlist /> */}
       </div>
       {/* <Following /> */}
       <Actions />

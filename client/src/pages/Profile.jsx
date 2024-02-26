@@ -145,8 +145,8 @@ const Profile = () => {
 					)}
 				</div>
 				<h2 className="card-header">
-          {profile ? `${profile.name}` : "No name retrieved"}
-          {profileId ? `${profile.name}'s` : "No name retrieved"}
+          {/* {profile ? `${profile.name}` : "No name retrieved"}
+          {profileId ? `${profile.name}'s` : "No name retrieved"} */}
           <FollowProfileButton profileId={profile._id} />
 		  <Actions />
         </h2>

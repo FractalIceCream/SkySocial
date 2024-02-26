@@ -231,3 +231,11 @@ query Query($name: String!) {
   }
 }
 `;
+
+export const QUERY_AGGREGATE_TRIPS = gql`
+query Tripinfo {
+  aggregateTrips {
+    name
+    count
+  }
+}`;

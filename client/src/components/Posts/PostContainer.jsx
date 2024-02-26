@@ -34,7 +34,7 @@ const PostContainer = ({ userPosts }) => {
 				<SubmitPost />
 				{posts.slice().reverse().map(post => (
 					// <div key={post._id} className="overflow-y-auto mt-5 align-center">
-						<Post post={post} />
+						<Post key={post._id} post={post} />
 					// </div>
 				))}
 			</div>
