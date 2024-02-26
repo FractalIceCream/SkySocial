@@ -3,7 +3,7 @@ import { REMOVE_POST } from "../../utils/mutation";
 import React, { useState } from "react";
 import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import AuthService from "../../utils/auth";
-import { QUERY_POST, QUERY_ME, QUERY_PROFILE_BY_NAME} from "../../utils/queries";
+import { QUERY_POST, QUERY_ME, QUERY_PROFILE_BY_NAME, QUERY_PROFILES} from "../../utils/queries";
 
 
 
@@ -108,7 +108,7 @@ const Post = ({ posts }) => {
                                 )}
                             </div>
                             <div className="border ml-2 h-12 w-1/3 flex justify-center items-center">
-                                Badge goes here
+									badge goes here
                             </div>
                             <div className="h-48 mt-3 bg-gray ">
                                 <div className=" flex justify-evenly flex-wrap  w h-3/4">

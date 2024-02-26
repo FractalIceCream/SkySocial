@@ -231,3 +231,17 @@ query Query($name: String!) {
   }
 }
 `;
+
+export const QUERY_PROFILES = gql`
+query Query {
+  profiles {
+    _id
+    email
+    name
+    wishlist {
+      _id
+      name
+    }
+  }
+}
+`;
