@@ -21,7 +21,7 @@ const Wishlist = ({ wishlist }) => {
 
   const [showInputBox, setShowInputBox] = useState(false);
   const [inputState, setInputState] = useState("");
-  const [wishListItem, setWishListItem] = useState();
+  // const [wishListItem, setWishListItem] = useState();
   const [isOpen, setIsOpen] = useState(false);
 
   const [createTrip, { error, data }] = useMutation(CREATE_TRIP, {
@@ -114,6 +114,12 @@ const Wishlist = ({ wishlist }) => {
                   </button>
                 </div>
               </div>
+              {isOpen && (
+                <div>
+                  <TripInfoModal tripInfo={tripinfo} onHide={() => setIsOpen(false)} />
+                  <button onClick={() => setIsOpen(false)}>Close Modal</button>
+                </div>
+              )}
             </div>
           ))}
         {/* {wishlist &&
@@ -187,12 +193,12 @@ const Wishlist = ({ wishlist }) => {
             // </form>
           )}
 
-          {isOpen && (
+          {/* {isOpen && (
             <div>
-              <TripInfoModal onHide={() => setIsOpen(false)} />
+              <TripInfoModal tripInfo={wishlist} onHide={() => setIsOpen(false)} />
               <button onClick={() => setIsOpen(false)}>Close Modal</button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

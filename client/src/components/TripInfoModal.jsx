@@ -2,40 +2,45 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { UPDATE_TRIP } from "../utils/mutation";
 
-const TripInfoModal = ({ onHide }) => {
+const TripInfoModal = ({ tripinfo, onHide }) => {
 
-  const [profileFormData, setProfileFormData] = useState({
-    originLocationCode: "",
-    destinationLocationCode: "",
-    departureDate: "",
-    returnDate: "",
-    adults: "",
-  });
+  // const [profileFormData, setProfileFormData] = useState({
+  //   originLocationCode: "",
+  //   destinationLocationCode: "",
+  //   departureDate: "",
+  //   returnDate: "",
+  //   adults: "",
+  // });
+  // console.log(tripinfo);
+  const [tripFormData, setTripFormData] = useState(tripinfo || {});
   const [updateTrip, { error }] = useMutation(UPDATE_TRIP)
-
+  // console.log(tripFormData);
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setProfileFormData({ ...profileFormData, [name]: value });
+    const { id, value } = event.target;
+    // console.log(`${id} : ${value}`);
+    event.target.value = value;
+    setTripFormData({ ...tripFormData, [id]: value });
+    // console.log(tripFormData);
   }
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(profileFormData)
+    // console.log(tripFormData)
     try {
       const { data } = await updateTrip({
-        variables: profileFormData,
+        variables: tripFormData,
       });
     } catch (err) {
       console.error(err);
     }
 
-    setProfileFormData({
-      originLocationCode: "",
-      destinationLocationCode: "",
-      departureDate: "",
-      returnDate: "",
-      adults: "",
-    })
+    // setProfileFormData({
+    //   originLocationCode: "",
+    //   destinationLocationCode: "",
+    //   departureDate: "",
+    //   returnDate: "",
+    //   adults: "",
+    // })
   }
 
   return (
