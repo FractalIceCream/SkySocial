@@ -1,69 +1,91 @@
 import { CREATE_COMMENT } from "../../utils/mutation";
 import { REMOVE_POST } from "../../utils/mutation";
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import AuthService from "../../utils/auth";
-import { QUERY_POST, QUERY_ME } from "../../utils/queries";
+import { QUERY_POST, QUERY_ME, QUERY_PROFILE_BY_NAME} from "../../utils/queries";
+
+
 
 const Post = ({ post }) => {
-	// if (!posts.length) {
-	// 	return <h3>No Posts Yet!</h3>;
-	// }
+    // if (!posts.length) {
+    //  return <h3>No Posts Yet!</h3>;
+    // }
+    const [profileId, setProfileId] = useState('');
+    const [createComment, { error }] = useMutation(CREATE_COMMENT);
+    const [removePost, { err }] = useMutation(REMOVE_POST, {
+        refetchQueries:
+            window.location.pathname === "/me" ? [QUERY_ME] : [QUERY_POST],
+        //  [
+        //  QUERY_POST,
+        //  QUERY_ME,
+        // ]
+    });
 
-	const [createComment, { error }] = useMutation(CREATE_COMMENT);
-	const [removePost, { err }] = useMutation(REMOVE_POST,
-		{
-			refetchQueries: window.location.pathname === '/me' ? [QUERY_ME] : [QUERY_POST]
-			//  [
-			// 	QUERY_POST, 
-			// 	QUERY_ME,
-			// ]
-		}
-	);
+    const [getUserByName, { loading, data }] = useLazyQuery(QUERY_PROFILE_BY_NAME, {
+        variables: {
+            name: Post.postAuthor
+        }
+    });
 
-	const authProfile = AuthService.getProfile();
-	const loggedInProfile = authProfile ? authProfile.data.name : null;
-
-	const [comment, setComment] = useState("");
-
+    const handleFetchedUser = async (author) => {
+        try {
+            const { data } = await getUserByName({
+                variables: {
+                    name: author,
+                },
+            });
+            // console.log(data);
+            const profileId = data.profileByName._id;
+            // console.log(profileId)
+            setProfileId(profileId);
+            window.location.href = `/profiles/${profileId}`;
+        } catch (err) {
+            console.error(err);
+        }
+    };
+	
+    const authProfile = AuthService.getProfile();
+    const loggedInProfile = authProfile ? authProfile.data.name : null;
+    const [comment, setComment] = useState("");
+    
 	const handleInputChange = (event) => {
-		const commentValue = event.target.value;
-		setComment(commentValue);
-	};
+        const commentValue = event.target.value;
+        setComment(commentValue);
+    };
 
-	const handleFormSubmit = async (event) => {
-		event.preventDefault();
-		try {
-			const authUser = AuthService.getProfile();
-			if (!authUser) {
-				console.error("User not authenticated");
-				return;
-			}
-
-			const { data } = await createComment({
-				variables: {
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const authUser = AuthService.getProfile();
+            if (!authUser) {
+                console.error("User not authenticated");
+                return;
+            }
+            const { data } = await createComment({
+                variables: {
 					postId: post._id,
-					commentText: comment,
-					commentAuthorId: authUser._id, // Adjust based on your token payload
-				},
-			});
+                    commentText: comment,
+                    commentAuthorId: authUser.userId, // Adjust based on your token payload
+                },
+            });
+            setComment("");
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
-			setComment('');
+    const handleRemovePost = async (postId) => {
+        // console.log(postId)
+        try {
+            const { data } = await removePost({
+                variables: { postId },
+            });
+        } catch (error) {
+            console.error("Error removing post", error);
+        }
 
-		} catch (err) {
-			console.error(err);
-		}
-	};
-	const handleRemovePost = async (postId) => {
-		try {
-			const { data } = await removePost({
-				variables: { postId },
-			});
-		} catch (error) {
-			console.error('Error removing post', error)
-		}
-	};
-		// 	}
+			};
 		// {/* {posts && */}
 		// 				{/* posts.slice().reverse().map((post) => ( */}
 		// This component will need to be updated to include the submitted info
@@ -76,7 +98,9 @@ const Post = ({ post }) => {
 					className="w-submitPost flex-grow max-w-custom h-post mt-4  bg-gray rounded-custom text-white"
 				>
 					<div className="flex justify-between ">
-						<h2 className="ml-7 mt-2">{post.postAuthor}</h2>
+					<button onClick={() => handleFetchedUser(post.postAuthor)} value={post.postAuthor}>
+                                    <h2 className="ml-7 mt-2">{post.postAuthor}</h2>
+                                </button>
 						<h2 className="mr-7 mt-2">{post.createdAt}</h2>
 
 						{loggedInProfile === post.postAuthor && (

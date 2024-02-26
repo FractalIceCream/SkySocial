@@ -50,7 +50,7 @@ const LoginForm = () => {
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 {" "}
                 {/* This is the beginning of the component */}
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-xl font-semibold text-black dark:text-white">
                   Join the Cloud!
                 </h3>
                 {/* <button
@@ -85,7 +85,7 @@ const LoginForm = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-black dark:text-white"
                   >
                     {" "}
                     {/* This is the email input field */}
@@ -105,7 +105,7 @@ const LoginForm = () => {
                 <div>
                   <label
                     htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-black dark:text-white"
                   >
                     {" "}
                     {/* This is the password input Field */}
@@ -118,7 +118,7 @@ const LoginForm = () => {
                     value={profileFormData.password}
                     id="login-password"
                     placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     required
                   />
                 </div>
