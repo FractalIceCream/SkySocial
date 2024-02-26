@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer";
-// import Itinerary from "../components/Itinerary";
+import Itinerary from "../components/Itinerary";
 import PostContainer from "../components/Posts/PostContainer";
 import Following from "../components/Following";
 import Wishlist from "../components/Wishlist";
@@ -19,7 +19,7 @@ const Home = () => {
       <PostContainer />
       {/* <Itinerary /> */}
       </div>
-      {/* <Following /> */}
+      <Following />
       <Actions />
       {/* <Footer /> */}
     </div>

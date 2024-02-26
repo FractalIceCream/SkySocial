@@ -13,6 +13,7 @@ import { QUERY_SINGLE_PROFILE, QUERY_ME, QUERY_FOLLOWING } from "../utils/querie
 import Itinerary from "../components/Itinerary";
 import Following from "../components/Following";
 import { FOLLOW_PROFILE, UNFOLLOW_PROFILE } from "../utils/mutation";
+import Post from "../components/Posts/Post";
 
 const FollowProfileButton = ({ profileId }) => {
   const [followProfile] = useMutation(FOLLOW_PROFILE, {
@@ -137,7 +138,7 @@ const Profile = () => {
 				</div>
 				<div className="flex justify-center">
 					{/* <PostContainer profile={profile} /> */}
-					<PostContainer userPosts={profile.posts} />
+					<PostContainer userPosts={profile.posts} allPosts={Post} />
 				</div>
 				<div className="flex justify-center">
 					{Auth.getProfile().data._id === profile._id && (
