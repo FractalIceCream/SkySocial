@@ -186,3 +186,48 @@ export const QUERY_FOLLOWING = gql`
     }
   }
 `;
+
+export const QUERY_PROFILE_BY_NAME = gql`
+query Query($name: String!) {
+  profileByName(name: $name) {
+    _id
+    name
+    email
+    posts {
+      _id
+      postAuthor
+      postText
+      createdAt
+      imageUrl
+      comments {
+        _id
+        commentAuthor
+        commentText
+        createdAt
+        secondLevelComments {
+          _id
+          secondLevelcommentAuthor
+          secondLevelcommentText
+          secondLevelcreatedAt
+        }
+      }
+    }
+    wishlist {
+      _id
+      name
+      originLocationCode
+      destinationLocationCode
+      departureDate
+      returnDate
+      adults
+      children
+      infants
+    }
+    following {
+      _id
+      email
+      name
+    }
+  }
+}
+`;

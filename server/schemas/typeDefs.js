@@ -104,6 +104,7 @@ const typeDefs = `
     type Query {
         profiles: [Profile]
         profile(profileId: ID!): Profile
+        profileByName(name: String!): Profile
         me: Profile
         posts: [Post]
         following: [Profile]
