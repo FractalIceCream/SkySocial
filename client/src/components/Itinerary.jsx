@@ -60,9 +60,9 @@ const Itinerary = ({
 
 
 	return (
-		<div className="box-border flex h-itinerary-height w-itinerary-width flex-wrap items-center justify-center rounded-custom bg-gray shadow-2xl">
+		<div className="box-border h-itinerary-height w-itinerary-width flex-wrap items-center justify-center rounded-custom bg-gray shadow-2xl">
 			<div className="text-2xl font-semibold text-white">
-				<h2>Itinerary</h2>
+				<h2 className="text-center">Itinerary</h2>
 			</div>
 
 			<div className="mt-2 box-border flex h-inner-itinerary-height w-inner-itinerary-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">

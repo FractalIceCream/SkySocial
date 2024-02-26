@@ -232,16 +232,10 @@ query Query($name: String!) {
 }
 `;
 
-export const QUERY_PROFILES = gql`
-query Query {
-  profiles {
-    _id
-    email
+export const QUERY_AGGREGATE_TRIPS = gql`
+query Tripinfo {
+  aggregateTrips {
     name
-    wishlist {
-      _id
-      name
-    }
+    count
   }
-}
-`;
+}`;

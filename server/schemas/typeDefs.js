@@ -41,6 +41,11 @@ const typeDefs = `
         secondLevelcreatedAt: String
     }
 
+    type AggregateTrips {
+        name: String
+        count: Int
+    }
+
     type TripInfo {
         _id: ID
         name: String
@@ -59,6 +64,7 @@ const typeDefs = `
         maxPrice: Int
         max: Int
         itinerary: FlightOffer
+        count: Int
     }
 
     input TripInput {
@@ -109,6 +115,7 @@ const typeDefs = `
         posts: [Post]
         following: [Profile]
         tripinfo: [TripInfo]
+        aggregateTrips: [AggregateTrips]
         #flightOffer(tripId: ID!, tripInfo: TripInput!): FlightOffer
         myTripinfo: [TripInfo]
         #flightOffer(

@@ -95,7 +95,7 @@ const Post = ({ post }) => {
 
 				<div
 					key={post._id}
-					className="w-submitPost flex-grow max-w-custom h-post mt-4  bg-gray rounded-custom text-white"
+					className="w-submitPost flex-grow max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
 				>
 					<div className="flex justify-between ">
 					<button onClick={() => handleFetchedUser(post.postAuthor)} value={post.postAuthor}>
@@ -112,7 +112,7 @@ const Post = ({ post }) => {
 						Badge goes here
 					</div>
 
-
+                    {post.imageUrl ? (
 					<div className="h-48 mt-3 bg-gray ">
 						<div className=" flex justify-evenly flex-wrap  w h-3/4">
 							<img
@@ -124,6 +124,12 @@ const Post = ({ post }) => {
 							<p>{post.postText}</p>
 						</div>
 					</div>
+                    ) : (
+                    <div className="h-auto mt-3 bg-gray ">
+                        <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
+							<p>{post.postText}</p>
+						</div>
+                    </div>)}
 					<div className="flex justify-center">
 						<div className="h-line bg-white mt-4 w-submitComment  "></div>
 					</div>

@@ -76,9 +76,7 @@ const SearchBar = ({  }) => {
 
 
 {modalOpen && (
-  <div>
     <SearchResults modalOpen={modalOpen}  onHide = {onHide} />
-  </div>
 )
 
 
