@@ -120,31 +120,31 @@ const Post = ({ post }) => {
 
         <div
             key={post._id}
-            className="w-submitPost overflow-y max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
+            className="w-submitPost border border-black overflow-y max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
         >
-            <div className="flex justify-between ">
-                <button onClick={() => handleFetchedUser(post.postAuthor)} value={post.postAuthor}>
-                    <h2 className="ml-7 mt-2">{post.postAuthor}</h2>
-                </button>
-                <h2 className="mr-7 mt-2">{post.createdAt}</h2>
-
+            <div className="flex justify-between">
+                <div className="">
                 {loggedInProfile === post.postAuthor && (
-                    <button onClick={() => handleRemovePost(post._id)}><i className="fa-regular fa-trash-can"></i></button>
+                    <button onClick={() => handleRemovePost(post._id)}><i className="fa-regular  px-5  fa-trash-can"></i></button>
                 )}
-
+                </div>
+                <div className="flex">
+                <button onClick={() => handleFetchedUser(post.postAuthor)} value={post.postAuthor}>
+                    <h2 className=" mt-2">{post.postAuthor}</h2>
+                </button>
+                <h2 className="ml-5 mr-2 mt-2">posted on {post.createdAt}</h2>
             </div>
+           </div>
 
 
-
-            <div className="border ml-2 h-12 w-1/3 flex justify-center items-center">
+            <div className="overflow-auto-y flex-wrap ml-2 h-auto w-1/3 flex justify-evenly items-center">
                 {!wishListItem ? (
                     <span>Loading...</span>
                 ) : (
-
                     // Render wishlist names here
-                    wishListItem.map((item) => (
-                        <div key={item._id}>
-                            <p className=" h-28 w-12 justify-start items-center flex text-center  rounded-custom bg-green-200 font-semibold text-black">
+                    wishListItem.slice(0, 3).map((item) => (
+                        <div key={item._id} className="flex">
+                            <p className=" h-auto w-16 items-center text-center rounded-custom bg-green-200 font-semibold text-black">
                                 {item.name}
                             </p>
                         </div>
@@ -171,11 +171,11 @@ const Post = ({ post }) => {
                     </div>
                 </div>)}
             <div className="flex justify-center">
-                <div className="h-line bg-white mt-4 w-submitComment  "></div>
+                <div className="h-line bg-black  mt-4 w-submitComment  "></div>
             </div>
             <div className="h-10  max-w-custom flex justify-evenly">
                 <button className="ml-3">Like</button>
-                <button onClick={showComments}>View Comments</button>
+                <button  onClick={showComments}>View Comments</button>
             </div>
             <div className=" flex  max-w-custom justify-evenly">
                 <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
@@ -183,7 +183,7 @@ const Post = ({ post }) => {
                     </button>
                 </div>
                 <input
-                    value={comment} onChange={handleInputChange} className="h-8 flex justify-center text-center text-white bg-gray-light rounded-custom w-2/3 "
+                    value={comment} onChange={handleInputChange} className="h-8 flex justify-center border border-black text-center text-white bg-gray-light rounded-custom w-2/3 "
                     placeholder="Comment here..."
                 ></input>
             </div>
