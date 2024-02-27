@@ -34,6 +34,8 @@ const Wishlist = ({ wishlist }) => {
     refetchQueries: [QUERY_ME, "me"],
   });
 
+  const [tripModal, setTripModal] = useState({});
+
   const wishlistStyles = {
     background: themeState.darkTheme ? '#333' : '#fff',
 		color: themeState.darkTheme ? '#fff' : '#333',
@@ -89,6 +91,11 @@ const Wishlist = ({ wishlist }) => {
   const handleClose = () => {
     setShowInputBox(false);
   };
+  const handleTripModal = (tripinfo) => {
+    setTripModal(tripinfo);
+    setIsOpen(!isOpen);
+
+  }
 
   return (
     <div className="box-border flex h-wishlist-height w-wishlist-width flex-wrap items-center justify-center rounded-custom shadow-2xl" style={wishlistStyles}>
@@ -113,7 +120,7 @@ const Wishlist = ({ wishlist }) => {
                 <div className="flex text-center">
                   <button
                     key={tripinfo._id}
-                    onClick={() => setIsOpen(true)}
+                    onClick={() => handleTripModal(tripinfo)}
                     className=" h-32 w-12 justify-start items-center flex text-center  rounded-custom bg-green-200"
                   >
                     <p className="font-semibold pt-3 text-black">
@@ -122,14 +129,20 @@ const Wishlist = ({ wishlist }) => {
                   </button>
                 </div>
               </div>
-              {isOpen && (
+              {/* {isOpen && (
                 <div>
-                  <TripInfoModal tripInfo={tripinfo} onHide={() => setIsOpen(false)} />
+                  <TripInfoModal tripId={tripinfo._id} tripInfo={tripinfo} name={tripinfo.name} onHide={() => setIsOpen(false)} />
                   <button onClick={() => setIsOpen(false)}>Close Modal</button>
                 </div>
-              )}
+              )} */}
             </div>
           ))}
+        {isOpen && (
+          <div>
+            <TripInfoModal tripId={tripModal._id} tripInfo={tripModal} name={tripModal.name} onHide={() => setIsOpen(false)} />
+            <button onClick={() => setIsOpen(false)}>Close Modal</button>
+          </div>
+        )}
         {/* {wishlist &&
 					wishlist.map((tripinfo) => (
 						<button key={tripinfo._id} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">

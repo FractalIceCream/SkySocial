@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UPDATE_TRIP } from "../utils/mutation";
+import { ADD_ITINERARY, UPDATE_TRIP } from "../utils/mutation";
 
-const TripInfoModal = ({ tripinfo, onHide }) => {
+const TripInfoModal = ({ tripId, tripinfo, name, onHide }) => {
 
   // const [profileFormData, setProfileFormData] = useState({
   //   originLocationCode: "",
@@ -11,26 +11,45 @@ const TripInfoModal = ({ tripinfo, onHide }) => {
   //   returnDate: "",
   //   adults: "",
   // });
-  // console.log(tripinfo);
+  // console.log(tripId);
   const [tripFormData, setTripFormData] = useState(tripinfo || {});
   const [updateTrip, { error }] = useMutation(UPDATE_TRIP)
+  const [addItinerary, { error : itineraryError }] = useMutation(ADD_ITINERARY);
   // console.log(tripFormData);
   const handleInputChange = (event) => {
     const { id, value } = event.target;
     // console.log(`${id} : ${value}`);
+    // if (id === 'adults') {
+    //   const numAdults = parseInt(value);
+    //   console.log(numAdults);
+    //   setTripFormData({...tripFormData, adults: numAdults});
+    //   console.log(tripFormData.adults);
+    // }
     event.target.value = value;
     setTripFormData({ ...tripFormData, [id]: value });
     // console.log(tripFormData);
   }
 
   const handleFormSubmit = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     // console.log(tripFormData)
+    
     try {
-      const { data } = await updateTrip({
-        variables: tripFormData,
+      const numAdults = parseInt(tripFormData.adults)
+      const { data: itinerary } = await updateTrip({
+        variables: {tripInfo: {...tripFormData, adults: numAdults}, tripId},
       });
+      // console.log(itinerary);
+      delete itinerary.updateTrip.__typename;
+      const { data } = await addItinerary({
+        variables: { itinerary: {...itinerary.updateTrip}, tripId }
+      });
+
+      // console.log(data);
+      await onHide(false);
+
     } catch (err) {
+      alert('Something went wrong');
       console.error(err);
     }
 
@@ -48,7 +67,7 @@ const TripInfoModal = ({ tripinfo, onHide }) => {
     <div className="absolute top-0 right-0 w-full flex items-center justify-center">
       <div className="absolute inset-0 bg-modal"></div>
       <div className="relative text-center bg-modalbg rounded-custom shadow-custom max-w-md w-full">
-        <h2 className="text-2xl text-center text-white font-semibold mb-4">Plan Your Trip!</h2>
+        <h2 className="text-2xl text-center text-white font-semibold mb-4">Plan Your Trip to {name}!</h2>
 
         <div className="mb-4">
           <label htmlFor="originLocationCode" className="block text-sm font-medium text-black">From</label>
