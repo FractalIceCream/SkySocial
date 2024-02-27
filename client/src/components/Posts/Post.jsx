@@ -115,12 +115,14 @@ const Post = ({ post }) => {
         }
     };
     const [isLiked, setIsLiked] = useState(false);
+
     const [addLike, { likeError }] = useMutation(ADD_LIKE, {
         refetchQueries: [QUERY_POST, "posts"],
     });
     const [removeLike, { removeLikeError }] = useMutation(REMOVE_LIKE, {
         refetchQueries: [QUERY_POST, "posts"],
     });
+    
     const handleLike = async (postId) => {
         try {
             const { data } = await addLike({
