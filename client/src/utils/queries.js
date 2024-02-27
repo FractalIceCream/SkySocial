@@ -13,6 +13,8 @@ query Query($profileId: ID!) {
         postAuthor
         postText
         imageUrl
+        likes
+        likesCount
         createdAt
         comments {
           _id
@@ -51,6 +53,7 @@ query Query {
       postAuthor
       postText
       imageUrl
+      likesCount
       createdAt
       comments 
       {
@@ -158,6 +161,7 @@ query Query {
       postAuthor
       postText
       imageUrl
+      likesCount
       createdAt
       comments {
         _id
@@ -199,6 +203,7 @@ query Query($name: String!) {
       postAuthor
       postText
       createdAt
+      likesCount
       imageUrl
       comments {
         _id
