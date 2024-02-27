@@ -13,27 +13,11 @@ const Following = ({ following }) => {
   const [themeState] = useTheme();
 
   const { loading, error, data } = useQuery(QUERY_FOLLOWING);
-  const [unfollowProfile] = useMutation(UNFOLLOW_PROFILE, {
-    refetchQueries: [
-      QUERY_FOLLOWING,
-      'following'
-    ]
-  });
 
   const followingStyles = {
     background: themeState.darkTheme ? '#333' : '#fff',
     color: themeState.darkTheme ? '#fff' : '#333',
     // Add other styles as needed
-  };
-
-  const handleUnfollow = async (profileId) => {
-    try {
-      await unfollowProfile({ variables: { profileId } });
-
-      
-    } catch (err) {
-      console.error("Error unfollowing user:", err);
-    }
   };
 
   // display loading state
@@ -66,9 +50,6 @@ const Following = ({ following }) => {
               <Link to={`/profiles/${user._id}`} className="text-decoration-none font-semibold text-black">
                 <p className="font-semibold text-black">{user.name}</p>
               </Link>
-              <button onClick={() => handleUnfollow(user._id)} className="ml-3 px-2 py-1 bg-red-500 text-black rounded">
-                Unfollow
-              </button>
             </div>
           ))}
       </div>
