@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './index.css'
+import './output.css'
 import ThemeProvider from './utils/ThemeContext.jsx'
 import ThemeComponent from './components/Navbar/ThemeComponent.jsx'
 
@@ -15,9 +17,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <ThemeProvider>
         <App />
-      </ThemeProvider>
     ),
     errorElement: <Error />,
     children: [

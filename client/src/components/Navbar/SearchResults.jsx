@@ -13,7 +13,7 @@ const SearchResultsList = ({ onHide }) => {
   return (
     // <div className="static w-96">
     // <div className="static w-96">
-      <div className="static px-12 w-48 bg-gray text-white" > 
+      <div className="absolute px-12 w-48 bg-gray text-white" > 
       
         <div className="flex justify-around">
           <h1 className="ml-16 text-2xl">Users</h1>

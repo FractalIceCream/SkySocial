@@ -36,7 +36,7 @@ function App() {
       <ThemeProvider>
         <Outlet />
 
-        <Footer />
+        {/* <Footer /> */}
       </ThemeProvider>
     </ApolloProvider>
   );

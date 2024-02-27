@@ -11,7 +11,7 @@ export const useTheme = () => useContext(ThemeContext);
 
 // Creating our theme provider. Accepts an argument of "props"
 export default function ThemeProvider(props) {
-  const darkTheme = false;
+  const darkTheme = true;
 
     // Set up our useReducer hook. Accepts two arguments - the reducer and an initial state
     const [state, dispatch] = useReducer(reducer, { darkTheme });
