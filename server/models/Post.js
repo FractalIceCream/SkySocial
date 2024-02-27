@@ -26,6 +26,12 @@ const postSchema = new Schema(
             default: Date.now(),
             get: (timestamp) => dateFormat(timestamp),
         },
+        likes: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Profile'
+            }
+        ],
         comments: [
             {
                 commentText: {
@@ -66,6 +72,8 @@ const postSchema = new Schema(
         ],
     },
 )
+
+postSchema.virtual('likesCount').get(function() {return this.likes.length})
 
 const Post = model('Post', postSchema);
 

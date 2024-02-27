@@ -1,5 +1,5 @@
 import { CREATE_COMMENT } from "../../utils/mutation";
-import { REMOVE_POST } from "../../utils/mutation";
+import { REMOVE_POST, ADD_LIKE, REMOVE_LIKE } from "../../utils/mutation";
 import React, { useState, useEffect } from "react";
 import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import AuthService from "../../utils/auth";
@@ -7,6 +7,7 @@ import { QUERY_POST, QUERY_ME, QUERY_PROFILE_BY_NAME, QUERY_ALL_PROFILES } from 
 
 // badges are not updating on home page and when a new post is created
 // need to style badges
+
 
 const Post = ({ post }) => {
     // if (!posts.length) {
@@ -110,6 +111,40 @@ const Post = ({ post }) => {
             console.error("Error removing post", error);
         }
 
+        const [isLiked, setIsLiked] = useState(false);
+    const [addLike, { likeError }] = useMutation(ADD_LIKE, {
+		refetchQueries: [QUERY_POST, "posts"],
+	});
+	const [removeLike, { removeLikeError }] = useMutation(REMOVE_LIKE, {
+		refetchQueries: [QUERY_POST, "posts"],
+	});
+
+	const handleLike = async (postId) => {
+		try {
+			const { data } = await addLike({
+				variables: { postId },
+			});
+		} catch (error) {
+			console.error(error);
+		}
+		setIsLiked(true);
+	};
+
+	const handleRemoveLike = async (postId) => {
+		try {
+			const { data } = await removeLike({
+				variables: { postId },
+			});
+		} catch (error) {
+			console.error(error);
+		}
+		setIsLiked(false);
+	};
+      
+      
+      
+      
+      
     };
     // {/* {posts && */}
     // 				{/* posts.slice().reverse().map((post) => ( */}
@@ -174,7 +209,16 @@ const Post = ({ post }) => {
                 <div className="h-line bg-black  mt-4 w-submitComment  "></div>
             </div>
             <div className="h-10  max-w-custom flex justify-evenly">
-                <button className="ml-3">Like</button>
+              {isLiked ? (
+					<button className="ml-3" onClick={() => handleRemoveLike(post._id)}>
+						Unlike
+					</button>
+				) : (
+					<button className="ml-3" onClick={() => handleLike(post._id)}>
+						Like
+					</button>
+				)}
+				<div>{post.likesCount}</div>
                 <button  onClick={showComments}>View Comments</button>
             </div>
             <div className=" flex  max-w-custom justify-evenly">
@@ -221,6 +265,7 @@ const Post = ({ post }) => {
         </div>
         // </div>
     );
+
 };
 
 export default Post;
