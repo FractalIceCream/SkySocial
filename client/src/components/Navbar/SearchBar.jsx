@@ -43,29 +43,18 @@ const SearchBar = ({  }) => {
         Search
       </label>
       <div className="flex justify-center items-center">
-        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-         
-            {/* <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-            /> */}
-          
-        </div>
         <input
           type="text"
           onChange={handleInputChange}
           id="default-search"
-          className="w-full  text-md text-white border border-gray-300 rounded-custom px-4 py-1 bg-gray-light "
+          className="w-full  text-md text-white border border-black rounded-custom px-4 py-1 bg-gray-light "
           placeholder="Search SkySocial"
           required
         />
         <button
           type="submit"
           onClick={handleFormSubmit}
-          className="text-white ml-3 h-7 bg-gray-light rounded-custom w-32"
+          className="text-white ml-3 h-7 border-black bg-gray-light rounded-custom w-32"
         >
           Search
         </button>
