@@ -245,3 +245,17 @@ query Tripinfo {
     count
   }
 }`;
+
+export const QUERY_ALL_PROFILES = gql`
+query Profiles {
+  profiles {
+    _id
+    email
+    name
+    wishlist {
+      _id
+      name
+    }
+  }
+}
+`;

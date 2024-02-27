@@ -55,9 +55,9 @@ const Navbar = () => {
               {/* Conditionally Renders this Logout Button if the user is already logged in */}
             </>
           ) : (
-            <div className="w-72">
+            <div className="w-72 flex justify-center  items-center">
               <Nav.Link
-                className="ml-5 w-72"
+                className=""
                 onClick={() => setShowModal(true)}
               >
                 Login/Sign Up
