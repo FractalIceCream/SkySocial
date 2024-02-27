@@ -76,6 +76,9 @@ const Post = ({ post }) => {
     };
     const authProfile = AuthService.getProfile();
     const loggedInProfile = authProfile ? authProfile.data.name : null;
+
+    const isLoggedIn = AuthService.loggedIn();
+
     const [comment, setComment] = useState("");
     const handleInputChange = (event) => {
         const commentValue = event.target.value;
@@ -213,7 +216,8 @@ const Post = ({ post }) => {
                 <div className="h-line bg-black  mt-4 w-submitComment  "></div>
             </div>
             <div className="h-10  max-w-custom flex justify-evenly">
-              {isLiked ? (
+                
+              {isLiked && isLoggedIn ? (
 					<button className="ml-3" onClick={() => handleRemoveLike(post._id)}>
 						Unlike
 					</button>
