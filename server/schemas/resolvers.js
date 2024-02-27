@@ -112,13 +112,13 @@ const resolvers = {
 
             try {
                 const profile = await Profile.create({ name, email, password });
-
+                    console.log(name, email, password);
                 const token = signToken(profile);
 
                 return { token, profile };
 
             } catch (error) {
-
+                console.error(error);
                 throw AuthenticationError
 
             }
