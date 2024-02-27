@@ -240,3 +240,34 @@ query Tripinfo {
     count
   }
 }`;
+
+export const QUERY_TRIPS_INFO = gql`
+query Query {
+  myTripinfo {
+    _id
+    name
+    originLocationCode
+    destinationLocationCode
+    departureDate
+    returnDate
+    adults
+    children
+    infants
+    travelClass
+    includedAirlineCodes
+    excludedAirlineCodes
+    nonStop
+    currencyCode
+    maxPrice
+    max
+    itinerary {
+      departureDate
+      departureCode
+      arrivalDate
+      arrivalCode
+      price
+    }
+    count
+  }
+}
+`;

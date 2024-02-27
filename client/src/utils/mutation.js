@@ -239,3 +239,34 @@ mutation Mutation($tripId: ID!, $tripInfo: TripInput!) {
     price
   }
 }`;
+
+export const ADD_ITINERARY =gql`
+mutation Mutation($tripId: ID!, $itinerary: ItineraryInput!) {
+  addItinerary(tripId: $tripId, itinerary: $itinerary) {
+    _id
+    name
+    originLocationCode
+    destinationLocationCode
+    departureDate
+    returnDate
+    adults
+    children
+    infants
+    travelClass
+    includedAirlineCodes
+    excludedAirlineCodes
+    nonStop
+    currencyCode
+    maxPrice
+    max
+    itinerary {
+      departureDate
+      departureCode
+      arrivalDate
+      arrivalCode
+      price
+    }
+    count
+  }
+}
+`;

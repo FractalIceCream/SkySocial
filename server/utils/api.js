@@ -30,9 +30,11 @@ module.exports = {
 
     getIataCode1: async (query) => {
         try {
-            const res = await amadeus.client.get('/v1/reference-data/locations', {
-                subType: ['AIRPORTS', 'CITIES'],
-                keyword: query,
+            // const res = await amadeus.referenceData.locations().get(//);
+            const res = await amadeus.client.get('/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=DFW', {
+            //     keyword: 'DFW',
+            // subType: 'AIRPORT',
+                
                 max: 1,
             });
             if (!res) {

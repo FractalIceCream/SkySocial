@@ -383,11 +383,15 @@ const resolvers = {
         },
         updateTrip: async (parent, { tripId, tripInfo }, context) => {
             if (context.user) {
+
+                console.log(tripId);
+                console.log(tripInfo);
                 const origin = await getIataCode(tripInfo.originLocationCode);
                 const dest = await getIataCode(tripInfo.destinationLocationCode);
 
                 const originLocationCode =  origin.iataCode;
                 const destinationLocationCode =  dest.iataCode;
+                console.log(tripInfo);
                 await TripInfo.findOneAndUpdate(
                     { _id: tripId },
                     { ...tripInfo, originLocationCode, destinationLocationCode }
