@@ -191,22 +191,21 @@ const Post = ({ post }) => {
 
 
 
-            {commentShow && post.comments &&
-                (
-                    post.comments.map((commentOfPost) => (
-                        <div key={commentOfPost._id}
-                            className="max-h-6 mt-2 overflow-auto">
-                            <div className="flex flex-col ">
-                                <div className="bg-gray-light flex justify-center items-center flex-wrap w-auto rounded-custom">
-                                    <p className="p-2 m-1"> {commentOfPost.commentText} </p>
-                                </div>
-                                <p className="text-end"> commented by {commentOfPost.commentAuthor}</p>
-
+            {commentShow &&
+                post.comments &&
+                post.comments.map((commentOfPost) => (
+                    <div key={commentOfPost._id} className="max-h-12 mt-4 overflow-y">
+                        <div className="flex flex-col h-auto">
+                            <div className="bg-gray-light flex justify-center items-center flex-wrap w-2/3 rounded-custom">
+                                <p className="p-2 m-1"> {commentOfPost.commentText} </p>
                             </div>
+                            <p className="text-end">
+                                {" "}
+                                commented by {commentOfPost.commentAuthor}
+                            </p>
                         </div>
-                    )
-                    )
-                )}
+                    </div>
+                ))}
 
 
 
