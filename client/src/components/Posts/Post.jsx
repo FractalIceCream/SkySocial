@@ -8,6 +8,7 @@ import { QUERY_POST, QUERY_ME, QUERY_PROFILE_BY_NAME, QUERY_ALL_PROFILES } from 
 // badges are not updating on home page and when a new post is created
 // need to style badges
 
+
 const Post = ({ post }) => {
     // if (!posts.length) {
     //  return <h3>No Posts Yet!</h3>;
@@ -24,6 +25,7 @@ const Post = ({ post }) => {
         //  QUERY_ME,
         // ]
     });
+
     const [getUserByName, { loading, data }] = useLazyQuery(QUERY_PROFILE_BY_NAME, {
         variables: {
             name: Post.postAuthor
@@ -48,9 +50,6 @@ const Post = ({ post }) => {
         }
 
     }, [profilesLoading, profilesData])
-
-
-    // const profileForPostAuthor = profilesData.profiles.find(profile => profile.name === post.postAuthor);
 
     const handleFetchedUser = async (author) => {
         try {
@@ -111,6 +110,7 @@ const Post = ({ post }) => {
         }
 
     };
+
     // {/* {posts && */}
     // 				{/* posts.slice().reverse().map((post) => ( */}
     // This component will need to be updated to include the submitted info
@@ -199,6 +199,9 @@ const Post = ({ post }) => {
                             <div className="bg-gray-light flex justify-center items-center flex-wrap w-2/3 rounded-custom">
                                 <p className="p-2 m-1"> {commentOfPost.commentText} </p>
                             </div>
+
+
+
                             <p className="text-end">
                                 {" "}
                                 commented by {commentOfPost.commentAuthor}
