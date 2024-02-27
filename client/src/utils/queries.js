@@ -233,6 +233,20 @@ query Query($name: String!) {
 }
 `;
 
+export const QUERY_ALL_PROFILES = gql`
+query Profiles {
+  profiles {
+    _id
+    email
+    name
+    wishlist {
+      _id
+      name
+    }
+  }
+}
+`;
+
 export const QUERY_AGGREGATE_TRIPS = gql`
 query Tripinfo {
   aggregateTrips {
