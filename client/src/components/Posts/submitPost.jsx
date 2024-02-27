@@ -74,7 +74,7 @@ const SubmitPosts = () => {
   };
 
 	return (
-		<div className=" flex-shrink h-submitPost w-submitPost mt-5 font-custom  shadow-custom box-border flex flex-wrap items-center justify-center flex-col rounded-custom bg-gray">
+		<div className=" flex-shrink h-submitPost w-submitPost mt-5 font-custom  box-border flex flex-wrap items-center justify-center flex-col rounded-custom bg-gray">
 		<input
   value={postValue}
   onChange={handleInputChange}
