@@ -38,10 +38,12 @@ const SearchBar = () => {
           name: searchInput,
         },
       });
+      console.log(data)
       const profileId = data.profileByName._id;
       const profileName = data.profileByName.name
       setProfileId(profileId);
       setProfileName(profileName)
+      console.log(profileId)
     } catch (err) {
       console.error(err);
     }
@@ -51,7 +53,6 @@ const SearchBar = () => {
     setModalOpen(true);
     
 
-    console.log(data);
   };
 
   return (
