@@ -8,6 +8,7 @@ import { QUERY_POST, QUERY_ME, QUERY_PROFILE_BY_NAME, QUERY_ALL_PROFILES } from 
 // badges are not updating on home page and when a new post is created
 // need to style badges
 
+
 const Post = ({ post }) => {
 	// if (!posts.length) {
 	//  return <h3>No Posts Yet!</h3>;

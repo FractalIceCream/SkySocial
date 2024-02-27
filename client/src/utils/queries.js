@@ -13,7 +13,6 @@ query Query($profileId: ID!) {
         postAuthor
         postText
         imageUrl
-        likes
         likesCount
         createdAt
         comments {
