@@ -66,7 +66,7 @@ const TripInfoModal = ({ tripId, tripinfo, name, onHide }) => {
 
     <div className="absolute top-0 right-0 w-full flex items-center justify-center">
       <div className="absolute inset-0 bg-modal"></div>
-      <div className="relative text-center bg-modalbg rounded-custom shadow-custom max-w-md w-full">
+      <div className="relative text-center rounded-custom shadow-custom max-w-md w-full">
         <h2 className="text-2xl text-center text-white font-semibold mb-4">Plan Your Trip to {name}!</h2>
 
         <div className="mb-4">

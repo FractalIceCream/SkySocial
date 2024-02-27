@@ -170,8 +170,7 @@ const Wishlist = ({ wishlist }) => {
 
           {showInputBox && (
             <div className="absolute top-0 right-0 w-full flex items-center justify-center">
-              <div className="absolute inset-0 bg-modal"></div>
-              <div className="relative text-center bg-modalbg rounded-custom shadow-custom max-w-md w-full">
+              <div className="relative bg-gray text-center border rounded-full border-black shadow-custom max-w-md w-full">
                 <h2 className="text-2xl text-center text-white font-semibold mb-4">
                   Add a city to your wishlist!
                 </h2>
@@ -181,20 +180,20 @@ const Wishlist = ({ wishlist }) => {
                     onChange={handleInputChange}
                     placeholder="City Name"
                     type="text"
-                    className="mt-1 rounded-custom bg-white text-black text-center p-2 border rounded-md w-full"
+                    className="mt-1 bg-white text-black text-center h-12 rounded-custom border w-72"
                   />
                 </div>
 
-                <div className="flex justify-end">
+                <div className="flex justify-center">
                   <button
                     onClick={handleFormSubmit}
-                    className="bg-green-200 text-black rounded-custom px-4 py-2 rounded-md mr-2"
+                    className="bg-green-200 text-black border border-black rounded-custom px-4 py-2 mr-2"
                   >
                     Submit
                   </button>
 
                   <button
-                    className="bg-gray-300 text-black px-4 py-2 rounded-md"
+                    className=" text-white px-4 py-2 rounded-md"
                     onClick={handleClose}
                   >
                     Cancel
