@@ -5,6 +5,9 @@ import AuthService from '../utils/auth'
 import { QUERY_ME } from '../utils/queries';
 import { REMOVE_TRIP } from "../utils/mutation";
 import ItineraryModal from "./ItineraryModal";
+import { useTheme } from "../utils/ThemeContext";
+// import { CREATE_TRIP } from "../utils/mutation";
+
 // able to createTrip but not populating itinerary with created trip yet
 
 const Itinerary = ({ itinerary }) => {
@@ -21,6 +24,14 @@ const Itinerary = ({ itinerary }) => {
 	const [removeTrip, { err, Data }] = useMutation(REMOVE_TRIP, {
 		refetchQueries: [QUERY_ME, "me"],
 	  });
+
+	const [themeState] = useTheme();
+
+	const itineraryStyles = {
+		background: themeState.darkTheme ? '#333' : '#fff',
+		color: themeState.darkTheme ? '#fff' : '#333',
+		// Add other styles as needed
+	}
 
 	// const [createTrip, { error, data }] = useMutation(CREATE_TRIP,
 	// 	{
@@ -78,8 +89,8 @@ const Itinerary = ({ itinerary }) => {
 
 
 	return (
-		<div className="box-border h-itinerary-height w-itinerary-width flex-wrap items-center justify-center rounded-custom bg-gray shadow-2xl">
-			<div className="text-2xl font-semibold text-white">
+		<div className="box-border h-itinerary-height w-itinerary-width flex-wrap items-center justify-center rounded-custom shadow-2xl" style={itineraryStyles}>
+			<div className="text-2xl font-semibold">
 				<h2 className="text-center">Itinerary</h2>
 			</div>
 

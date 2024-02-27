@@ -9,6 +9,7 @@ import { QUERY_ME } from "../utils/queries";
 
 import { CREATE_TRIP, REMOVE_TRIP } from "../utils/mutation";
 import SignUpForm from "./Navbar/SignUpForm";
+import { useTheme } from "../utils/ThemeContext";
 
 // create button to close input box to add trip
 // add css to input form
@@ -21,6 +22,7 @@ const Wishlist = ({ wishlist }) => {
 
   const [showInputBox, setShowInputBox] = useState(false);
   const [inputState, setInputState] = useState("");
+  const [themeState] = useTheme();
   // const [wishListItem, setWishListItem] = useState();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -34,6 +36,11 @@ const Wishlist = ({ wishlist }) => {
 
   const [tripModal, setTripModal] = useState({});
 
+  const wishlistStyles = {
+    background: themeState.darkTheme ? '#333' : '#fff',
+		color: themeState.darkTheme ? '#fff' : '#333',
+		// Add other styles as needed
+  }
 
   // const openModal = () => {
   //   setIsOpen(true);
@@ -91,12 +98,12 @@ const Wishlist = ({ wishlist }) => {
   }
 
   return (
-    <div className="box-border flex h-wishlist-height w-wishlist-width flex-wrap items-center justify-center rounded-custom bg-gray shadow-2xl">
-      <div className="text-2xl font-semibold text-white">
+    <div className="box-border flex h-wishlist-height w-wishlist-width flex-wrap items-center justify-center rounded-custom shadow-2xl" style={wishlistStyles}>
+      <div className="text-2xl font-semibold">
         <h2>Wishlist</h2>
       </div>
 
-      <div className="mt-2 box-border flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">
+      <div className="mt-2 box-border flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom p-4 shadow-inner-strong">
         {wishlist &&
           wishlist.map((tripinfo) => (
             <div key={tripinfo._id}>
@@ -105,7 +112,7 @@ const Wishlist = ({ wishlist }) => {
                 <div className="flex justify-center items-start w-12 h-12">
                   <button
                     onClick={() => handleRemoveTrip(tripinfo._id)}
-                    className="text-md text-center"
+                    className="text-md text-center text-black"
                   >
                     x
                   </button>
@@ -155,7 +162,7 @@ const Wishlist = ({ wishlist }) => {
         <div className="flex items-center justify-evenly">
           {/* <button className="h-4 w-4 rounded-full bg-black"></button> */}
           <button
-            className="ml-5 h-20 w-20 text-xl font-semibold text-white"
+            className="ml-5 h-20 w-20 text-xl font-semibold"
             onClick={() => setShowInputBox(true)}
           >
             Add Trip

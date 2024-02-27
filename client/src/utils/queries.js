@@ -13,6 +13,7 @@ query Query($profileId: ID!) {
         postAuthor
         postText
         imageUrl
+        likesCount
         createdAt
         comments {
           _id
@@ -51,6 +52,7 @@ query Query {
       postAuthor
       postText
       imageUrl
+      likesCount
       createdAt
       comments 
       {
@@ -158,6 +160,7 @@ query Query {
       postAuthor
       postText
       imageUrl
+      likesCount
       createdAt
       comments {
         _id
@@ -199,6 +202,7 @@ query Query($name: String!) {
       postAuthor
       postText
       createdAt
+      likesCount
       imageUrl
       comments {
         _id
@@ -268,6 +272,19 @@ query Query {
       price
     }
     count
+  }
+}`;
+
+export const QUERY_ALL_PROFILES = gql`
+query Profiles {
+  profiles {
+    _id
+    email
+    name
+    wishlist {
+      _id
+      name
+    }
   }
 }
 `;

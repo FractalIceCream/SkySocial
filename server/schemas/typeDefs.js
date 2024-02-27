@@ -23,6 +23,8 @@ const typeDefs = `
         postText: String
         imageUrl: String
         createdAt: String
+        likes: [Profile]
+        likesCount: Int
         comments: [Comment]
     }
 
@@ -129,6 +131,8 @@ const typeDefs = `
         addProfile(name: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         createPost(postText: String!, imageUrl: String): Post
+        likePost(postId: ID!): Post
+        unlikePost(postId: ID!): Post
         removePost(postId: ID!): Post
         createComment(postId: ID!, commentText: String!): Post
         removeComment(postId: ID!, commentId: String!): Post

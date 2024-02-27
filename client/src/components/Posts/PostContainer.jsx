@@ -3,7 +3,7 @@ import SubmitPost from "./submitPost";
 //Add Map For Map.Posts
 import AuthService from "../../utils/auth";
 import { QUERY_POST, QUERY_ME } from "../../utils/queries";
-
+import { useTheme } from "../../utils/ThemeContext";
 import { useQuery } from '@apollo/client';
 
 const PostContainer = ({ userPosts }) => {
@@ -15,6 +15,14 @@ const PostContainer = ({ userPosts }) => {
 	//   }
 	// );
 
+	const [themeState] = useTheme();
+
+	const postContainerStyles = {
+		background: themeState.darkTheme ? '#333' : '#fff',
+		color: themeState.darkTheme ? '#fff' : '#333',
+		// Add other styles as needed
+	};
+
 	const { loading, error, data } = useQuery(
 		QUERY_POST);
 
@@ -23,12 +31,13 @@ const PostContainer = ({ userPosts }) => {
 	// console.log(posts);
 	return (
 			<div
-				className="w-postContainer overflow-y-auto flex flex-col items-center shadow-custom bg-gray-dark h-postContainer rounded-custom"
+				className="w-postContainer overflow-y-auto flex flex-col items-center h-postContainer rounded-custom"
 				style={{
 					overflow: "auto",
 					scrollbarWidth: "thin",
 					scrollbarColor: "transparent transparent",
 					msOverflowStyle: "none",
+					postContainerStyles,
 				}}
 			>
 				<SubmitPost />

@@ -14,6 +14,7 @@ import Itinerary from "../components/Itinerary";
 import Following from "../components/Following";
 import { FOLLOW_PROFILE, UNFOLLOW_PROFILE } from "../utils/mutation";
 import Post from "../components/Posts/Post";
+import { useTheme } from "../utils/ThemeContext";
 
 const FollowProfileButton = ({ profileId }) => {
   const [followProfile] = useMutation(FOLLOW_PROFILE, {
@@ -72,6 +73,14 @@ const FollowProfileButton = ({ profileId }) => {
 const Profile = () => {
 	const { profileId } = useParams();
 
+	const [themeState, themeDispatch] = useTheme();
+
+	const profileStyles = {
+		background: themeState.darkTheme ? '#333' : '#fff',
+		color: themeState.darkTheme ? '#fff' : '#333',
+		// Add other styles as needed
+	}
+
 	// const { loading, data } = useQuery(
 	//   profileId ? QUERY_SINGLE_PROFILE : QUERY_ME,
 	//   {
@@ -120,10 +129,10 @@ const Profile = () => {
 	}
 
 	return (
-		<div>
+		<div className="w-full h-screen">
 			{/* this is a test */}
 			<Navbar />
-			<div className="w-full overflow-y-auto items-center flex shadow-custom bg-gray-dark justify-evenly h-postContainer rounded-custom">
+			<div className="w-full items-center flex justify-evenly min-h-full flex-wrap" style={profileStyles}>
 				<div className="flex flex-col">
 					{Auth.getProfile().data._id === profile._id && (
 						<Itinerary
@@ -161,7 +170,7 @@ const Profile = () => {
       /> */}
 			{/* <PostContainer /> */}
 			{/* <Actions /> */}
-			{/* <Footer /> */}
+			<Footer />
 		</div>
 	);
 };

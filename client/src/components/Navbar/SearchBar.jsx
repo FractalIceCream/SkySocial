@@ -1,11 +1,22 @@
 import { useState } from "react";
 import { QUERY_SINGLE_PROFILE } from "../../utils/queries";
-import SearchResults from "./SearchResults";
+import { QUERY_PROFILE_BY_NAME } from "../../utils/queries"; 
+import { useMutation, useQuery, useLazyQuery } from "@apollo/client"; 
+import { Link } from "react-router-dom";
 
-const SearchBar = ({  }) => {
+const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('')
+  const [profileId, setProfileId] = useState("");
+  const [profileName, setProfileName] = useState("")
   const [modalOpen, setModalOpen] = useState(false)
-
+  const [getUserByName, { loading, data }] = useLazyQuery(
+    QUERY_PROFILE_BY_NAME,
+    {
+      variables: {
+        name: searchInput,
+      },
+    }
+  );
 
   const onHide = () => {
       setModalOpen(false)
@@ -13,17 +24,30 @@ const SearchBar = ({  }) => {
 
 
   const handleInputChange = (event) => {
-    try {
       const profile = event.target.value;
       setSearchInput(profile)
-    } catch (error) {
-    console.log(error)      
-    }
+ 
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async ( event ) => {
     event.preventDefault();
-    
+
+    try {
+      const { data } = await getUserByName({
+        variables: {
+          name: searchInput,
+        },
+      });
+      const profileId = data.profileByName._id;
+      const profileName = data.profileByName.name
+      setProfileId(profileId);
+      setProfileName(profileName)
+    } catch (err) {
+      console.error(err);
+    }
+  
+
+
     setModalOpen(true);
     
 
@@ -32,40 +56,23 @@ const SearchBar = ({  }) => {
 
   return (
     <>
-    <form
-      className="flex flex-row "
-      onSubmit={handleFormSubmit}
-    >
-      <label
-        htmlFor="default-search"
-        className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-      >
+    <form  className="flex flex-row">
+      <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white" >
         Search
       </label>
       <div className="flex justify-center items-center">
-        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-         
-            {/* <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-            /> */}
-          
-        </div>
         <input
           type="text"
           onChange={handleInputChange}
           id="default-search"
-          className="w-full  text-md text-white border border-gray-300 rounded-custom px-4 py-1 bg-gray-light "
+          className="w-full  text-md text-white border border-black rounded-custom px-4 py-1 bg-gray-light "
           placeholder="Search SkySocial"
           required
         />
         <button
           type="submit"
           onClick={handleFormSubmit}
-          className="text-white ml-3 h-7 bg-gray-light rounded-custom w-32"
+          className="text-white ml-3 h-7 border-black bg-gray-light rounded-custom w-32"
         >
           Search
         </button>
@@ -75,23 +82,16 @@ const SearchBar = ({  }) => {
 
 
 
-{modalOpen && (
-    <SearchResults modalOpen={modalOpen}  onHide = {onHide} />
-)
+  {modalOpen && (
+        <div className="absolute flex justify-between items-center w-52 mt-2 bg-gray-light rounded-custom border border-black ml-3 text-white">
+          <Link className="ml-3" to={`/profiles/${profileId}`}>{profileName}</Link>
+          <button className="text-md mr-2 w-4 " onClick={onHide}>
+            x
+          </button>
+        </div>
+      )}
+  
 
-
-
-}
-        
-
-
-
-
-
-
-
-</>
-  );
-};
-
+  </>
+  )}
 export default SearchBar;

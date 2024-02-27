@@ -51,7 +51,7 @@ const resolvers = {
 
         // works correctly 
         posts: async () => {
-            return Post.find();
+            return Post.find().populate('likes');
         },
 
         // works correctly
@@ -112,13 +112,13 @@ const resolvers = {
 
             try {
                 const profile = await Profile.create({ name, email, password });
-
+                    console.log(name, email, password);
                 const token = signToken(profile);
 
                 return { token, profile };
 
             } catch (error) {
-
+                console.error(error);
                 throw AuthenticationError
 
             }
@@ -169,6 +169,45 @@ const resolvers = {
             }
             throw AuthenticationError;
             ('You need to be logged in!');
+        },
+
+        likePost: async (parent, { postId }, context) => {
+            if (context.user) {
+
+                const post = await Post.findOneAndUpdate(
+                    {
+                        _id: postId
+                    },
+                    {
+                        $addToSet: {likes: context.user._id}
+                    },
+                    {
+                        new: true,
+                    },
+                )
+                return post;
+            }
+        },
+
+        unlikePost: async (parent, { postId }, context) => {
+            try {
+              if (context.user) {
+                const post = await Post.findByIdAndUpdate(
+                  postId,
+                  {
+                    $pull: { likes: context.user._id },
+                  },
+                  { new: true }
+                );
+          
+                return post;
+              } else {
+                throw new AuthenticationError("User not authenticated");
+              }
+            } catch (error) {
+              console.error("Error unliking post:", error);
+              throw new Error("Error unliking post");
+            }
         },
 
         //  works correctly 

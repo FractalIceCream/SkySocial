@@ -6,16 +6,31 @@ import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 import { Modal, Tab, Nav } from "react-bootstrap";
 import SearchBar from "./SearchBar";
+import { useTheme } from "../../utils/ThemeContext";
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [themeState, themeDispatch] = useTheme();
+
+  const handleThemeToggle = () => {
+    themeDispatch({ type: 'TOGGLE_THEME', payload: themeState.darkTheme });
+  };
+
+  // Update the Navbar styling based on the theme
+  const navbarStyles = {
+    background: themeState.darkTheme ? '#333' : '#fff',
+    color: themeState.darkTheme ? '#fff' : '#333',
+    // Add other styles as needed
+  };
 
   return (
     <>
-      <div className="w-full p-2 flex justify-evenly items-center">
-          <h2 className="">skySocial</h2>
+      <div className="w-full p-2 flex justify-evenly items-center" style={navbarStyles}>
+      <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/" className="text-2xl">
+              skySocial
+            </Link>
         <div className="p-2">
           <SearchBar
             searchInput={searchInput}
@@ -23,9 +38,10 @@ const Navbar = () => {
             setSearchResults={setSearchResults}
           />
         </div>
+
         <div className="w-md mx-4 p-2 flex justify-evenly">
           <div className="p-4 ">
-            <Link className="text-decoration-none text-black " to="/">
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">
               Home
             </Link>
           </div>
@@ -42,15 +58,19 @@ const Navbar = () => {
               {/* Conditionally Renders this Logout Button if the user is already logged in */}
             </>
           ) : (
-            <div className="w-72">
+            <div className="w-72 flex justify-center  items-center">
               <Nav.Link
-                className="ml-5 w-72"
+                className=""
                 onClick={() => setShowModal(true)}
               >
                 Login/Sign Up
               </Nav.Link>
             </div>
           )}
+          {/* Add the light/dark mode toggle button */}
+          <button onClick={handleThemeToggle}>
+            Toggle Theme
+          </button>
         </div>
       </div>
       <Modal
