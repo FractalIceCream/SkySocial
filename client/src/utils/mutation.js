@@ -38,6 +38,7 @@ mutation Mutation($postText: String!, $imageUrl: String) {
       postText
       imageUrl
       createdAt
+      likes
       comments {
         _id
         commentAuthor
@@ -77,6 +78,24 @@ mutation Mutation($postId: ID!) {
     }
   }
 `;
+
+export const ADD_LIKE = gql`
+mutation Mutation($postId: ID!) {
+  likePost(postId: $postId) {
+    likes {
+      _id
+    }
+  }
+}`;
+
+export const REMOVE_LIKE = gql`
+mutation Mutation($postId: ID!) {
+  unlikePost(postId: $postId) {
+    likes {
+      _id
+    }
+  }
+}`;
 
 export const CREATE_COMMENT = gql`
 mutation Mutation($postId: ID!, $commentText: String!) {
