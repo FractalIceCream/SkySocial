@@ -64,39 +64,38 @@ const TripInfoModal = ({ tripId, tripinfo, name, onHide }) => {
 
   return (
 
-    <div className="absolute top-0 right-0 w-full flex items-center justify-center">
-      <div className="absolute inset-0 bg-modal"></div>
-      <div className="relative text-center rounded-custom shadow-custom max-w-md w-full">
+    <div className="absolute inset-0  w-full flex items-center justify-center">
+      <div className="relative text-center bg-gray rounded-custom shadow-custom max-w-md w-full">
         <h2 className="text-2xl text-center text-white font-semibold mb-4">Plan Your Trip to {name}!</h2>
 
         <div className="mb-4">
-          <label htmlFor="originLocationCode" className="block text-sm font-medium text-black">From</label>
-          <input onChange={handleInputChange} placeholder="Dallas" type="text" id="originLocationCode" className="mt-1 rounded-custom bg-white text-black text-center p-2 border rounded-md w-full" />
+          <label htmlFor="originLocationCode" className="block text-sm font-medium text-white">From</label>
+          <input onChange={handleInputChange} placeholder="Dallas" type="text" id="originLocationCode" className="mt-1 rounded-custom bg-white text-black text-center p-2 border w-72" />
         </div>
 
         <div className="mb-4">
-          <label htmlFor="destinationLocationCode" className="block text-sm font-medium text-black">To</label>
-          <input onChange={handleInputChange} type="text" placeholder="New York" id="destinationLocationCode" className="mt-1 rounded-custom bg-white text-center p-2 border rounded-md w-full" />
+          <label htmlFor="destinationLocationCode" className="block text-sm font-medium text-">To</label>
+          <input onChange={handleInputChange} type="text" placeholder="New York" id="destinationLocationCode" className="mt-1 rounded-custom bg-white text-black text-center p-2 border   w-72" />
         </div>
 
         <div className="mb-4">
-          <label htmlFor="departureDate" className="block text-sm font-medium text-black">Departure Date</label>
-          <input onChange={handleInputChange} type="date" id="departureDate" className="mt-1 text-black rounded-custom bg-white p-2 border rounded-md w-full" />
+          <label htmlFor="departureDate" className="block text-sm font-medium text-white">Departure Date</label>
+          <input onChange={handleInputChange} type="date" id="departureDate" className="mt-1 text-black text-center rounded-custom bg-white p-2 border   w-72" />
         </div>
 
         <div className="mb-4">
-          <label htmlFor="returnDate" className="block text-sm font-medium text-black">Return Date</label>
-          <input onChange={handleInputChange} type="date" id="returnDate" className="mt-1 text-black rounded-custom bg-white p-2 border rounded-md w-full" />
+          <label htmlFor="returnDate" className="block text-sm font-medium text-white">Return Date</label>
+          <input onChange={handleInputChange} type="date" id="returnDate" className="mt-1 text-black text-center rounded-custom bg-white p-2 border   w-72" />
         </div>
 
         <div className="mb-4">
-          <label htmlFor="adults" className="block text-sm font-medium text-black">Adults</label>
-          <input onChange={handleInputChange} type="number" id="adults" className="mt-1 text-black rounded-custom bg-white p-2 border rounded-md w-full" />
+          <label htmlFor="adults" className="block text-sm font-medium text-white">Adults</label>
+          <input onChange={handleInputChange} type="number" id="adults" className="mt-1 text-black text-center rounded-custom bg-white p-2 border  w-72" />
         </div>
 
-        <div className="flex justify-end">
-          <button onClick={handleFormSubmit} className="bg-green-200 text-black rounded-custom px-4 py-2 rounded-md mr-2">Submit</button>
-          <button className="bg-gray-300 text-black px-4 py-2 rounded-md" onClick={onHide}>Cancel</button>
+        <div className="flex justify-center">
+          <button onClick={handleFormSubmit} className="bg-green-200 text-black rounded-custom px-4 py-2 border border-black mr-2">Submit</button>
+          <button className="bg-gray-300 text-white px-4 py-2 rounded-md" onClick={onHide}>Cancel</button>
         </div>
       </div>
     </div>
