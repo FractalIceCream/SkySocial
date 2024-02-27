@@ -43,12 +43,22 @@ const resolvers = {
 
         profileByName: async (parent, { name }) => {
             try {
-                return Profile.findOne({name}).populate('posts').populate('following').populate('wishlist');
+                const profile = await Profile.findOne(
+                    { name: { $regex: new RegExp('^' + name + '$', 'i') } }
+                ).populate('posts').populate('following').populate('wishlist');
+                
+                console.log('Profile:', profile);
+        
+                if (!profile) {
+                    return null;
+                }
+        
+                return profile;
             } catch (error) {
                 console.error(error);
+                throw error;
             }
         },
-
         // works correctly 
         posts: async () => {
             return Post.find().populate('likes');
