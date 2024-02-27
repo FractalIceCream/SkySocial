@@ -47,7 +47,7 @@ const Post = ({ post }) => {
             setWishListItem(wishlist)
         }
 
-    }, [profilesLoading])
+    }, [profilesLoading, profilesData])
 
 
     // const profileForPostAuthor = profilesData.profiles.find(profile => profile.name === post.postAuthor);
@@ -143,7 +143,11 @@ const Post = ({ post }) => {
 
                     // Render wishlist names here
                     wishListItem.map((item) => (
-                        <div  key={item._id}><p className=" h-28 w-12 justify-start items-center flex text-center  rounded-custom bg-green-200 font-semibold text-black">{item.name}</p></div>
+                        <div key={item._id}>
+                            <p className=" h-28 w-12 justify-start items-center flex text-center  rounded-custom bg-green-200 font-semibold text-black">
+                                {item.name}
+                            </p>
+                        </div>
                     ))
                 )}
             </div>
