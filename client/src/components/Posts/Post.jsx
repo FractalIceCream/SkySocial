@@ -1,5 +1,5 @@
 import { CREATE_COMMENT } from "../../utils/mutation";
-import { REMOVE_POST, ADD_LIKE, REMOVE_LIKE } from "../../utils/mutation";
+import { REMOVE_POST, ADD_LIKE, REMOVE_LIKE, REMOVE_COMMENT } from "../../utils/mutation";
 import React, { useState, useEffect } from "react";
 import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import AuthService from "../../utils/auth";
@@ -22,6 +22,12 @@ const Post = ({ post }) => {
         //  QUERY_ME,
         // ]
     });
+
+    const [removeComment, {removeCommentError}] = useMutation(REMOVE_COMMENT, {
+        refetchQueries: [QUERY_POST, 'posts'],
+        variables: {postId: post._id}
+    })
+
     const [getUserByName, { loading, data }] = useLazyQuery(
         QUERY_PROFILE_BY_NAME,
         {
@@ -30,6 +36,7 @@ const Post = ({ post }) => {
             },
         }
     );
+
     const [getProfilesData, { loading: profilesLoading, data: profilesData }] =
         useLazyQuery(QUERY_ALL_PROFILES);
     const onPageLoad = async () => {
@@ -131,6 +138,18 @@ const Post = ({ post }) => {
         }
         setIsLiked(false);
     };
+
+    const handleRemoveComment = async (postId, commentId) => {
+        try {
+            await removeComment({
+                variables: {postId, commentId}
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+
     // {/* {posts && */}
     // 				{/* posts.slice().reverse().map((post) => ( */}
     // This component will need to be updated to include the submitted info
@@ -232,6 +251,11 @@ const Post = ({ post }) => {
                                 {" "}
                                 commented by {commentOfPost.commentAuthor}
                             </p>
+                            <div>
+                                {loggedInProfile === commentOfPost.commentAuthor && (
+                                    <button onClick={() => handleRemoveComment(post._id, commentOfPost._id)}><i className="fa-regular  px-5  fa-trash-can"></i></button>
+                                )}
+                            </div>
                         </div>
                     </div>
                 ))}
