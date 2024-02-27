@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import ThemeProvider from './utils/ThemeContext.jsx'
+import ThemeComponent from './components/Navbar/ThemeComponent.jsx'
 
 import Profile from './pages/Profile'
 
@@ -12,7 +14,11 @@ import Error from './pages/Error'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: (
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    ),
     errorElement: <Error />,
     children: [
       {

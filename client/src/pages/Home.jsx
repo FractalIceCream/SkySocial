@@ -8,19 +8,21 @@ import Actions from "../components/Actions"
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import TripContainer from "../components/Trips/TripContainer";
+import { useTheme } from "../utils/ThemeContext";
 
 const Home = () => {
+
   return (
     <div className="w-full">
       <Navbar />
       {/* removed flex flex-col */}
-      <div className="w-full overflow-y-auto flex justify-center items-center shadow-custom bg-gray-dark h-postContainer rounded-custom">
+      <div className="w-full overflow-y-auto flex justify-center items-center rounded-custom">
       <TripContainer />
       <PostContainer />
       {/* <Itinerary /> */}
       </div>
-      <Following />
-      <Actions />
+      {/* <Following /> */}
+      {/* <Actions /> */}
       {/* <Footer /> */}
     </div>
   );

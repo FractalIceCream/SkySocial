@@ -123,7 +123,7 @@ const Profile = () => {
 		<div>
 			{/* this is a test */}
 			<Navbar />
-			<div className="w-full overflow-y-auto items-center flex shadow-custom bg-gray-dark justify-evenly h-postContainer rounded-custom">
+			<div className="w-full overflow-y-auto items-center flex justify-evenly h-postContainer rounded-custom">
 				<div className="flex flex-col">
 					{Auth.getProfile().data._id === profile._id && (
 						<Itinerary

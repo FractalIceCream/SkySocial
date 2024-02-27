@@ -7,6 +7,13 @@
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
+.root {
+  background-color: inherit;
+  color: inherit;
+  width: screen;
+  height: screen;
+}
+
 *,
 ::before,
 ::after {
