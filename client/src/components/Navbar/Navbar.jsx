@@ -28,7 +28,9 @@ const Navbar = () => {
   return (
     <>
       <div className="w-full p-2 flex justify-evenly items-center" style={navbarStyles}>
-          <h2 className="">skySocial</h2>
+      <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/" className="text-2xl">
+              skySocial
+            </Link>
         <div className="p-2">
           <SearchBar
             searchInput={searchInput}
@@ -36,6 +38,7 @@ const Navbar = () => {
             setSearchResults={setSearchResults}
           />
         </div>
+
         <div className="w-md mx-4 p-2 flex justify-evenly">
           <div className="p-4 ">
             <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">
