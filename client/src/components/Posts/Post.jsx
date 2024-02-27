@@ -4,18 +4,15 @@ import React, { useState, useEffect } from "react";
 import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import AuthService from "../../utils/auth";
 import { QUERY_POST, QUERY_ME, QUERY_PROFILE_BY_NAME, QUERY_ALL_PROFILES } from "../../utils/queries";
-
 // badges are not updating on home page and when a new post is created
 // need to style badges
-
-
 const Post = ({ post }) => {
     // if (!posts.length) {
     //  return <h3>No Posts Yet!</h3>;
     // }
-    const [profileId, setProfileId] = useState('');
-    const [commentShow, setCommentShow] = useState(false)
-    const [wishListItem, setWishListItem] = useState(null)
+    const [profileId, setProfileId] = useState("");
+    const [commentShow, setCommentShow] = useState(false);
+    const [wishListItem, setWishListItem] = useState(null);
     const [createComment, { error }] = useMutation(CREATE_COMMENT);
     const [removePost, { err }] = useMutation(REMOVE_POST, {
         refetchQueries:
@@ -25,34 +22,32 @@ const Post = ({ post }) => {
         //  QUERY_ME,
         // ]
     });
-    const [getUserByName, { loading, data }] = useLazyQuery(QUERY_PROFILE_BY_NAME, {
-        variables: {
-            name: Post.postAuthor
+    const [getUserByName, { loading, data }] = useLazyQuery(
+        QUERY_PROFILE_BY_NAME,
+        {
+            variables: {
+                name: Post.postAuthor,
+            },
         }
-    });
-
-    const [getProfilesData, { loading: profilesLoading, data: profilesData }] = useLazyQuery(QUERY_ALL_PROFILES)
-
+    );
+    const [getProfilesData, { loading: profilesLoading, data: profilesData }] =
+        useLazyQuery(QUERY_ALL_PROFILES);
     const onPageLoad = async () => {
-        getProfilesData()
-    }
-
+        getProfilesData();
+    };
     useEffect(() => {
-        onPageLoad()
-    }, [])
-
+        onPageLoad();
+    }, []);
     useEffect(() => {
         if (profilesData && post) {
-            const profileData = profilesData.profiles.find(profile => profile.name === post.postAuthor)
-            const wishlist = profileData?.wishlist
-            setWishListItem(wishlist)
+            const profileData = profilesData.profiles.find(
+                (profile) => profile.name === post.postAuthor
+            );
+            const wishlist = profileData?.wishlist;
+            setWishListItem(wishlist);
         }
-
-    }, [profilesLoading, profilesData])
-
-
+    }, [profilesLoading, profilesData]);
     // const profileForPostAuthor = profilesData.profiles.find(profile => profile.name === post.postAuthor);
-
     const handleFetchedUser = async (author) => {
         try {
             const { data } = await getUserByName({
@@ -71,16 +66,14 @@ const Post = ({ post }) => {
     };
     const showComments = () => {
         setCommentShow((prevCommentShow) => !prevCommentShow);
-    }
+    };
     const authProfile = AuthService.getProfile();
     const loggedInProfile = authProfile ? authProfile.data.name : null;
     const [comment, setComment] = useState("");
-
     const handleInputChange = (event) => {
         const commentValue = event.target.value;
         setComment(commentValue);
     };
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -110,41 +103,33 @@ const Post = ({ post }) => {
         } catch (error) {
             console.error("Error removing post", error);
         }
-
-        const [isLiked, setIsLiked] = useState(false);
+    };
+    const [isLiked, setIsLiked] = useState(false);
     const [addLike, { likeError }] = useMutation(ADD_LIKE, {
-		refetchQueries: [QUERY_POST, "posts"],
-	});
-	const [removeLike, { removeLikeError }] = useMutation(REMOVE_LIKE, {
-		refetchQueries: [QUERY_POST, "posts"],
-	});
-
-	const handleLike = async (postId) => {
-		try {
-			const { data } = await addLike({
-				variables: { postId },
-			});
-		} catch (error) {
-			console.error(error);
-		}
-		setIsLiked(true);
-	};
-
-	const handleRemoveLike = async (postId) => {
-		try {
-			const { data } = await removeLike({
-				variables: { postId },
-			});
-		} catch (error) {
-			console.error(error);
-		}
-		setIsLiked(false);
-	};
-      
-      
-      
-      
-      
+        refetchQueries: [QUERY_POST, "posts"],
+    });
+    const [removeLike, { removeLikeError }] = useMutation(REMOVE_LIKE, {
+        refetchQueries: [QUERY_POST, "posts"],
+    });
+    const handleLike = async (postId) => {
+        try {
+            const { data } = await addLike({
+                variables: { postId },
+            });
+        } catch (error) {
+            console.error(error);
+        }
+        setIsLiked(true);
+    };
+    const handleRemoveLike = async (postId) => {
+        try {
+            const { data } = await removeLike({
+                variables: { postId },
+            });
+        } catch (error) {
+            console.error(error);
+        }
+        setIsLiked(false);
     };
     // {/* {posts && */}
     // 				{/* posts.slice().reverse().map((post) => ( */}
