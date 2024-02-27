@@ -38,7 +38,6 @@ mutation Mutation($postText: String!, $imageUrl: String) {
       postText
       imageUrl
       createdAt
-      likes
       comments {
         _id
         commentAuthor
