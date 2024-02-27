@@ -6,15 +6,28 @@ import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 import { Modal, Tab, Nav } from "react-bootstrap";
 import SearchBar from "./SearchBar";
+import { useTheme } from "../../utils/ThemeContext";
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [themeState, themeDispatch] = useTheme();
+
+  const handleThemeToggle = () => {
+    themeDispatch({ type: 'TOGGLE_THEME', payload: themeState.darkTheme });
+  };
+
+  // Update the Navbar styling based on the theme
+  const navbarStyles = {
+    background: themeState.darkTheme ? '#333' : '#fff',
+    color: themeState.darkTheme ? '#fff' : '#333',
+    // Add other styles as needed
+  };
 
   return (
     <>
-      <div className="w-full p-2 flex justify-evenly items-center">
+      <div className="w-full p-2 flex justify-evenly items-center" style={navbarStyles}>
           <h2 className="">skySocial</h2>
         <div className="p-2">
           <SearchBar
@@ -25,7 +38,7 @@ const Navbar = () => {
         </div>
         <div className="w-md mx-4 p-2 flex justify-evenly">
           <div className="p-4 ">
-            <Link className="text-decoration-none text-black " to="/">
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">
               Home
             </Link>
           </div>
@@ -51,6 +64,10 @@ const Navbar = () => {
               </Nav.Link>
             </div>
           )}
+          {/* Add the light/dark mode toggle button */}
+          <button onClick={handleThemeToggle}>
+            Toggle Theme
+          </button>
         </div>
       </div>
       <Modal
