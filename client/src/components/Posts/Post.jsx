@@ -202,9 +202,9 @@ const Post = ({ post }) => {
             </div>
       {post.imageUrl ? (
         <div className="h-48 mt-3 bg-gray ">
-          <div className=" flex justify-evenly flex-wrap  w h-3/4">
+          <div className=" flex justify-evenly flex-wrap  w-full h-3/4">
             <img
-              className="max-w-full rounded-custom max-h-full h-auto"
+              className="w-96 rounded-custom max-h-full h-auto"
               src={post.imageUrl}
             ></img>
           </div>
@@ -256,9 +256,9 @@ const Post = ({ post }) => {
       {commentShow &&
         post.comments &&
         post.comments.map((commentOfPost) => (
-          <div key={commentOfPost._id} className="max-h-12 mt-4 overflow-y">
+          <div key={commentOfPost._id} className="max-h-12  mt-4 overflow-y">
             <div className="flex flex-col h-auto">
-              <div className="bg-gray-light flex justify-center items-center flex-wrap rounded-custom">
+              <div className="bg-gray-light w-2/3 flex justify-center items-center flex-wrap rounded-custom">
                 <p className="p-2 m-1"> {commentOfPost.commentText} </p>
               </div>
               <div className="flex justify-around items-center mt-1">
@@ -268,7 +268,7 @@ const Post = ({ post }) => {
                       onClick={() =>
                         handleRemoveComment(post._id, commentOfPost._id)
                       }
-                     className="ml-4"
+                     className="ml-4 text-sm"
                       
                     >
                       Delete Comment
@@ -282,7 +282,7 @@ const Post = ({ post }) => {
                   {" "}
                   {/* Set max-width for the commented by section */}
                     <p className= "mr-3"> 
-                    Commented by {commentOfPost.commentAuthor}
+                    commented by {commentOfPost.commentAuthor}
                   </p>
                 </div>
               </div>
