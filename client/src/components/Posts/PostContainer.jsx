@@ -37,7 +37,7 @@ const PostContainer = ({ userPosts }) => {
 					scrollbarWidth: "thin",
 					scrollbarColor: "transparent transparent",
 					msOverflowStyle: "none",
-					postContainerStyles,
+					postContainerStyles
 				}}
 			>
 				<SubmitPost />

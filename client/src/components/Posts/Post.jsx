@@ -227,10 +227,10 @@ const Post = ({ post }) => {
 					</button>
 				)}
 				<div>{post.likesCount}</div>
-                <button  onClick={showComments}>View Comments</button>
+                <button  onClick={showComments}>View Comments ({post.comments.length})</button>
             </div>
             <div className=" flex  max-w-custom justify-evenly">
-                <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
+                <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 bg-green-400 hover:bg-blue-500 items-center">
                     <button onClick={handleFormSubmit} className="text-center text-black ">Comment
                     </button>
                 </div>

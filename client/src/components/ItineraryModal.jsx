@@ -16,7 +16,7 @@ const ItineraryModal = ({ tripId, tripInfo, name, onHide }) => {
   const [tripFormData, setTripFormData] = useState(tripInfo);
 
 //   console.log(tripFormData);
-  const [updateTrip, { error }] = useMutation(UPDATE_TRIP)
+  const [updateTrip, { loading, error }] = useMutation(UPDATE_TRIP)
   const [addItinerary, { error : itineraryError }] = useMutation(ADD_ITINERARY);
 
 

@@ -36,6 +36,7 @@ module.exports = {
             // subType: 'AIRPORT',
                 
                 max: 1,
+                nonStop: true
             });
             if (!res) {
                 console.log("Something went wrong");

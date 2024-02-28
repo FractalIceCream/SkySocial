@@ -76,7 +76,7 @@ const TripInfoModal = ({ tripId, tripinfo, name, onHide }) => {
 
         <div className="mb-4">
           <label htmlFor="destinationLocationCode" className="block text-sm font-medium text-black">To</label>
-          <input onChange={handleInputChange} type="text" placeholder="New York" id="destinationLocationCode" className="mt-1 rounded-custom bg-white text-center p-2 border rounded-md w-full" />
+          <input onChange={handleInputChange} type="text" placeholder={name} id="destinationLocationCode" className="mt-1 rounded-custom bg-white text-center p-2 border rounded-md w-full" />
         </div>
 
         <div className="mb-4">
