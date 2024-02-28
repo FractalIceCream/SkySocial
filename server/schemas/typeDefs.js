@@ -93,6 +93,8 @@ const typeDefs = `
         departureCode: String
         arrivalDate: String
         arrivalCode: String
+        departureDateR: String
+        arrivalDateR: String
         price: Float
     }
 
@@ -101,6 +103,8 @@ const typeDefs = `
         departureCode: String
         arrivalDate: String
         arrivalCode: String
+        departureDateR: String
+        arrivalDateR: String
         price: Float
     }
 

@@ -14,6 +14,12 @@ module.exports = itinerarySchema = new Schema(
         arrivalCode: {
             type: String
         },
+        departureDateR: {
+            type: String
+        },
+        arrivalDateR: {
+            type: String
+        },
         price: {
             type: Number
         }

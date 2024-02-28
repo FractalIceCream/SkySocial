@@ -5,30 +5,6 @@ const { getIataCode, getFlightOffers } = require('../utils/api');
 
 const resolvers = {
     Query: {
-
-        //takes args{originLocationCode, destinationCode, departureDate}
-        //reassigns to get corresponding IataCodes from user-input
-        //returns {departureCode, departureDate, arrivalCode, arrivalDate, price} so far!
-
-        //want to see name's of to and from cities
-
-        // flightOffer: async (parent, { tripId, ...tripInfo }, context) => {
-
-        //     if (context.user) {
-        //         const userTrip = await 
-        //     }
-
-        //     const origin = await getIataCode(args.originLocationCode);
-        //     const originLocationCode = origin.iataCode;
-
-        //     const destination = await getIataCode(args.destinationLocationCode);
-        //     const destinationLocationCode = destination.iataCode;
-
-        //     const offer = await getFlightOffers({ ...args, originLocationCode, destinationLocationCode, max: 1 });
-
-        //     return offer;
-        // },
-
         // used to get data in graphql playground only
         // works correctly 
         profiles: async () => {
@@ -170,8 +146,6 @@ const resolvers = {
                     { $addToSet: { posts: post._id } },
                     {
                         new: true,
-                        // ask about runValidators
-                        // runValidators: true,
                     },
                 );
 
@@ -219,8 +193,6 @@ const resolvers = {
               throw new Error("Error unliking post");
             }
         },
-
-        //  works correctly 
 
         removePost: async (parent, { postId }, context) => {
             if (context.user) {
@@ -431,25 +403,26 @@ const resolvers = {
             }
         },
         updateTrip: async (parent, { tripId, tripInfo }, context) => {
-            if (context.user) {
+            try {
+                if (context.user) {
+                    const origin = await getIataCode(tripInfo.originLocationCode);
+                    const dest = await getIataCode(tripInfo.destinationLocationCode);
+    
+                    const originLocationCode =  origin.iataCode;
+                    const destinationLocationCode =  dest.iataCode;
 
-                console.log(tripId);
-                console.log(tripInfo);
-                const origin = await getIataCode(tripInfo.originLocationCode);
-                const dest = await getIataCode(tripInfo.destinationLocationCode);
-
-                const originLocationCode =  origin.iataCode;
-                const destinationLocationCode =  dest.iataCode;
-                console.log(tripInfo);
-                await TripInfo.findOneAndUpdate(
-                    { _id: tripId },
-                    { ...tripInfo, originLocationCode, destinationLocationCode }
-                );
-
-                const offer = await getFlightOffers( { ...tripInfo, originLocationCode, destinationLocationCode, max: 1 });
-
-                console.log(offer);
-                return offer;
+                    await TripInfo.findOneAndUpdate(
+                        { _id: tripId },
+                        { ...tripInfo, originLocationCode, destinationLocationCode }
+                    );
+    
+                    const offer = await getFlightOffers( { ...tripInfo, originLocationCode, destinationLocationCode, max: 1});
+                    if (!offer) throw new Error('No flight offer found with those dates');
+                    return offer;
+                }
+            } catch (error) {
+                console.error('Error adding following profile:', error);
+                return error;
             }
 
             throw AuthenticationError
@@ -462,11 +435,8 @@ const resolvers = {
                     { $set: { itinerary }},
                     { new:true}
                 );
-
-                console.log(addItinerary);
                 return addItinerary;
             }
-
             throw AuthenticationError;
         }
     },

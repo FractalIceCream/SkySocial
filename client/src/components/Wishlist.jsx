@@ -14,16 +14,11 @@ import { useTheme } from "../utils/ThemeContext";
 // create button to close input box to add trip
 // add css to input form
 
-const Wishlist = ({ wishlist }) => {
-  // 	encountering error here
-  //   if (!wishlist.length) {
-  //     return <h3>No Wishlist Yet</h3>
-  //   }
+const Wishlist = ({ authUser, wishlist }) => {
 
   const [showInputBox, setShowInputBox] = useState(false);
   const [inputState, setInputState] = useState("");
   const [themeState] = useTheme();
-  // const [wishListItem, setWishListItem] = useState();
   const [isOpen, setIsOpen] = useState(false);
 
   const [createTrip, { error, data }] = useMutation(CREATE_TRIP, {
@@ -52,20 +47,10 @@ const Wishlist = ({ wishlist }) => {
     color: themeState.darkTheme ? 'white' : 'white',
   }
 
-  // const openModal = () => {
-  //   setIsOpen(true);
-  //   console.log(isOpen)
-  // };
-  // const closeModal = () => {
-  //   setIsOpen(false);
-  // };
 
   const handleInputChange = (event) => {
-    // console.log(event.target.value)
     const city = event.target.value;
-
     setInputState(city);
-    // console.log(city)
   };
 
   const handleFormSubmit = async (event) => {
@@ -121,31 +106,24 @@ const Wishlist = ({ wishlist }) => {
               <div className="border border-black flex justify-evenly mt-4 w-32 h-auto items-center rounded-custom" style={buttonStyles}>
                 <div className="flex justify-center items-start w-auto h-auto" >
                   <button
-                    onClick={() => handleRemoveTrip(tripinfo._id)}
+                    onClick={() => authUser ? handleRemoveTrip(tripinfo._id) : null}
                     className="text-md text-center"
                   >
                     x
                   </button>
                 </div>
                 <div className="flex text-center"  >
-                  <button
+                    <button
                     key={tripinfo._id}
-                    onClick={() => handleTripModal(tripinfo)}
+                    onClick={() => authUser ? handleTripModal(tripinfo) : null}
                     className=" h-auto w-auto justify-start items-center flex text-center  rounded-custom "
-                    
-                  >
+                    >
                     <p className="font-semibold">
                       {tripinfo.name}
                     </p>
                   </button>
                 </div>
               </div>
-              {/* {isOpen && (
-                <div>
-                  <TripInfoModal tripId={tripinfo._id} tripInfo={tripinfo} name={tripinfo.name} onHide={() => setIsOpen(false)} />
-                  <button onClick={() => setIsOpen(false)}>Close Modal</button>
-                </div>
-              )} */}
             </div>
           ))}
         {isOpen && (
@@ -154,27 +132,13 @@ const Wishlist = ({ wishlist }) => {
             <button onClick={() => setIsOpen(false)}>Close Modal</button>
           </div>
         )}
-        {/* {wishlist &&
-					wishlist.map((tripinfo) => (
-						<button key={tripinfo._id} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
-							<p className="font-semibold text-black">{tripinfo.name}</p>
-						</button>
-					))} */}
-        {/* We will need to add with the Queried Data to this area here and when the button is produced, it should then trigger the Modal to start the Itinerary */}
       </div>
 
       <div className="flex items-center justify-evenly">
-        {/* <button className="h-4 w-4 rounded-full bg-black"></button>
-        <button
-          className="ml-5 h-20 w-20 text-xl font-semibold text-white"
-          onClick={() => setShowInputBox(true)}
-        ></button> */}
-
         <div className="flex items-center justify-evenly">
-          {/* <button className="h-4 w-4 rounded-full bg-black"></button> */}
           <button
             className="ml-5 h-20 w-20 text-xl font-semibold"
-            onClick={() => setShowInputBox(true)}
+            onClick={() => authUser ? setShowInputBox(true) : null}
           >
             Add Trip
           </button>
@@ -212,24 +176,7 @@ const Wishlist = ({ wishlist }) => {
                 </div>
               </div>
             </div>
-
-            // <form >
-            // 	<input
-            // 		type="text"
-            // 		placeholder="Enter wishlist destination"
-            // 		value={inputState}
-            // 		onChange={handleInputChange}
-            // 	/>
-            // 	<button onClick={handleFormSubmit}> Add Trip </button>
-            // </form>
           )}
-
-          {/* {isOpen && (
-            <div>
-              <TripInfoModal tripInfo={wishlist} onHide={() => setIsOpen(false)} />
-              <button onClick={() => setIsOpen(false)}>Close Modal</button>
-            </div>
-          )} */}
         </div>
       </div>
     </div>
