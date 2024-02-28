@@ -254,6 +254,8 @@ mutation Mutation($tripId: ID!, $tripInfo: TripInput!) {
     departureCode
     arrivalDate
     arrivalCode
+    departureDateR
+    arrivalDateR
     price
   }
 }`;
@@ -282,6 +284,8 @@ mutation Mutation($tripId: ID!, $itinerary: ItineraryInput!) {
       departureCode
       arrivalDate
       arrivalCode
+      departureDateR
+      arrivalDateR
       price
     }
     count

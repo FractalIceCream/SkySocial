@@ -63,7 +63,7 @@ const Post = ({ post }) => {
                     name: author,
                 },
             });
-            // console.log(data);
+            console.log(data);
             const profileId = data.profileByName._id;
             // console.log(profileId)
             setProfileId(profileId);
@@ -227,7 +227,7 @@ const Post = ({ post }) => {
               </button>
             )}
             </div>
-            <button onClick={showComments}>View Comments</button>
+            <button onClick={showComments}>View Comments ({post.comments.length})</button>
           </div>
           <div className=" flex  max-w-custom justify-evenly">
             <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
