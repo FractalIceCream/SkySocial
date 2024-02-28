@@ -196,27 +196,92 @@ const Post = ({ post }) => {
                     ))
                 )}
             </div>
+      {post.imageUrl ? (
+        <div className="h-48 mt-3 bg-gray ">
+          <div className=" flex justify-evenly flex-wrap  w-full h-3/4">
+            <img
+              className="w-96 rounded-custom max-h-full h-auto"
+              src={post.imageUrl}
+            ></img>
+          </div>
+          <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
+            <p>{post.postText}</p>
+          </div>
+        </div>
+      ) : (
+        <div className="h-auto mt-3 bg-gray ">
+          <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
+            <p>{post.postText}</p>
+          </div>
+        </div>
+      )}
+      <div className="flex justify-center">
+        <div className="h-line bg-black  mt-4 w-submitComment  "></div>
+      </div>
+      <div className="h-10  max-w-custom flex justify-evenly items-center">
+        <div>{post.likesCount}
+        {isLiked && isLoggedIn ? (
+          <button className="ml-3" onClick={() => handleRemoveLike(post._id)}>
+            Unlike
+          </button>
+        ) : (
+          <button className="ml-3" onClick={() => handleLike(post._id)}>
+            Like
+          </button>
+        )}
+        </div>
+        <button onClick={showComments}>View Comments</button>
+      </div>
+      <div className=" flex  max-w-custom justify-evenly">
+        <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
+          <button
+            onClick={handleFormSubmit}
+            className="text-center text-black "
+          >
+            Comment
+          </button>
+        </div>
+        <input
+          value={comment}
+          onChange={handleInputChange}
+          className="h-8 flex justify-center border border-black text-center text-white bg-gray-light rounded-custom w-2/3 "
+          placeholder="Comment here..."
+        ></input>
+      </div>
 
-            {post.imageUrl ? (
-                <div className="h-48 mt-3 bg-gray ">
-                    <div className=" flex justify-evenly flex-wrap  w h-3/4">
-                        <img
-                            className="max-w-full rounded-custom max-h-full h-auto"
-                            src={post.imageUrl}
-                        ></img>
-                    </div>
-                    <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
-                        <p>{post.postText}</p>
-                    </div>
+      {commentShow &&
+        post.comments &&
+        post.comments.map((commentOfPost) => (
+          <div key={commentOfPost._id} className="max-h-12  mt-4 overflow-y">
+            <div className="flex flex-col h-auto">
+              <div className="bg-gray-light w-2/3 flex justify-center items-center flex-wrap rounded-custom">
+                <p className="p-2 m-1"> {commentOfPost.commentText} </p>
+              </div>
+              <div className="flex justify-around items-center mt-1">
+                <div className= "ml-4">
+                  {loggedInProfile === commentOfPost.commentAuthor && (
+                    <button
+                      onClick={() =>
+                        handleRemoveComment(post._id, commentOfPost._id)
+                      }
+                     className="ml-4 text-sm"
+                      
+                    >
+                      Delete Comment
+                    </button>
+                  )}
                 </div>
-            ) : (
-                <div className="h-auto mt-3 bg-gray ">
-                    <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
-                        <p>{post.postText}</p>
-                    </div>
-                </div>)}
-            <div className="flex justify-center">
-                <div className="h-line bg-black  mt-4 w-submitComment  "></div>
+                <div
+                  className="flex-grow text-end mr-2"
+                  
+                >
+                  {" "}
+                  {/* Set max-width for the commented by section */}
+                    <p className= "mr-3"> 
+                    commented by {commentOfPost.commentAuthor}
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="h-10  max-w-custom flex justify-evenly">
                 
