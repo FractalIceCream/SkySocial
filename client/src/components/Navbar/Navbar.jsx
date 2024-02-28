@@ -29,7 +29,7 @@ const Navbar = () => {
     <>
       <div className="w-full p-2 flex justify-evenly items-center" style={navbarStyles}>
       <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/" className="text-2xl">
-              skySocial
+              skySocial  <i className="fa-solid fa-cloud"></i>
             </Link>
         <div className="p-2">
           <SearchBar
