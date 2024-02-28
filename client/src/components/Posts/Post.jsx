@@ -193,9 +193,9 @@ const Post = ({ post }) => {
 
             {post.imageUrl ? (
                 <div className="h-48 mt-3 bg-gray ">
-                    <div className=" flex justify-evenly flex-wrap  w h-3/4">
+                    <div className=" flex justify-evenly flex-wrap w-full  h-3/4">
                         <img
-                            className="max-w-full rounded-custom max-h-full h-auto"
+                            className=" w-96 rounded-custom max-h-full h-auto"
                             src={post.imageUrl}
                         ></img>
                     </div>
