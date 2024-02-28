@@ -24,6 +24,10 @@ const Following = ({ following }) => {
     color: themeState.darkTheme ? '#fff' : 'white',
 
   }
+  const buttonStyles = {
+    background: themeState.darkTheme ? `` : `linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)`,
+    color: themeState.darkTheme ? '#333' : 'white',
+  }
 
   // display loading state
   if (loading) return <p>Loading...</p>;
@@ -51,9 +55,9 @@ const Following = ({ following }) => {
       <div className="mt-2 box-border flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom p-4 shadow-inner-strong" style={innerFollowingStyles}>
         {following &&
           following.map((user) => (
-            <div key={user._id} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
-              <Link to={`/profiles/${user._id}`} className="text-decoration-none font-semibold text-black">
-                <p className="font-semibold text-black">{user.name}</p>
+            <div key={user._id} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom" style={buttonStyles}>
+              <Link to={`/profiles/${user._id}`} className="text-decoration-none font-semibold">
+                <p className="font-semibold">{user.name}</p>
               </Link>
             </div>
           ))}

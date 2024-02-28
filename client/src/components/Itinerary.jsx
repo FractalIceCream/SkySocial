@@ -114,11 +114,11 @@ const Itinerary = ({ itinerary }) => {
 									onClick={() => handleRemoveTrip(tripinfo._id)}
 									className="text-md mt-2 text-center"> x </button>
 							</div>
-							<div className="flex justify-center items-start w-12 h-12">
+							<div className="flex justify-center items-start w-12 h-auto">
 								<button
 									key={tripinfo._id}
 									onClick={() => handleTripModal(tripinfo)}
-									className="mb-2 flex h-10 w-40 items-center justify-center rounded-custom">
+									className=" flex h-10 w-40 items-center justify-center rounded-custom">
 									<p className="font-semibold">{tripinfo.name}</p></button>
 							</div>
 						</div>

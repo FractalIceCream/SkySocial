@@ -47,6 +47,10 @@ const Wishlist = ({ wishlist }) => {
     color: themeState.darkTheme ? '#333' : '#333',
 
   }
+  const buttonStyles = {
+    background: themeState.darkTheme ? `` : `linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)`,
+    color: themeState.darkTheme ? '#333' : 'white',
+  }
 
   // const openModal = () => {
   //   setIsOpen(true);
@@ -114,22 +118,23 @@ const Wishlist = ({ wishlist }) => {
           wishlist.map((tripinfo) => (
             <div key={tripinfo._id}>
               {/* need help styling this to the correct position */}
-              <div className="bg-green-200 border border-black flex justify-evenly mt-4 w-32 h-auto items-center rounded-custom">
-                <div className="flex justify-center items-start w-auto h-auto">
+              <div className="border border-black flex justify-evenly mt-4 w-32 h-auto items-center rounded-custom" style={buttonStyles}>
+                <div className="flex justify-center items-start w-auto h-auto" >
                   <button
                     onClick={() => handleRemoveTrip(tripinfo._id)}
-                    className="text-md text-center text-black"
+                    className="text-md text-center"
                   >
                     x
                   </button>
                 </div>
-                <div className="flex text-center">
+                <div className="flex text-center"  >
                   <button
                     key={tripinfo._id}
                     onClick={() => handleTripModal(tripinfo)}
-                    className=" h-auto w-auto justify-start items-center flex text-center  rounded-custom bg-green-200"
+                    className=" h-auto w-auto justify-start items-center flex text-center  rounded-custom "
+                    
                   >
-                    <p className="font-semibold  text-black">
+                    <p className="font-semibold">
                       {tripinfo.name}
                     </p>
                   </button>
