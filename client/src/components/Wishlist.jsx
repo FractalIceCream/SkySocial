@@ -94,7 +94,7 @@ const Wishlist = ({ authUser, wishlist }) => {
   }
 
   return (
-    <div className="flex h-wishlist-height w-wishlist-width flex-wrap items-center justify-center rounded-custom " style={wishlistStyles}>
+    <div className="flex flex-grow h-wishlist-height mt-4 w-wishlist-width flex-wrap items-center justify-center rounded-custom " style={wishlistStyles}>
       <div className="text-2xl ">
         <h2>Wishlist</h2>
       </div>

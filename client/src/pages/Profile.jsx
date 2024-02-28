@@ -113,20 +113,16 @@ const Profile = () => {
 	return (
 		<div className="w-full h-screen" style={profileStyles}>
 			<Navbar />
-			<div className="w-full items-center flex justify-evenly min-h-full flex-wrap">
+			<div className="  flex justify-around w-auto h-auto flex-wrap">
 				<div className="flex flex-col">
 					{Auth.getProfile()?.data._id === profile._id && (
-						<Itinerary
-							itinerary={profile.wishlist.filter((trip) => trip.itinerary)}
-						/>
-					)}
-					{(
-						<Wishlist authUser={Auth.getProfile()?.data._id === profile._id}
-							wishlist={profile.wishlist.filter((trip) => !trip.itinerary)}
-						/>
-					)}
+						<Itinerary	itinerary={profile.wishlist.filter((trip) => trip.itinerary)}	/>	)}
+
+					    {(<Wishlist authUser={Auth.getProfile()?.data._id === profile._id}
+							  wishlist={profile.wishlist.filter((trip) => !trip.itinerary)}/>
+				      	)}
 				</div>
-				<div className="flex justify-center">
+				<div className="flex">
 					<PostContainer userPosts={profile.posts} allPosts={Post} />
 				</div>
 				<div className="flex justify-center">

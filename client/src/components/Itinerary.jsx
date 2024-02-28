@@ -99,7 +99,7 @@ const Itinerary = ({ itinerary }) => {
 
 
 	return (
-		<div className="box-border h-itinerary-height w-itinerary-width flex-wrap items-center justify-center rounded-custom shadow-2xl" style={itineraryStyles}>
+		<div className="box-border h-72 w-itinerary-width flex-wrap items-center justify-center rounded-custom shadow-2xl" style={itineraryStyles}>
 			<div className="text-2xl font-semibold">
 				<h2 className="text-center">Itinerary</h2>
 			</div>
