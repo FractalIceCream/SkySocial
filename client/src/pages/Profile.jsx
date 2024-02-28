@@ -135,12 +135,12 @@ const Profile = () => {
 			<Navbar />
 			<div className="w-full items-center flex justify-evenly min-h-full flex-wrap">
 				<div className="flex flex-col">
-					{Auth.getProfile().data._id === profile._id && (
+					{Auth.getProfile()?.data._id === profile._id && (
 						<Itinerary
 							itinerary={profile.wishlist.filter((trip) => trip.itinerary)}
 						/>
 					)}
-					{Auth.getProfile().data._id === profile._id && (
+					{Auth.getProfile()?.data._id === profile._id && (
 						<Wishlist
 							wishlist={profile.wishlist.filter((trip) => !trip.itinerary)}
 						/>
@@ -151,7 +151,7 @@ const Profile = () => {
 					<PostContainer userPosts={profile.posts} allPosts={Post} />
 				</div>
 				<div className="flex justify-center">
-					{Auth.getProfile().data._id === profile._id && (
+					{Auth.getProfile()?.data._id === profile._id && (
 						<Following following={profile.following} />
 					)}
 				</div>
