@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="flex justify-center items-center h-10">
+    <div className="flex justify-center items-center">
       <a
         href="https://github.com/FractalIceCream/SkySocial.git" 
         className=""
@@ -10,7 +10,7 @@ const Footer = () => {
       >
         <i className="fa-brands fa-github text-black text-xl md:text-2xl lg:text-3xl cursor-pointer"></i> {/* GitHub icon */}
       </a>
-    </footer>
+    </div>
   );
 }
 
