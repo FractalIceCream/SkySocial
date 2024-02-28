@@ -16,6 +16,7 @@ import { FOLLOW_PROFILE, UNFOLLOW_PROFILE } from "../utils/mutation";
 import Post from "../components/Posts/Post";
 import { useTheme } from "../utils/ThemeContext";
 
+
 const FollowProfileButton = ({ profileId }) => {
   const [followProfile] = useMutation(FOLLOW_PROFILE, {
     onCompleted: () => {
@@ -76,8 +77,8 @@ const Profile = () => {
 	const [themeState, themeDispatch] = useTheme();
 
 	const profileStyles = {
-		background: themeState.darkTheme ? '#333' : '#fff',
-		color: themeState.darkTheme ? '#fff' : '#333',
+    background: themeState.darkTheme ? 'radial-gradient(circle, rgba(34,34,34,1) 43%, rgba(62,62,62,1) 83%, rgba(87,87,87,1) 100%)' : 'linear-gradient(335deg, rgba(78,95,236,1) 5%, rgba(102,117,238,1) 10%, rgba(133,145,241,1) 14%, rgba(157,166,244,1) 18%, rgba(194,199,248,1) 21%, rgba(255,255,255,1) 26%, rgba(0,0,0,1) 31%, rgba(68,61,47,1) 88%, rgba(255,252,18,1) 100%)',
+		color: themeState.darkTheme ? '#fff' : '#fff',
 		// Add other styles as needed
 	}
 
@@ -129,10 +130,10 @@ const Profile = () => {
 	}
 
 	return (
-		<div className="w-full h-screen">
+		<div className="w-full h-screen" style={profileStyles}>
 			{/* this is a test */}
 			<Navbar />
-			<div className="w-full items-center flex justify-evenly min-h-full flex-wrap" style={profileStyles}>
+			<div className="w-full items-center flex justify-evenly min-h-full flex-wrap">
 				<div className="flex flex-col">
 					{Auth.getProfile().data._id === profile._id && (
 						<Itinerary
@@ -158,7 +159,7 @@ const Profile = () => {
           {/* {profile ? `${profile.name}` : "No name retrieved"}
           {profileId ? `${profile.name}'s` : "No name retrieved"} */}
           <FollowProfileButton profileId={profile._id} />
-		  <Actions />
+		  
         </h2>
 			</div>
 			{/* profile?.wishlist?.itinerary */}

@@ -28,10 +28,21 @@ const Itinerary = ({ itinerary }) => {
 	const [themeState] = useTheme();
 
 	const itineraryStyles = {
-		background: themeState.darkTheme ? '#333' : '#fff',
-		color: themeState.darkTheme ? '#fff' : '#333',
-		// Add other styles as needed
+    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)' : 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)',
+		color: themeState.darkTheme ? '#333' : 'white',
 	}
+  const innerItineraryStyles = {
+    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(34,34,34,1) 28%, rgba(62,62,62,1) 58%, rgba(87,87,87,0.8547794117647058) 100%)' : 'linear-gradient(180deg, rgba(34,34,34,1) 28%, rgba(62,62,62,1) 58%, rgba(87,87,87,0.8547794117647058) 100%)',
+    
+    color: themeState.darkTheme ? '#333' : '#333',
+
+  }
+  const buttonStyles = {
+    background: themeState.darkTheme ? `` : `linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)`,
+    color: themeState.darkTheme ? '#333' : 'white',
+  }
+
+
 
 	// const [createTrip, { error, data }] = useMutation(CREATE_TRIP,
 	// 	{
@@ -94,21 +105,21 @@ const Itinerary = ({ itinerary }) => {
 				<h2 className="text-center">Itinerary</h2>
 			</div>
 
-			<div className="m-4 box-border flex h-inner-itinerary-height w-inner-itinerary-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong">
+			<div className="m-4 border border-black flex h-inner-itinerary-height w-inner-itinerary-width flex-col items-center justify-start rounded-custom bg-gray-dark p-4 shadow-inner-strong " style={innerItineraryStyles}>
 				{itinerary &&
 					itinerary.map((tripinfo) => (
-						<div key={tripinfo._id} className="bg-green-200 flex justify-start mt-4 w-32 h-32 items-center rounded-custom">
+						<div key={tripinfo._id} className="flex justify-start mt-4 w-32 h-auto items-center rounded-custom" style={buttonStyles}>
 							<div className="flex justify-center items-start w-12 h-12">
 								<button
 									onClick={() => handleRemoveTrip(tripinfo._id)}
-									className="text-md text-center"> x </button>
+									className="text-md mt-2 text-center"> x </button>
 							</div>
 							<div className="flex justify-center items-start w-12 h-12">
 								<button
 									key={tripinfo._id}
 									onClick={() => handleTripModal(tripinfo)}
-									className="mb-2 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
-									<p className="font-semibold text-black">{tripinfo.name}</p></button>
+									className="mb-2 flex h-10 w-40 items-center justify-center rounded-custom">
+									<p className="font-semibold">{tripinfo.name}</p></button>
 							</div>
 						</div>
 					))
