@@ -162,7 +162,7 @@ const Post = ({ post }) => {
 
         <div
             key={post._id}
-            className="w-submitPost border border-black overflow-y max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
+            className="w-submitPost shadow-custom border border-black overflow-y max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
         >
             <div className="flex justify-between">
                 <div className="">

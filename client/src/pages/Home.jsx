@@ -15,10 +15,10 @@ const Home = () => {
   const [themeState] = useTheme();
 
 	const homeStyles = {
-		background: themeState.darkTheme ? '#333' : '#fff',
+    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(34,34,34,1) 27%, rgba(62,62,62,1) 50%, rgba(87,87,87,1) 74%)' : '#fff',
 		color: themeState.darkTheme ? '#fff' : '#333',
 		// Add other styles as needed
-	};
+	}
 
   return (
     <div className="w-full min-h-full" style={homeStyles} id="home">

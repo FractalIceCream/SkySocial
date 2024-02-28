@@ -19,15 +19,15 @@ const Navbar = () => {
   };
 
   // Update the Navbar styling based on the theme
-  const navbarStyles = {
-    background: themeState.darkTheme ? '#333' : '#fff',
-    color: themeState.darkTheme ? '#fff' : '#333',
-    // Add other styles as needed
-  };
+  // const navbarStyles = {
+  //   background: themeState.darkTheme ? '#333' : '',
+  //   color: themeState.darkTheme ? '#fff' : '#fff',
+  //   // Add other styles as needed
+  // };
 
   return (
     <>
-      <div className="w-full p-2 flex justify-evenly items-center" style={navbarStyles}>
+      <div className="w-full p-2 flex justify-evenly items-center bg-transparent">
       <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/" className="text-2xl">
               skySocial
             </Link>
