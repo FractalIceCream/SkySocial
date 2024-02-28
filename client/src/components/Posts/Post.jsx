@@ -3,34 +3,25 @@ import { REMOVE_POST, ADD_LIKE, REMOVE_LIKE, REMOVE_COMMENT } from "../../utils/
 import React, { useState, useEffect } from "react";
 import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import AuthService from "../../utils/auth";
-
-import {
-  QUERY_POST,
-  QUERY_ME,
-  QUERY_PROFILE_BY_NAME,
-  QUERY_ALL_PROFILES,
-} from "../../utils/queries";
-import { useTheme } from "../../utils/ThemeContext";
+import { QUERY_POST, QUERY_ME, QUERY_PROFILE_BY_NAME, QUERY_ALL_PROFILES } from "../../utils/queries";
 // badges are not updating on home page and when a new post is created
 // need to style badges
 const Post = ({ post }) => {
-  // if (!posts.length) {
-  //  return <h3>No Posts Yet!</h3>;
-  // }
-  const [themeState] = useTheme();
-  const [profileId, setProfileId] = useState("");
-  const [commentShow, setCommentShow] = useState(false);
-  const [wishListItem, setWishListItem] = useState(null);
-  const [createComment, { error }] = useMutation(CREATE_COMMENT);
-  const [removePost, { err }] = useMutation(REMOVE_POST, {
-    refetchQueries:
-      window.location.pathname === "/me" ? [QUERY_ME] : [QUERY_POST],
-    //  [
-    //  QUERY_POST,
-    //  QUERY_ME,
-    // ]
-  });
-
+    // if (!posts.length) {
+    //  return <h3>No Posts Yet!</h3>;
+    // }
+    const [profileId, setProfileId] = useState("");
+    const [commentShow, setCommentShow] = useState(false);
+    const [wishListItem, setWishListItem] = useState(null);
+    const [createComment, { error }] = useMutation(CREATE_COMMENT);
+    const [removePost, { err }] = useMutation(REMOVE_POST, {
+        refetchQueries:
+            window.location.pathname === "/me" ? [QUERY_ME] : [QUERY_POST],
+        //  [
+        //  QUERY_POST,
+        //  QUERY_ME,
+        // ]
+    });
 
     const [removeComment, {removeCommentError}] = useMutation(REMOVE_COMMENT, {
         refetchQueries: [QUERY_POST, 'posts'],
@@ -41,7 +32,7 @@ const Post = ({ post }) => {
         QUERY_PROFILE_BY_NAME,
         {
             variables: {
-                name: post.postAuthor,
+                name: Post.postAuthor,
             },
         }
     );
@@ -52,7 +43,6 @@ const Post = ({ post }) => {
         getProfilesData();
     };
     useEffect(() => {
-        // setIsLiked(post.likes.includes(AuthService.getProfile().data._id))
         onPageLoad();
     }, []);
     useEffect(() => {
@@ -72,7 +62,7 @@ const Post = ({ post }) => {
                     name: author,
                 },
             });
-            console.log(data);
+            // console.log(data);
             const profileId = data.profileByName._id;
             // console.log(profileId)
             setProfileId(profileId);
@@ -124,15 +114,13 @@ const Post = ({ post }) => {
             console.error("Error removing post", error);
         }
     };
-    const [isLiked, setIsLiked] = useState(post.likes.map(user => user._id).includes(AuthService.getProfile()?.data._id));
-
+    const [isLiked, setIsLiked] = useState(false);
     const [addLike, { likeError }] = useMutation(ADD_LIKE, {
         refetchQueries: [QUERY_POST, "posts"],
     });
     const [removeLike, { removeLikeError }] = useMutation(REMOVE_LIKE, {
         refetchQueries: [QUERY_POST, "posts"],
     });
-    
     const handleLike = async (postId) => {
         try {
             const { data } = await addLike({
@@ -165,109 +153,32 @@ const Post = ({ post }) => {
     }
 
 
-  
+    // {/* {posts && */}
+    // 				{/* posts.slice().reverse().map((post) => ( */}
+    // This component will need to be updated to include the submitted info
+    return (
+        // <div className='text-white h-12'> {userPost.postText} </div>
+        // <div> 
 
-
-  const postStyles = {
-    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(183,226,255,1) 17%, rgba(235,240,249,1) 75%, rgba(218,224,241,1) 100%)' : 'linear-gradient(180deg, rgba(0,0,0,1) 42%, rgba(40,39,39,1) 75%, rgba(79,78,78,0.8855917366946778) 100%)',
-		color: themeState.darkTheme ? 'black' : 'white',
-  };
-  const innerPostStyles = {
-    background: themeState.darkTheme ? 'white' : 'gray',
-    
-    color: themeState.darkTheme ? '#333' : 'white',
-  }
-  const buttonStyles = {
-    background: themeState.darkTheme ? `linear-gradient(180deg, rgba(23,203,255,1) 21%, rgba(218,224,241,1) 100%)` : `radial-gradient(circle, rgba(13,13,13,1) 21%, rgba(39,39,40,1) 48%, rgba(89,91,97,1) 77%, rgba(170,175,188,1) 92%, rgba(0,0,0,1) 97%)`,
-    color: themeState.darkTheme ? 'white' : 'white',
-  }
-  const innerInputStyles = {
-    background: themeState.darkTheme ? 'white' : 'gray',
-    
-    color: themeState.darkTheme ? '#333' : 'black',
-  }
-
-  const commentButton = {
-    background: themeState.darkTheme ? 'white' : 'gray',
-    
-    color: themeState.darkTheme ? '#333' : 'black',
-  }
-
-
-  
-
-
-
-
-
-
-  return (
-    // <div className='text-white h-12'> {userPost.postText} </div>
-    // <div>
-
-    <div
+        <div
             key={post._id}
-            className="w-submitPost shadow overflow-y max-w-custom h-auto mt-4  rounded-custom " style={postStyles}
+            className="w-submitPost border border-black overflow-y max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
         >
             <div className="flex justify-between">
                 <div className="">
                 {loggedInProfile === post.postAuthor && (
                     <button onClick={() => handleRemovePost(post._id)}><i className="fa-regular  px-5  fa-trash-can"></i></button>
                 )}
-=======
-
-    // {/* {posts && */}
-    // 				{/* posts.slice().reverse().map((post) => ( */}
-    // This component will need to be updated to include the submitted info
-    return (
-        // <div className='text-white h-12'> {userPost.postText} </div>
-        // <div>
-        <div
-                key={post._id}
-                className="w-submitPost shadow-custom border border-black overflow-y max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
-            >
-                <div className="flex justify-between">
-                    <div className="">
-                    {loggedInProfile === post.postAuthor && (
-                        <button onClick={() => handleRemovePost(post._id)}><i className="fa-regular  px-5  fa-trash-can"></i></button>
-                    )}
-                    </div>
-                    <div className="flex">
-                    <button onClick={() => handleFetchedUser(post.postAuthor)} value={post.postAuthor}>
-                        <h2 className=" mt-2">{post.postAuthor}</h2>
-                    </button>
-                    <h2 className="ml-5 mr-2 mt-2">posted on {post.createdAt}</h2>
                 </div>
-               </div>
-                <div className="overflow-auto-y flex-wrap ml-2 h-auto w-1/3 flex justify-evenly items-center">
-                    {!wishListItem ? (
-                        <span>Loading...</span>
-                    ) : (
-                        // Render wishlist names here
-                        wishListItem.slice(0, 3).map((item) => (
-                            <div key={item._id} className="flex">
-                                <p className=" h-auto w-16 items-center text-center rounded-custom bg-green-200 font-semibold text-black">
-                                    {item.name}
-                                </p>
-                            </div>
-                        ))
-                    )}
-
-                </div>
-          {post.imageUrl ? (
-            <div className="h-48 mt-3 bg-gray ">
-              <div className=" flex justify-evenly flex-wrap  w-full h-3/4">
-                <img
-                  className="w-96 rounded-custom max-h-full h-auto"
-                  src={post.imageUrl}
-                ></img>
-              </div>
-              <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
-                <p>{post.postText}</p>
-              </div>
+                <div className="flex">
+                <button onClick={() => handleFetchedUser(post.postAuthor)} value={post.postAuthor}>
+                    <h2 className=" mt-2">{post.postAuthor}</h2>
+                </button>
+                <h2 className="ml-5 mr-2 mt-2">posted on {post.createdAt}</h2>
             </div>
-
            </div>
+
+
             <div className="overflow-auto-y flex-wrap ml-2 h-auto w-1/3 flex justify-evenly items-center">
                 {!wishListItem ? (
                     <span>Loading...</span>
@@ -275,161 +186,99 @@ const Post = ({ post }) => {
                     // Render wishlist names here
                     wishListItem.slice(0, 3).map((item) => (
                         <div key={item._id} className="flex">
-                            <p className=" h-auto  mt-1 p-1 w-auto items-center text-center text-sm rounded-custom font-semibold" style={buttonStyles}>
+                            <p className=" h-auto w-16 items-center text-center rounded-custom bg-green-200 font-semibold text-black">
                                 {item.name}
                             </p>
                         </div>
                     ))
                 )}
             </div>
-      {post.imageUrl ? (
-        <div className="h-48 mt-3 ">
-          <div className=" flex justify-evenly flex-wrap  w-full h-3/4">
-            <img
-              className="w-96 rounded-custom max-h-full h-auto"
-              src={post.imageUrl}
-            ></img>
 
-          ) : (
-            <div className="h-auto mt-3 bg-gray ">
-              <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
-                <p>{post.postText}</p>
-              </div>
-            </div>
-          )}
-          <div className="flex justify-center">
-            <div className="h-line bg-black  mt-4 w-submitComment  "></div>
-
-          </div>
-          <div className="h-10  max-w-custom flex justify-evenly items-center">
-            <div>{post.likesCount}
-            {isLiked && isLoggedIn ? (
-              <button className="ml-3" onClick={() => handleRemoveLike(post._id)}>
-                Unlike
-              </button>
-            ) : (
-              <button className="ml-3" onClick={() => handleLike(post._id)}>
-                Like
-              </button>
-            )}
-            </div>
-            <button onClick={showComments}>View Comments ({post.comments.length})</button>
-          </div>
-
-        </div>
-      ) : (
-        <div className="h-auto mt-3 ">
-          <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
-            <p>{post.postText}</p>
-          </div>
-        </div>
-      )}
-      <div className="flex justify-center">
-        <div className="h-line bg-black  mt-4 w-submitComment  "></div>
-      </div>
-      <div className="h-10  max-w-custom flex justify-evenly items-center">
-        <div>{post.likesCount}
-        {isLiked && isLoggedIn ? (
-          <button className="ml-3" onClick={() => handleRemoveLike(post._id)}>
-            Unlike
-          </button>
-        ) : (
-          <button className="ml-3" onClick={() => handleLike(post._id)}>
-            Like
-          </button>
-        )}
-        </div>
-        <button onClick={showComments}>View Comments</button>
-      </div>
-      <div className=" flex  max-w-custom justify-evenly">
-        <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent items-center" style={commentButton}>
-          <button
-            onClick={handleFormSubmit}
-            className="text-center text-black "
-          >
-            Comment
-          </button>
-        </div>
-        <input
-          value={comment}
-          onChange={handleInputChange}
-          className="h-8 flex justify-center border border-black text-center  bg-gray-light rounded-custom w-2/3 "
-          placeholder="Comment here..."
-        style={innerInputStyles} ></input>
-      </div>
-
-      {commentShow &&
-        post.comments &&
-        post.comments.map((commentOfPost) => (
-          <div key={commentOfPost._id} className="max-h-12  mt-4 overflow-y" >
-            <div className="flex flex-col h-auto">
-              <div className=" w-2/3 flex justify-center items-center flex-wrap rounded-custom" style={innerPostStyles}>
-                <p className="p-2 m-1"> {commentOfPost.commentText} </p>
-              </div>
-              <div className="flex justify-around items-center mt-1">
-                <div className= "ml-4">
-                  {loggedInProfile === commentOfPost.commentAuthor && (
-                    <button
-                      onClick={() =>
-                        handleRemoveComment(post._id, commentOfPost._id)
-                      }
-                     className="ml-4 text-sm"
-                      
-
-          <div className=" flex  max-w-custom justify-evenly">
-            <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
-              <button
-                onClick={handleFormSubmit}
-                className="text-center text-black "
-              >
-                Comment
-              </button>
-            </div>
-            <input
-              value={comment}
-              onChange={handleInputChange}
-              className="h-8 flex justify-center border border-black text-center text-white bg-gray-light rounded-custom w-2/3 "
-              placeholder="Comment here..."
-            ></input>
-          </div>
-          {commentShow &&
-            post.comments &&
-            post.comments.map((commentOfPost) => (
-              <div key={commentOfPost._id} className="max-h-12  mt-4 overflow-y">
-                <div className="flex flex-col h-auto">
-                  <div className="bg-gray-light w-2/3 flex justify-center items-center flex-wrap rounded-custom">
-                    <p className="p-2 m-1"> {commentOfPost.commentText} </p>
-                  </div>
-                  <div className="flex justify-around items-center mt-1">
-                    <div className= "ml-4">
-                      {loggedInProfile === commentOfPost.commentAuthor && (
-                        <button
-                          onClick={() =>
-                            handleRemoveComment(post._id, commentOfPost._id)
-                          }
-                         className="ml-4 text-sm"
-                        >
-                          Delete Comment
-                        </button>
-                      )}
+            {post.imageUrl ? (
+                <div className="h-48 mt-3 bg-gray ">
+                    <div className=" flex justify-evenly flex-wrap  w h-3/4">
+                        <img
+                            className="max-w-full rounded-custom max-h-full h-auto"
+                            src={post.imageUrl}
+                        ></img>
                     </div>
-                    <div
-                      className="flex-grow text-end mr-2"
-
-                    >
-                      {" "}
-                      {/* Set max-width for the commented by section */}
-                        <p className= "mr-3">
-                        commented by {commentOfPost.commentAuthor}
-                      </p>
+                    <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
+                        <p>{post.postText}</p>
                     </div>
-                  </div>
                 </div>
-              </div>
-            ))}
+            ) : (
+                <div className="h-auto mt-3 bg-gray ">
+                    <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
+                        <p>{post.postText}</p>
+                    </div>
+                </div>)}
+            <div className="flex justify-center">
+                <div className="h-line bg-black  mt-4 w-submitComment  "></div>
+            </div>
+            <div className="h-10  max-w-custom flex justify-evenly">
+                
+              {isLiked && isLoggedIn ? (
+					<button className="ml-3" onClick={() => handleRemoveLike(post._id)}>
+						Unlike
+					</button>
+				) : (
+					<button className="ml-3" onClick={() => handleLike(post._id)}>
+						Like
+					</button>
+				)}
+				<div>{post.likesCount}</div>
+                <button  onClick={showComments}>View Comments</button>
+            </div>
+            <div className=" flex  max-w-custom justify-evenly">
+                <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
+                    <button onClick={handleFormSubmit} className="text-center text-black ">Comment
+                    </button>
+                </div>
+                <input
+                    value={comment} onChange={handleInputChange} className="h-8 flex justify-center border border-black text-center text-white bg-gray-light rounded-custom w-2/3 "
+                    placeholder="Comment here..."
+                ></input>
+            </div>
+
+
+
+
+            {commentShow &&
+                post.comments &&
+                post.comments.map((commentOfPost) => (
+                    <div key={commentOfPost._id} className="max-h-12 mt-4 overflow-y">
+                        <div className="flex flex-col h-auto">
+                            <div className="bg-gray-light flex justify-center items-center flex-wrap w-2/3 rounded-custom">
+                                <p className="p-2 m-1"> {commentOfPost.commentText} </p>
+                            </div>
+                            <p className="text-end">
+                                {" "}
+                                commented by {commentOfPost.commentAuthor}
+                            </p>
+                            <div>
+                                {loggedInProfile === commentOfPost.commentAuthor && (
+                                    <button onClick={() => handleRemoveComment(post._id, commentOfPost._id)}><i className="fa-regular  px-5  fa-trash-can"></i></button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
         // </div>
-      );
-    };
+    );
+
+};
 
 export default Post;
