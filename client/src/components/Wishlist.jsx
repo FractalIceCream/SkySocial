@@ -130,7 +130,6 @@ const Wishlist = ({ authUser, wishlist }) => {
         {isOpen && (
           <div>
             <TripInfoModal tripId={tripModal._id} tripInfo={tripModal} name={tripModal.name} onHide={() => setIsOpen(false)} />
-            <button onClick={() => setIsOpen(false)}>Close Modal</button>
           </div>
         )}
       </div>
