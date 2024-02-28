@@ -169,7 +169,7 @@ const Wishlist = ({ wishlist }) => {
           </button>
 
           {showInputBox && (
-            <div className="absolute top-50 right-0 w-full flex items-center justify-center">
+            <div className="absolute inset-0 w-full flex items-center justify-center">
               <div className="relative bg-gray text-center border rounded-full border-black shadow-custom max-w-md w-full">
                 <h2 className="text-2xl text-center text-white font-semibold mb-4">
                   Add a city to your wishlist!
