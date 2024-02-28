@@ -14,12 +14,14 @@ import {
   QUERY_PROFILE_BY_NAME,
   QUERY_ALL_PROFILES,
 } from "../../utils/queries";
+import { useTheme } from "../../utils/ThemeContext";
 // badges are not updating on home page and when a new post is created
 // need to style badges
 const Post = ({ post }) => {
   // if (!posts.length) {
   //  return <h3>No Posts Yet!</h3>;
   // }
+  const [themeState] = useTheme();
   const [profileId, setProfileId] = useState("");
   const [commentShow, setCommentShow] = useState(false);
   const [wishListItem, setWishListItem] = useState(null);
@@ -162,16 +164,49 @@ const Post = ({ post }) => {
     }
   };
 
-  // {/* {posts && */}
-  // 				{/* posts.slice().reverse().map((post) => ( */}
-  // This component will need to be updated to include the submitted info
+  
+
+
+  const postStyles = {
+    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(183,226,255,1) 17%, rgba(235,240,249,1) 75%, rgba(218,224,241,1) 100%)' : 'linear-gradient(180deg, rgba(0,0,0,1) 42%, rgba(40,39,39,1) 75%, rgba(79,78,78,0.8855917366946778) 100%)',
+		color: themeState.darkTheme ? 'black' : 'white',
+  };
+  const innerPostStyles = {
+    background: themeState.darkTheme ? 'white' : 'gray',
+    
+    color: themeState.darkTheme ? '#333' : 'white',
+  }
+  const buttonStyles = {
+    background: themeState.darkTheme ? `linear-gradient(180deg, rgba(23,203,255,1) 21%, rgba(218,224,241,1) 100%)` : `radial-gradient(circle, rgba(13,13,13,1) 21%, rgba(39,39,40,1) 48%, rgba(89,91,97,1) 77%, rgba(170,175,188,1) 92%, rgba(0,0,0,1) 97%)`,
+    color: themeState.darkTheme ? 'white' : 'white',
+  }
+  const innerInputStyles = {
+    background: themeState.darkTheme ? 'white' : 'gray',
+    
+    color: themeState.darkTheme ? '#333' : 'black',
+  }
+
+  const commentButton = {
+    background: themeState.darkTheme ? 'white' : 'gray',
+    
+    color: themeState.darkTheme ? '#333' : 'black',
+  }
+
+
+  
+
+
+
+
+
+
   return (
     // <div className='text-white h-12'> {userPost.postText} </div>
     // <div>
 
     <div
             key={post._id}
-            className="w-submitPost shadow-custom border border-black overflow-y max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
+            className="w-submitPost shadow overflow-y max-w-custom h-auto mt-4  rounded-custom " style={postStyles}
         >
             <div className="flex justify-between">
                 <div className="">
@@ -193,7 +228,7 @@ const Post = ({ post }) => {
                     // Render wishlist names here
                     wishListItem.slice(0, 3).map((item) => (
                         <div key={item._id} className="flex">
-                            <p className=" h-auto mt-1 p-1 w-auto items-center text-center text-sm rounded-custom bg-green-200 font-semibold text-black">
+                            <p className=" h-auto  mt-1 p-1 w-auto items-center text-center text-sm rounded-custom font-semibold" style={buttonStyles}>
                                 {item.name}
                             </p>
                         </div>
@@ -201,7 +236,7 @@ const Post = ({ post }) => {
                 )}
             </div>
       {post.imageUrl ? (
-        <div className="h-48 mt-3 bg-gray ">
+        <div className="h-48 mt-3 ">
           <div className=" flex justify-evenly flex-wrap  w-full h-3/4">
             <img
               className="w-96 rounded-custom max-h-full h-auto"
@@ -213,7 +248,7 @@ const Post = ({ post }) => {
           </div>
         </div>
       ) : (
-        <div className="h-auto mt-3 bg-gray ">
+        <div className="h-auto mt-3 ">
           <div className=" flex  max-w-custom overflow-auto   h-12 justify-center items-center text-center mt-2 ">
             <p>{post.postText}</p>
           </div>
@@ -237,7 +272,7 @@ const Post = ({ post }) => {
         <button onClick={showComments}>View Comments</button>
       </div>
       <div className=" flex  max-w-custom justify-evenly">
-        <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent bg-green-400  items-center">
+        <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent items-center" style={commentButton}>
           <button
             onClick={handleFormSubmit}
             className="text-center text-black "
@@ -248,17 +283,17 @@ const Post = ({ post }) => {
         <input
           value={comment}
           onChange={handleInputChange}
-          className="h-8 flex justify-center border border-black text-center text-white bg-gray-light rounded-custom w-2/3 "
+          className="h-8 flex justify-center border border-black text-center  bg-gray-light rounded-custom w-2/3 "
           placeholder="Comment here..."
-        ></input>
+        style={innerInputStyles} ></input>
       </div>
 
       {commentShow &&
         post.comments &&
         post.comments.map((commentOfPost) => (
-          <div key={commentOfPost._id} className="max-h-12  mt-4 overflow-y">
+          <div key={commentOfPost._id} className="max-h-12  mt-4 overflow-y" >
             <div className="flex flex-col h-auto">
-              <div className="bg-gray-light w-2/3 flex justify-center items-center flex-wrap rounded-custom">
+              <div className=" w-2/3 flex justify-center items-center flex-wrap rounded-custom" style={innerPostStyles}>
                 <p className="p-2 m-1"> {commentOfPost.commentText} </p>
               </div>
               <div className="flex justify-around items-center mt-1">

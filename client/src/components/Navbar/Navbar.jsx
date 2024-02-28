@@ -18,12 +18,14 @@ const Navbar = () => {
     themeDispatch({ type: 'TOGGLE_THEME', payload: themeState.darkTheme });
   };
 
-  // Update the Navbar styling based on the theme
-  // const navbarStyles = {
-  //   background: themeState.darkTheme ? '#333' : '',
-  //   color: themeState.darkTheme ? '#fff' : '#fff',
-  //   // Add other styles as needed
-  // };
+const navbarStyles = {
+    background: themeState.darkTheme ? 'linear-gradient(172deg, rgba(13,107,204,1) 17%, rgba(137,186,241,1) 63%, rgba(186,206,235,1) 79%, rgba(218,224,241,1) 89%)' : 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)',
+		color: themeState.darkTheme ? 'white' : 'white',
+    fontFamily: themeState.darkTheme ? 'Arial' : 'Source Code Pro'
+  };
+
+
+
 
   return (
     <>
@@ -69,7 +71,7 @@ const Navbar = () => {
           )}
           {/* Add the light/dark mode toggle button */}
           <button onClick={handleThemeToggle}>
-            Toggle Theme
+          <i class="fa-solid fa-rocket"></i>
           </button>
         </div>
       </div>

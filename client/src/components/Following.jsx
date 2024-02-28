@@ -15,14 +15,14 @@ const Following = ({ following }) => {
   const { loading, error, data } = useQuery(QUERY_FOLLOWING);
 
   const followingStyles = {
-    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)' : 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)',
-		color: themeState.darkTheme ? '#fff' : 'white',
+    background: themeState.darkTheme ? 'linear-gradient(172deg, rgba(13,107,204,1) 17%, rgba(137,186,241,1) 63%, rgba(186,206,235,1) 79%, rgba(218,224,241,1) 89%)' : 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)',
+		color: themeState.darkTheme ? 'white' : 'white',
+    fontFamily: themeState.darkTheme ? 'Arial' : 'Source Code Pro'
   };
   const innerFollowingStyles = {
-    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(34,34,34,1) 28%, rgba(62,62,62,1) 58%, rgba(87,87,87,0.8547794117647058) 100%)' : 'linear-gradient(180deg, rgba(34,34,34,1) 28%, rgba(62,62,62,1) 58%, rgba(87,87,87,0.8547794117647058) 100%)',
+    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(183,226,255,1) 17%, rgba(235,240,249,1) 75%, rgba(218,224,241,1) 100%)' : 'linear-gradient(180deg, rgba(34,34,34,1) 28%, rgba(62,62,62,1) 58%, rgba(87,87,87,0.8547794117647058) 100%)',
     
-    color: themeState.darkTheme ? '#fff' : 'white',
-
+    color: themeState.darkTheme ? '#333' : '#333',
   }
   const buttonStyles = {
     background: themeState.darkTheme ? `` : `linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)`,
