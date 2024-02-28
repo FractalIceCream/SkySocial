@@ -21,7 +21,7 @@ const Home = () => {
 	}
 
   return (
-    <div className="w-full min-h-full" style={homeStyles} id="home">
+    <div className="w-full flex flex-col justify-between min-h-full" style={homeStyles} id="home">
       <Navbar />
       {/* removed flex flex-col */}
       <div className="w-full overflow-y-auto flex justify-center items-center rounded-custom min-h-full">

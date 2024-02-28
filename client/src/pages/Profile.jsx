@@ -130,7 +130,7 @@ const Profile = () => {
 	}
 
 	return (
-		<div className="w-full h-screen" style={profileStyles}>
+		<div className="w-full " style={profileStyles}>
 			{/* this is a test */}
 			<Navbar />
 			<div className="w-full items-center flex justify-evenly min-h-full flex-wrap">

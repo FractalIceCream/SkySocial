@@ -193,7 +193,7 @@ const Post = ({ post }) => {
                     // Render wishlist names here
                     wishListItem.slice(0, 3).map((item) => (
                         <div key={item._id} className="flex">
-                            <p className=" h-auto w-16 items-center text-center rounded-custom bg-green-200 font-semibold text-black">
+                            <p className=" h-auto mt-1 p-1 w-auto items-center text-center text-sm rounded-custom bg-green-200 font-semibold text-black">
                                 {item.name}
                             </p>
                         </div>
