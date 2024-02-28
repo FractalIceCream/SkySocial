@@ -76,7 +76,7 @@ const Profile = () => {
 	const [themeState, themeDispatch] = useTheme();
 
 	const profileStyles = {
-    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(6,179,250,1) 13%, rgba(6,179,250,1) 13%, rgba(6,179,250,1) 18%, rgba(123,217,255,1) 51%, rgba(161,228,255,1) 65%, rgba(182,234,255,1) 73%, rgba(214,243,255,1) 85%, rgba(255,255,255,1) 100%)' : 'linear-gradient(335deg, rgba(78,95,236,1) 5%, rgba(102,117,238,1) 10%, rgba(133,145,241,1) 14%, rgba(157,166,244,1) 18%, rgba(194,199,248,1) 21%, rgba(255,255,255,1) 26%, rgba(0,0,0,1) 31%, rgba(68,61,47,1) 88%, rgba(255,252,18,1) 100%)',
+    background: themeState.darkTheme ? 'radial-gradient(circle, rgba(34,34,34,1) 43%, rgba(62,62,62,1) 83%, rgba(87,87,87,1) 100%)' : 'linear-gradient(335deg, rgba(78,95,236,1) 5%, rgba(102,117,238,1) 10%, rgba(133,145,241,1) 14%, rgba(157,166,244,1) 18%, rgba(194,199,248,1) 21%, rgba(255,255,255,1) 26%, rgba(0,0,0,1) 31%, rgba(68,61,47,1) 88%, rgba(255,252,18,1) 100%)',
 		color: themeState.darkTheme ? '#fff' : '#fff',
 		// Add other styles as needed
 	}
@@ -107,23 +107,14 @@ const Profile = () => {
 	}
 	console.log(Auth.getProfile()?.data._id === profile._id);
 	return (
-
-		<div className="w-full " style={profileStyles}>
-			{/* this is a test */}
-			<Navbar />
-			<div className="w-full items-center flex justify-evenly min-h-full flex-wrap">
-				<div className="flex justify-between flex-col">
-					{Auth.getProfile().data._id === profile._id && (
-
 		<div className="w-full h-screen" style={profileStyles}>
 			<Navbar />
 			<div className="w-full items-center flex justify-evenly min-h-full flex-wrap">
 				<div className="flex flex-col">
 					{Auth.getProfile()?.data._id === profile._id && (
-
 						<Itinerary
 							itinerary={profile.wishlist.filter((trip) => trip.itinerary)}
-					 />
+						/>
 					)}
 					{(
 						<Wishlist authUser={Auth.getProfile()?.data._id === profile._id}
