@@ -5,76 +5,45 @@ import { QUERY_TRIPS_INFO } from "../utils/queries";
 import Auth from '../utils/auth';
 
 const ItineraryModal = ({ tripId, tripInfo, name, onHide }) => {
-// { tripId, tripInfo, name, onHide }
-  // const [profileFormData, setProfileFormData] = useState({
-  //   originLocationCode: "",
-  //   destinationLocationCode: "",
-  //   departureDate: "",
-  //   returnDate: "",
-  //   adults: "",
-  // });
-  const [tripFormData, setTripFormData] = useState(tripInfo);
 
-//   console.log(tripFormData);
+  const [tripFormData, setTripFormData] = useState(tripInfo);
   const [updateTrip, { loading, error }] = useMutation(UPDATE_TRIP)
-  const [addItinerary, { error : itineraryError }] = useMutation(ADD_ITINERARY);
+  const [addItinerary, { error: itineraryError }] = useMutation(ADD_ITINERARY);
 
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
-    // console.log(`${id} : ${value}`);
-    // if (id === 'adults') {
-    //   const numAdults = parseInt(value);
-    //   console.log(numAdults);
-    //   setTripFormData({...tripFormData, adults: numAdults});
-    //   console.log(tripFormData.adults);
-    // }
-    // console.log(`${id} ${value}`)
     event.target.value = value;
     setTripFormData({ ...tripFormData, [id]: value });
-    // console.log(tripFormData);
   }
 
   const handleFormSubmit = async (event) => {
-    // event.preventDefault();
-    // console.log(tripFormData)
-    
+
     try {
 
-        const { originLocationCode, destinationLocationCode, departureDate, returnDate, adults } = tripFormData;
-        // console.log(tripFormData.adults);
-        // console.log(tripFormData.originLocationCode);
-        // console.log(tripFormData.departureDate);
-        // console.log(tripFormData.returnDate);
-        // console.log(tripFormData.destinationLocationCode);
+      const { originLocationCode, destinationLocationCode, departureDate, returnDate, adults } = tripFormData;
       const numAdults = parseInt(adults);
       const { data: itinerary } = await updateTrip({
-        variables: {tripInfo: { 
+        variables: {
+          tripInfo: {
             originLocationCode,
             destinationLocationCode,
             departureDate,
             returnDate,
-            adults: numAdults}, tripId},
+            adults: numAdults
+          }, tripId
+        },
       });
       delete itinerary.updateTrip.__typename;
       const { data } = await addItinerary({
-        variables: { itinerary: {...itinerary.updateTrip}, tripId }
+        variables: { itinerary: { ...itinerary.updateTrip }, tripId }
       });
-    //   setTripFormData(data)
       await onHide(false);
 
     } catch (err) {
-      alert('Something went wrong');
+      alert('No available flights with those conditions');
       console.error(err);
     }
-
-    // setProfileFormData({
-    //   originLocationCode: "",
-    //   destinationLocationCode: "",
-    //   departureDate: "",
-    //   returnDate: "",
-    //   adults: "",
-    // })
   }
 
   return (
@@ -84,11 +53,17 @@ const ItineraryModal = ({ tripId, tripInfo, name, onHide }) => {
         <h2 className="text-2xl text-center text-white font-semibold mb-4">Trip Itinerary to {name}!</h2>
 
         <div className="mb-4 flex flex-col items-center justify-center ">
+          <label htmlFor="departureDate" className="block text-md font-medium text-white my-2">DESTINATION FLIGHT:</label><div></div>
           <label htmlFor="departureDate" className="block text-md font-medium text-white">Departure Date: {tripFormData.itinerary.departureDate}</label>
           <label htmlFor="departureCode" className="block text-md font-medium text-white">Departure Airport: {tripFormData.itinerary.departureCode}</label>
           <label htmlFor="arrivalDate" className="block text-md font-medium text-white">Arrival Date: {tripFormData.itinerary.arrivalDate}</label>
           <label htmlFor="arrivalCode" className="block text-md font-medium text-white">Arrival Airport: {tripFormData.itinerary.arrivalCode}</label>
-          <label htmlFor="price" className="block text-md font-medium text-white">Price: ${tripFormData.itinerary.price}</label>
+          <label className="block text-md font-medium text-white my-2">RETURN FLIGHT</label>
+          <label htmlFor="departureDate" className="block text-md font-medium text-white">Departure Date: {tripFormData.itinerary.departureDateR}</label>
+          <label htmlFor="departureDate" className="block text-md font-medium text-white">Departure Code: {tripFormData.itinerary.arrivalCode}</label>
+          <label htmlFor="departureDate" className="block text-md font-medium text-white">Arrival Date: {tripFormData.itinerary.arrivalDateR}</label>
+          <label htmlFor="departureDate" className="block text-md font-medium text-white">Arrival Code: {tripFormData.itinerary.departureCode}</label>
+          <label htmlFor="price" className="block text-md font-medium text-white my-4">Price: ${tripFormData.itinerary.price}</label>
           <h2>Update Your Trip Below!</h2>
         </div>
         <div className="mb-4">

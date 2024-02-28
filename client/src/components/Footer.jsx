@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-blue-500 flex justify-center items-center h-10">
+    <footer className="flex justify-center items-center h-10">
       <a
         href="https://github.com/FractalIceCream/SkySocial.git" 
         className=""

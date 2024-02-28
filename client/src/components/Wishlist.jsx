@@ -14,16 +14,11 @@ import { useTheme } from "../utils/ThemeContext";
 // create button to close input box to add trip
 // add css to input form
 
-const Wishlist = ({ wishlist }) => {
-  // 	encountering error here
-  //   if (!wishlist.length) {
-  //     return <h3>No Wishlist Yet</h3>
-  //   }
+const Wishlist = ({ authUser, wishlist }) => {
 
   const [showInputBox, setShowInputBox] = useState(false);
   const [inputState, setInputState] = useState("");
   const [themeState] = useTheme();
-  // const [wishListItem, setWishListItem] = useState();
   const [isOpen, setIsOpen] = useState(false);
 
   const [createTrip, { error, data }] = useMutation(CREATE_TRIP, {
@@ -37,25 +32,25 @@ const Wishlist = ({ wishlist }) => {
   const [tripModal, setTripModal] = useState({});
 
   const wishlistStyles = {
-    background: themeState.darkTheme ? '#333' : '#fff',
-		color: themeState.darkTheme ? '#fff' : '#333',
+    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)' : 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)',
+		color: themeState.darkTheme ? '#333' : 'white',
 		// Add other styles as needed
   }
+  const innerWishlistStyles = {
+    background: themeState.darkTheme ? 'linear-gradient(180deg, rgba(34,34,34,1) 28%, rgba(62,62,62,1) 58%, rgba(87,87,87,0.8547794117647058) 100%)' : 'linear-gradient(180deg, rgba(34,34,34,1) 28%, rgba(62,62,62,1) 58%, rgba(87,87,87,0.8547794117647058) 100%)',
+    
+    color: themeState.darkTheme ? '#333' : '#333',
 
-  // const openModal = () => {
-  //   setIsOpen(true);
-  //   console.log(isOpen)
-  // };
-  // const closeModal = () => {
-  //   setIsOpen(false);
-  // };
+  }
+  const buttonStyles = {
+    background: themeState.darkTheme ? `` : `linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)`,
+    color: themeState.darkTheme ? '#333' : 'white',
+  }
+
 
   const handleInputChange = (event) => {
-    // console.log(event.target.value)
     const city = event.target.value;
-
     setInputState(city);
-    // console.log(city)
   };
 
   const handleFormSubmit = async (event) => {
@@ -98,43 +93,37 @@ const Wishlist = ({ wishlist }) => {
   }
 
   return (
-    <div className="box-border flex h-wishlist-height w-wishlist-width flex-wrap items-center justify-center rounded-custom shadow-2xl" style={wishlistStyles}>
+    <div className="flex h-wishlist-height w-wishlist-width flex-wrap items-center justify-center rounded-custom " style={wishlistStyles}>
       <div className="text-2xl font-semibold">
         <h2>Wishlist</h2>
       </div>
 
-      <div className="mt-2 box-border flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom p-4 shadow-inner-strong">
+      <div className="mt-2 border border border-black flex h-inner-wishlist-height w-inner-wishlist-width flex-col items-center justify-start rounded-custom p-4 shadow-inner-strong" style={innerWishlistStyles} >
         {wishlist &&
           wishlist.map((tripinfo) => (
             <div key={tripinfo._id}>
               {/* need help styling this to the correct position */}
-              <div className="bg-green-200 flex justify-start mt-4 w-32 h-32 items-center rounded-custom">
-                <div className="flex justify-center items-start w-12 h-12">
+              <div className="border border-black flex justify-evenly mt-4 w-32 h-auto items-center rounded-custom" style={buttonStyles}>
+                <div className="flex justify-center items-start w-auto h-auto" >
                   <button
-                    onClick={() => handleRemoveTrip(tripinfo._id)}
-                    className="text-md text-center text-black"
+                    onClick={() => authUser ? handleRemoveTrip(tripinfo._id) : null}
+                    className="text-md text-center"
                   >
                     x
                   </button>
                 </div>
-                <div className="flex text-center">
-                  <button
+                <div className="flex text-center"  >
+                    <button
                     key={tripinfo._id}
-                    onClick={() => handleTripModal(tripinfo)}
-                    className=" h-32 w-12 justify-start items-center flex text-center  rounded-custom bg-green-200"
-                  >
-                    <p className="font-semibold pt-3 text-black">
+                    onClick={() => authUser ? handleTripModal(tripinfo) : null}
+                    className=" h-auto w-auto justify-start items-center flex text-center  rounded-custom "
+                    >
+                    <p className="font-semibold">
                       {tripinfo.name}
                     </p>
                   </button>
                 </div>
               </div>
-              {/* {isOpen && (
-                <div>
-                  <TripInfoModal tripId={tripinfo._id} tripInfo={tripinfo} name={tripinfo.name} onHide={() => setIsOpen(false)} />
-                  <button onClick={() => setIsOpen(false)}>Close Modal</button>
-                </div>
-              )} */}
             </div>
           ))}
         {isOpen && (
@@ -143,27 +132,13 @@ const Wishlist = ({ wishlist }) => {
             <button onClick={() => setIsOpen(false)}>Close Modal</button>
           </div>
         )}
-        {/* {wishlist &&
-					wishlist.map((tripinfo) => (
-						<button key={tripinfo._id} className="mb-5 flex h-10 w-40 items-center justify-center rounded-custom bg-green-200">
-							<p className="font-semibold text-black">{tripinfo.name}</p>
-						</button>
-					))} */}
-        {/* We will need to add with the Queried Data to this area here and when the button is produced, it should then trigger the Modal to start the Itinerary */}
       </div>
 
       <div className="flex items-center justify-evenly">
-        {/* <button className="h-4 w-4 rounded-full bg-black"></button>
-        <button
-          className="ml-5 h-20 w-20 text-xl font-semibold text-white"
-          onClick={() => setShowInputBox(true)}
-        ></button> */}
-
         <div className="flex items-center justify-evenly">
-          {/* <button className="h-4 w-4 rounded-full bg-black"></button> */}
           <button
             className="ml-5 h-20 w-20 text-xl font-semibold"
-            onClick={() => setShowInputBox(true)}
+            onClick={() => authUser ? setShowInputBox(true) : null}
           >
             Add Trip
           </button>
@@ -201,24 +176,7 @@ const Wishlist = ({ wishlist }) => {
                 </div>
               </div>
             </div>
-
-            // <form >
-            // 	<input
-            // 		type="text"
-            // 		placeholder="Enter wishlist destination"
-            // 		value={inputState}
-            // 		onChange={handleInputChange}
-            // 	/>
-            // 	<button onClick={handleFormSubmit}> Add Trip </button>
-            // </form>
           )}
-
-          {/* {isOpen && (
-            <div>
-              <TripInfoModal tripInfo={wishlist} onHide={() => setIsOpen(false)} />
-              <button onClick={() => setIsOpen(false)}>Close Modal</button>
-            </div>
-          )} */}
         </div>
       </div>
     </div>

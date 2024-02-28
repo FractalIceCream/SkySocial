@@ -13,6 +13,9 @@ query Query($profileId: ID!) {
         postAuthor
         postText
         imageUrl
+        likes {
+          _id
+        }
         likesCount
         createdAt
         comments {
@@ -52,8 +55,9 @@ query Query {
       postAuthor
       postText
       imageUrl
-      likes { _id }
-
+      likes {
+        _id
+      }
       likesCount
       createdAt
       comments 
@@ -95,6 +99,8 @@ query Query {
         departureCode
         arrivalDate
         arrivalCode
+        departureDateR
+        arrivalDateR
         price
       }
     }
@@ -105,55 +111,6 @@ query Query {
     }
   }
 }`;
-// query Query {
-//     me {
-//       _id
-//       name
-//       email
-//       posts {
-//         _id
-//         postAuthor
-//         postText
-//         imageUrl
-//         createdAt
-//         comments {
-//           _id
-//           commentText
-//           commentAuthor
-//           createdAt
-//           secondLevelComments {
-//             _id
-//             secondLevelcommentText
-//             secondLevelcommentAuthor
-//             secondLevelcreatedAt
-//           }
-//         }
-//       }
-//       wishlist {
-//         _id
-//         name
-//         originLocationCode
-//         destinationLocationCode
-//         departureDate
-//         returnDate
-//         adults
-//         children
-//         infants
-//         travelClass
-//         includedAirlineCodes
-//         excludedAirlineCodes
-//         nonStop
-//         currencyCode
-//         maxPrice
-//         max
-//       }
-//       following {
-//         _id
-//         name
-//       }
-//     }
-//   }
-// `;
 
 export const QUERY_POST = gql`
 query Query {
@@ -162,6 +119,9 @@ query Query {
       postAuthor
       postText
       imageUrl
+      likes {
+        _id
+      }
       likesCount
       createdAt
       comments {
@@ -271,6 +231,8 @@ query Query {
       departureCode
       arrivalDate
       arrivalCode
+      departureDateR
+      arrivalDateR
       price
     }
     count
