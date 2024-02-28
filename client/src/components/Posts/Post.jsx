@@ -192,16 +192,6 @@ const Post = ({ post }) => {
         </div>
       </div>
 
-      <div className="overflow-auto-y flex-wrap ml-2 h-auto w-1/3 flex justify-evenly items-center">
-        {!wishListItem ? (
-          <span>Loading...</span>
-        ) : (
-          // Render wishlist names here
-          wishListItem.slice(0, 3).map((item) => (
-            <div key={item._id} className="flex">
-              <p className=" h-auto w-16 items-center text-center rounded-custom bg-green-200 font-semibold text-black">
-                {item.name}
-              </p>
             </div>
           ))
         )}

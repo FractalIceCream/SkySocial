@@ -30,10 +30,12 @@ const client = new ApolloClient({
 
 function App() {
   //Outlet component for the router provider
+  
 
   return (
     <ApolloProvider client={client}>
       <ThemeProvider>
+       
         <Outlet />
 
         {/* <Footer /> */}
