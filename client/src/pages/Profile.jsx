@@ -147,7 +147,7 @@ const Profile = () => {
 
 			<Footer />
 		</div>
-	);
+	); 
 };
 
 export default Profile;
