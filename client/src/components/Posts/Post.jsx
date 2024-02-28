@@ -170,33 +170,36 @@ const Post = ({ post }) => {
     // <div>
 
     <div
-      key={post._id}
-      className="w-submitPost border border-black overflow-y max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
-    >
-      <div className="flex justify-between">
-        <div className="">
-          {loggedInProfile === post.postAuthor && (
-            <button onClick={() => handleRemovePost(post._id)}>
-              <i className="fa-regular  px-5  fa-trash-can"></i>
-            </button>
-          )}
-        </div>
-        <div className="flex">
-          <button
-            onClick={() => handleFetchedUser(post.postAuthor)}
-            value={post.postAuthor}
-          >
-            <h2 className=" mt-2">{post.postAuthor}</h2>
-          </button>
-          <h2 className="ml-5 mr-2 mt-2">posted on {post.createdAt}</h2>
-        </div>
-      </div>
-
+            key={post._id}
+            className="w-submitPost shadow-custom border border-black overflow-y max-w-custom h-auto mt-4 bg-gray rounded-custom text-white"
+        >
+            <div className="flex justify-between">
+                <div className="">
+                {loggedInProfile === post.postAuthor && (
+                    <button onClick={() => handleRemovePost(post._id)}><i className="fa-regular  px-5  fa-trash-can"></i></button>
+                )}
+                </div>
+                <div className="flex">
+                <button onClick={() => handleFetchedUser(post.postAuthor)} value={post.postAuthor}>
+                    <h2 className=" mt-2">{post.postAuthor}</h2>
+                </button>
+                <h2 className="ml-5 mr-2 mt-2">posted on {post.createdAt}</h2>
             </div>
-          ))
-        )}
-      </div>
-
+           </div>
+            <div className="overflow-auto-y flex-wrap ml-2 h-auto w-1/3 flex justify-evenly items-center">
+                {!wishListItem ? (
+                    <span>Loading...</span>
+                ) : (
+                    // Render wishlist names here
+                    wishListItem.slice(0, 3).map((item) => (
+                        <div key={item._id} className="flex">
+                            <p className=" h-auto w-16 items-center text-center rounded-custom bg-green-200 font-semibold text-black">
+                                {item.name}
+                            </p>
+                        </div>
+                    ))
+                )}
+            </div>
       {post.imageUrl ? (
         <div className="h-48 mt-3 bg-gray ">
           <div className=" flex justify-evenly flex-wrap  w h-3/4">
