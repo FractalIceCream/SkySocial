@@ -62,7 +62,7 @@ const Post = ({ post }) => {
                     name: author,
                 },
             });
-            // console.log(data);
+            console.log(data);
             const profileId = data.profileByName._id;
             // console.log(profileId)
             setProfileId(profileId);
@@ -114,6 +114,7 @@ const Post = ({ post }) => {
             console.error("Error removing post", error);
         }
     };
+    
     const [isLiked, setIsLiked] = useState(false);
     const [addLike, { likeError }] = useMutation(ADD_LIKE, {
         refetchQueries: [QUERY_POST, "posts"],

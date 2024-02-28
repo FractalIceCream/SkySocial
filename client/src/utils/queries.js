@@ -52,6 +52,8 @@ query Query {
       postAuthor
       postText
       imageUrl
+      likes { _id }
+
       likesCount
       createdAt
       comments 
