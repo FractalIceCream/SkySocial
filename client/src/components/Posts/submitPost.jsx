@@ -86,6 +86,7 @@ const SubmitPosts = () => {
 			<div className=" flex-shrink w-inputSubmitPost h-12 mt-4  flex flex-wrap justify-evenly items-center text-white">
 				<div className=" flex justify-around w-5/12">
 					<input type="url" value={imageUrl} onChange={handleImageChange} placeholder="Image URL" className="text-center rounded-custom w-32" style={{ color: 'black' }}/>
+          <i className="fa-solid fa-image fa-2x" style={{ lineHeight: '1' }}></i>
 					<h2></h2>
 				</div>
     
