@@ -51,6 +51,10 @@ const ItineraryModal = ({ tripId, tripInfo, name, onHide }) => {
     background: themeState.darkTheme ? 'linear-gradient(172deg, rgba(13,107,204,1) 17%, rgba(137,186,241,1) 63%, rgba(186,206,235,1) 79%, rgba(218,224,241,1) 89%)' : 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)',
 		color: themeState.darkTheme ? 'white' : 'white',
   };
+  const buttonStyles = {
+    background: themeState.darkTheme ? `linear-gradient(313deg, rgba(13,107,204,1) 17%, rgba(218,224,241,1) 99%)` : `linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)`,
+    color: themeState.darkTheme ? 'white' : 'white',
+  }
   return (
 
     <div className="absolute inset-0 w-full flex items-center justify-center" 
@@ -98,7 +102,7 @@ const ItineraryModal = ({ tripId, tripInfo, name, onHide }) => {
         </div>
 
         <div className="flex justify-center">
-          <button onClick={handleFormSubmit} className="bg-green-200 text-black rounded-custom px-4 py-2  mr-2">Update</button>
+          <button onClick={handleFormSubmit} className="rounded-custom px-4 py-2  mr-2" style={buttonStyles}>Update</button>
           <button className="bg-gray-300  px-4 py-2 " onClick={onHide}>Cancel</button>
         </div>
       </div>
