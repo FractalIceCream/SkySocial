@@ -32,7 +32,7 @@ const Post = ({ post }) => {
         QUERY_PROFILE_BY_NAME,
         {
             variables: {
-                name: Post.postAuthor,
+                name: post.postAuthor,
             },
         }
     );
@@ -43,6 +43,7 @@ const Post = ({ post }) => {
         getProfilesData();
     };
     useEffect(() => {
+        // setIsLiked(post.likes.includes(AuthService.getProfile().data._id))
         onPageLoad();
     }, []);
     useEffect(() => {
@@ -114,7 +115,7 @@ const Post = ({ post }) => {
             console.error("Error removing post", error);
         }
     };
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(post.likes.map(user => user._id).includes(AuthService.getProfile().data._id));
 
     const [addLike, { likeError }] = useMutation(ADD_LIKE, {
         refetchQueries: [QUERY_POST, "posts"],
