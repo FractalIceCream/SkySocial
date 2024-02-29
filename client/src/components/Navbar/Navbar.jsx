@@ -69,7 +69,7 @@ const Navbar = () => {
           )}
           {/* Add the light/dark mode toggle button */}
           <button onClick={handleThemeToggle}>
-            Toggle Theme
+          <i class="fa-solid fa-rocket"></i>
           </button>
         </div>
       </div>

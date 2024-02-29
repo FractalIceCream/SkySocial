@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_ITINERARY, UPDATE_TRIP } from "../utils/mutation";
-
+import { useTheme } from "../utils/ThemeContext";
 const TripInfoModal = ({ tripId, tripinfo, name, onHide }) => {
 
   // const [profileFormData, setProfileFormData] = useState({
@@ -61,11 +61,21 @@ const TripInfoModal = ({ tripId, tripinfo, name, onHide }) => {
     //   adults: "",
     // })
   }
+  const [themeState] = useTheme();
+  const tripInfoStyles = {
+    background: themeState.darkTheme ? 'linear-gradient(172deg, rgba(13,107,204,1) 17%, rgba(137,186,241,1) 63%, rgba(186,206,235,1) 79%, rgba(218,224,241,1) 89%)' : 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)',
+		color: themeState.darkTheme ? 'white' : 'white',
+  };
+  const buttonStyles = {
+    background: themeState.darkTheme ? `linear-gradient(313deg, rgba(13,107,204,1) 17%, rgba(218,224,241,1) 99%)` : `linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)`,
+    color: themeState.darkTheme ? 'white' : 'white',
+  }
+
 
   return (
 
     <div className="absolute inset-0  w-full flex items-center justify-center">
-      <div className="relative text-center bg-gray rounded-custom shadow-custom max-w-md w-full">
+      <div className="relative text-center rounded-custom shadow-custom max-w-md w-full" style={tripInfoStyles}>
         <h2 className="text-2xl text-center text-white font-semibold mb-4">Plan Your Trip to {name}!</h2>
 
         <div className="mb-4">
@@ -94,7 +104,7 @@ const TripInfoModal = ({ tripId, tripinfo, name, onHide }) => {
         </div>
 
         <div className="flex justify-center">
-          <button onClick={handleFormSubmit} className="bg-green-200 text-black rounded-custom px-4 py-2 border border-black mr-2">Submit</button>
+          <button onClick={handleFormSubmit} className=" rounded-custom px-4 py-2 border border-black mr-2" style={buttonStyles}>Submit</button>
           <button className="bg-gray-300 text-white px-4 py-2 rounded-md" onClick={onHide}>Cancel</button>
         </div>
       </div>
