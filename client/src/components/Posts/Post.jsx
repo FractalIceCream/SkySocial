@@ -163,13 +163,13 @@ const Post = ({ post }) => {
   const innerInputStyles = {
     background: themeState.darkTheme ? 'white' : 'gray',
 
-    color: themeState.darkTheme ? '#333' : 'black',
+    color: themeState.darkTheme ? '#333' : 'white',
   }
 
   const commentButton = {
     background: themeState.darkTheme ? 'white' : 'gray',
 
-    color: themeState.darkTheme ? '#333' : 'black',
+    color: themeState.darkTheme ? '#333' : 'white',
   }
 
   return (
@@ -243,9 +243,11 @@ const Post = ({ post }) => {
         <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent items-center" style={commentButton}>
           <button
             onClick={handleFormSubmit}
-            className="text-center text-black "
+            className="text-center rounded-full" 
           >
-            Comment
+            <p className="rounded-full" style={innerInputStyles}>
+              Comment
+              </p>
           </button>
         </div>
         <input
