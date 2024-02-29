@@ -6,7 +6,6 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { Outlet } from "react-router-dom";
-import Footer from "./components/Footer";
 import ThemeProvider from "./utils/ThemeContext"
 
 const httpLink = createHttpLink({
@@ -29,16 +28,10 @@ const client = new ApolloClient({
 });
 
 function App() {
-  //Outlet component for the router provider
-  
-
   return (
     <ApolloProvider client={client}>
       <ThemeProvider>
-       
         <Outlet />
-
-        {/* <Footer /> */}
       </ThemeProvider>
     </ApolloProvider>
   );

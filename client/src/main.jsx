@@ -5,12 +5,7 @@ import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 import './output.css'
-import ThemeProvider from './utils/ThemeContext.jsx'
-import ThemeComponent from './components/Navbar/ThemeComponent.jsx'
-
 import Profile from './pages/Profile'
-
-import LandingPage from './pages/Landingpage'
 import Error from './pages/Error'
 
 const router = createBrowserRouter([
@@ -33,14 +28,6 @@ const router = createBrowserRouter([
         path: '/profiles/:profileId',
         element: <Profile />,
       },
-      // {
-      //   path: '/index',
-      //   element: <LandingPage/>,
-      // },
-      // {
-      //   path: '/login',
-      //   element: <Login />,
-      // },
     ],
   },
 ]);
