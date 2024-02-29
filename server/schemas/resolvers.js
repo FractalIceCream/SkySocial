@@ -5,18 +5,13 @@ const { getIataCode, getFlightOffers } = require('../utils/api');
 
 const resolvers = {
     Query: {
-        // used to get data in graphql playground only
-        // works correctly 
         profiles: async () => {
             return Profile.find().populate('posts').populate('following').populate('wishlist');
         },
-
-        // works correctly
         profile: async (parent, { profileId }) => {
             Profile.fine
             return Profile.findById(profileId).populate('posts').populate('following').populate('wishlist');
         },
-
         profileByName: async (parent, { name }) => {
             try {
                 const profile = await Profile.findOne(
@@ -28,31 +23,24 @@ const resolvers = {
                 if (!profile) {
                     return null;
                 }
-        
                 return profile;
             } catch (error) {
                 console.error(error);
                 throw error;
             }
         },
-        // works correctly 
         posts: async () => {
             return Post.find().populate('likes');
         },
-
-        // works correctly
         me: async (parent, args, context) => {
             if (context.user) {
                 return Profile.findOne({ _id: context.user._id }).populate('posts').populate('following').populate('wishlist');
             }
             throw AuthenticationError
         },
-
-        // works correctly
         tripinfo: async () => {
             return TripInfo.find();
         },
-
         aggregateTrips: async () => {
             return TripInfo.aggregate([
                 { $group: { _id: "$name", count: { $sum: 1 } } },
@@ -60,8 +48,6 @@ const resolvers = {
                 { $sort: { count: -1 } }
               ]);
         },
-
-        // works correctly
         myTripinfo: async (parent, args, context) => {
             if (context.user) {
                 const profile = await Profile.findOne({ _id: context.user._id }).populate('wishlist');
@@ -75,7 +61,6 @@ const resolvers = {
                 throw new Error('User not authenticated')
             }
         },
-
         following: async (parent, args, context) => {
             if (context.user) {
                 const profile = await Profile.findOne({ _id: context.user._id }).populate('following');
@@ -90,12 +75,8 @@ const resolvers = {
             }
         }
     },
-
     Mutation: {
-
-        // works correctly 
         addProfile: async (parent, { name, email, password }) => {
-
             try {
                 const profile = await Profile.create({ name, email, password });
                     console.log(name, email, password);
@@ -106,41 +87,27 @@ const resolvers = {
             } catch (error) {
                 console.error(error);
                 throw AuthenticationError
-
             }
         },
-
-        // works correctly 
         login: async (parent, { email, password }) => {
             const profile = await Profile.findOne({ email }).populate('posts');
-
             if (!profile) {
                 throw AuthenticationError;
             }
-
             const correctPw = await profile.isCorrectPassword(password)
-
             if (!correctPw) {
                 throw AuthenticationError;
             }
-
             const token = signToken(profile);
-
             return { token, profile };
         },
-
-        // works correctly 
         createPost: async (parent, { postText, imageUrl }, context) => {
-            console.log(context.user)
             if (context.user) {
                 const post = await Post.create({
                     postText,
                     postAuthor: context.user.name,
                     imageUrl
                 });
-
-                console.log(post)
-
                 await Profile.findOneAndUpdate(
                     { _id: (context.user._id) },
                     { $addToSet: { posts: post._id } },
@@ -148,42 +115,28 @@ const resolvers = {
                         new: true,
                     },
                 );
-
                 return post;
             }
             throw AuthenticationError;
-            ('You need to be logged in!');
         },
-
         likePost: async (parent, { postId }, context) => {
             if (context.user) {
-
                 const post = await Post.findOneAndUpdate(
-                    {
-                        _id: postId
-                    },
-                    {
-                        $addToSet: {likes: context.user._id}
-                    },
-                    {
-                        new: true,
-                    },
+                    { _id: postId },
+                    { $addToSet: {likes: context.user._id} },
+                    { new: true },
                 )
                 return post;
             }
         },
-
         unlikePost: async (parent, { postId }, context) => {
             try {
               if (context.user) {
                 const post = await Post.findByIdAndUpdate(
                   postId,
-                  {
-                    $pull: { likes: context.user._id },
-                  },
+                  { $pull: { likes: context.user._id } },
                   { new: true }
                 );
-          
                 return post;
               } else {
                 throw new AuthenticationError("User not authenticated");
@@ -193,65 +146,45 @@ const resolvers = {
               throw new Error("Error unliking post");
             }
         },
-
         removePost: async (parent, { postId }, context) => {
             if (context.user) {
-
                 const post = await Post.findOneAndDelete({
                     _id: postId,
                     postAuthor: context.user.name
                 });
-
                 await Profile.findOneAndUpdate(
                     { _id: context.user._id },
                     { $pull: { posts: post._id } }
                 );
-
                 return post;
             }
             throw AuthenticationError
         },
-
-        // Works correctly 
         createComment: async (parent, { postId, commentText }, context) => {
             if (context.user) {
                 return Post.findOneAndUpdate(
                     { _id: postId },
-                    {
-                        $addToSet: {
-                            comments: { commentText, commentAuthor: context.user.name },
-                        },
+                    { $addToSet: 
+                        { comments: { commentText, commentAuthor: context.user.name } } 
                     },
-                    {
-                        new: true,
-                    },
+                    { new: true },
                 );
             }
             throw AuthenticationError
         },
-
-        // works correctly
         removeComment: async (parent, { postId, commentId }, context) => {
             if (context.user) {
                 return Post.findOneAndUpdate(
                     { _id: postId },
-                    {
-                        $pull: {
-                            comments: {
-                                _id: commentId,
-                                commentAuthor: context.user.name,
-                            },
+                    { $pull: { 
+                        comments: { _id: commentId, commentAuthor: context.user.name },
                         },
                     },
-                    {
-                        new: true
-                    }
+                    { new: true }
                 );
             }
             throw AuthenticationError
         },
-
-        // works correctly
         createSecondLevelComment: async (parent, { postId, commentId, commentText }, context) => {
             try {
                 const post = await Post.findById(postId);
@@ -270,69 +203,50 @@ const resolvers = {
                     secondLevelcommentAuthor: context.user.name,
                     secondLevelcreatedAt: new Date().toISOString(),
                 });
-
                 await post.save();
-
                 return post;
-
             } catch (error) {
                 console.error('Error creating second-level comment:', error);
                 throw error;
             }
         },
-
-        // works correctly
         removeSecondLevelComment: async (parent, { postId, commentId, secondLevelCommentId }, context) => {
             try {
-
                 const post = await Post.findById(postId);
-
                 if (!post) {
                     throw new Error('Post not found')
                 }
-
                 const commentIndex = post.comments.findIndex(comment => comment._id.equals(commentId));
                 if (commentIndex === -1) {
                     throw new Error('Comment not found');
                 }
-
                 const comment = post.comments[commentIndex];
-
                 const secondLevelCommentIndex = comment.secondLevelComments.findIndex(comment => comment._id.equals(secondLevelCommentId));
                 if (secondLevelCommentIndex === -1) {
                     throw new Error('Second-level comment not found');
                 }
 
                 comment.secondLevelComments.splice(secondLevelCommentIndex, 1);
-
                 await post.save();
-
                 return post;
-
             } catch (error) {
                 console.error('Error removing second-level comment:', error);
                 throw error;
             }
         },
-
-        // works correctly
         followProfile: async (parent, { profileId }, context) => {
             try {
                 if (!context.user) {
                     throw new AuthenticationError('Must be logged in to follow profile');
                 }
-
                 const profile = await Profile.findById(context.user._id);
-
                 if (!profile) {
                     throw new Error('Profile not found');
                 }
-
                 if (!profile.following.includes(profileId)) {
                     profile.following.push(profileId);
                     await profile.save();
                 }
-
                 return profile;
 
             } catch (error) {
@@ -340,35 +254,26 @@ const resolvers = {
                 throw error;
             };
         },
-
-        // works correctly
         unfollowProfile: async (parent, { profileId }, context) => {
             try {
                 if (!context.user) {
                     throw new AuthenticationError('You must be logged into unfollow that profile');
                 }
-
                 const profile = await Profile.findById(context.user._id);
-
                 if (!profile) {
                     throw new Error('Profile not found');
                 }
-
                 const index = profile.following.indexOf(profileId);
                 if (index !== -1) {
                     profile.following.splice(index, 1);
                     await profile.save();
                 }
-
                 return profile;
-
             } catch (error) {
                 console.error('Error unfollowing profile:', error);
                 throw error
             }
         },
-
-        // works correctly
         createTrip: async (parent, { name }, context) => {
             if (context.user) {
                 const tripInfoItem = await TripInfo.create({
@@ -385,8 +290,6 @@ const resolvers = {
             }
             throw AuthenticationError;
         },
-
-        // works correctly
         removeTrip: async (parent, { tripId }, context) => {
             if (context.user) {
 
@@ -402,12 +305,12 @@ const resolvers = {
                 return tripInfoItem;
             }
         },
+        //run third-API queries to retrieve proper IATA CODES and flightoffer data
         updateTrip: async (parent, { tripId, tripInfo }, context) => {
             try {
                 if (context.user) {
                     const origin = await getIataCode(tripInfo.originLocationCode);
                     const dest = await getIataCode(tripInfo.destinationLocationCode);
-    
                     const originLocationCode =  origin.iataCode;
                     const destinationLocationCode =  dest.iataCode;
 
@@ -424,8 +327,7 @@ const resolvers = {
                 console.error('Error adding following profile:', error);
                 return error;
             }
-
-            throw AuthenticationError
+            throw AuthenticationError;
         },
         // store API response from the flightoffer
         addItinerary: async (parent, { tripId, itinerary }, context) => {
