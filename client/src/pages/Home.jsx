@@ -22,13 +22,24 @@ const Home = () => {
 
 
   return (
-    <div className="w-full min-h-full" style={homeStyles} id="home">
+    <div className="h-10" style={{
+					overflow: "auto",
+					scrollbarWidth: "thin",
+					scrollbarColor: "transparent transparent",
+					msOverflowStyle: "none",
+					...homeStyles,
+				}} id="home">
       <Navbar />
       {/* removed flex flex-col */}
-      <div className="w-full overflow-y-auto flex justify-center items-center rounded-custom min-h-full">
-      <TripContainer />
+      <div className="w-full overflow-y-auto flex justify-center  items-start  flex-wrap rounded-custom min-h-full">
+     
+      
+
+
       <PostContainer />
+      {/* <TripContainer /> */}
       {/* <Itinerary /> */}
+      
       </div>
       {/* <Following /> */}
       {/* <Actions /> */}

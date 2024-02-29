@@ -25,7 +25,7 @@ const TripContainer = () => {
     const { loading, error, data } = useQuery(QUERY_AGGREGATE_TRIPS);
 
     return (
-        <div className="border border-black flex h-wishlist-height w-wishlist-width flex-col items-center justify-evenly rounded-custom  shadow-2xl mr-12" style={tripContainerStyles}>
+        <div className="border mt-4 border-black flex h-wishlist-height w-wishlist-width flex-col items-center justify-evenly rounded-custom  shadow-2xl shrink" style={tripContainerStyles}>
             <div className="text-2xl mt-2 mb-4">
                 <h2>Wishful Trip Count</h2>
             </div>

@@ -14,6 +14,7 @@ import Following from "../components/Following";
 import { FOLLOW_PROFILE, UNFOLLOW_PROFILE } from "../utils/mutation";
 import Post from "../components/Posts/Post";
 import { useTheme } from "../utils/ThemeContext";
+import TripContainer from "../components/Trips/TripContainer";
 //this is good branch
 
 const FollowProfileButton = ({ profileId }) => {
@@ -111,24 +112,26 @@ const Profile = () => {
 	}
 	console.log(Auth.getProfile()?.data._id === profile._id);
 	return (
-		<div className="w-full h-screen" style={profileStyles}>
+		<div className=" h-screen" style={profileStyles}>
 			<Navbar />
-			<div className="  flex justify-around w-auto h-auto flex-wrap">
-				<div className="flex flex-col">
+			<div className="  flex flex-wrap justify-evenly w-full h-auto ">
+          <div className="w-auto">
 					{Auth.getProfile()?.data._id === profile._id && (
 						<Itinerary	itinerary={profile.wishlist.filter((trip) => trip.itinerary)}	/>	)}
 
 					    {(<Wishlist authUser={Auth.getProfile()?.data._id === profile._id}
 							  wishlist={profile.wishlist.filter((trip) => !trip.itinerary)}/>
 				      	)}
-				</div>
-				<div className="flex">
+                </div>
+			
+				<div className=" flex justify-center">
 					<PostContainer userPosts={profile.posts} allPosts={Post} />
 				</div>
-				<div className="flex justify-center">
+				<div className="flex justify-center flex-col">
 					{Auth.getProfile()?.data._id === profile._id && (
 						<Following following={profile.following} />
 					)}
+             <TripContainer />
 				</div>
 				<h2 className="card-header">
           <FollowProfileButton profileId={profile._id} />

@@ -31,7 +31,7 @@ const PostContainer = ({ userPosts }) => {
 	// console.log(posts);
 	return (
 			<div
-				className="w-postContainer overflow-y-auto flex flex-col bg-transparent items-center h-postContainer rounded-custom"
+				className=" h-postContainer overflow-y-auto  bg-transparent   rounded-custom"
 				style={{
 					overflow: "auto",
 					scrollbarWidth: "thin",
