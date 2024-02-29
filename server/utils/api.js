@@ -1,11 +1,9 @@
 const Amadeus = require('amadeus');
 require('dotenv').config();
-
 const amadeus = new Amadeus({
     clientId: process.env.API_KEY,
     clientSecret: process.env.API_SECRET
 });
-
 // query contains keyword like a city name
 // keyword only required to fetch 
 module.exports = {
@@ -32,7 +30,6 @@ module.exports = {
     // maxPrice, travelClass, currencyCode, max
     getFlightOffers: async (queryArgs) => {
         try {
-            // console.log(queryArgs);
             const res = await amadeus.client.get('/v2/shopping/flight-offers',
                 {...queryArgs, nonStop: true});
             
@@ -67,8 +64,6 @@ module.exports = {
                 arrivalCodeR,
                 price
             };
-
-
             return offer;
         } catch (error) {
             return console.log(error);

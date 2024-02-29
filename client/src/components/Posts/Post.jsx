@@ -109,7 +109,7 @@ const Post = ({ post }) => {
       console.error("Error removing post", error);
     }
   };
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(post.likes.map(user => user._id).includes(AuthService.getProfile()?.data._id));
   const [addLike, { likeError }] = useMutation(ADD_LIKE, {
     refetchQueries: [QUERY_POST, "posts"],
   });
@@ -163,13 +163,13 @@ const Post = ({ post }) => {
   const innerInputStyles = {
     background: themeState.darkTheme ? 'white' : 'gray',
 
-    color: themeState.darkTheme ? '#333' : 'black',
+    color: themeState.darkTheme ? '#333' : 'white',
   }
 
   const commentButton = {
     background: themeState.darkTheme ? 'white' : 'gray',
 
-    color: themeState.darkTheme ? '#333' : 'black',
+    color: themeState.darkTheme ? '#333' : 'white',
   }
 
   return (
@@ -243,15 +243,17 @@ const Post = ({ post }) => {
         <div className="flex w-20 justify-center  ml-3 rounded-full mb-3 hover:bg-transparent items-center" style={commentButton}>
           <button
             onClick={handleFormSubmit}
-            className="text-center text-black "
+            className="text-center rounded-full" 
           >
-            Comment
+            <p className="rounded-full" style={innerInputStyles}>
+              Comment
+              </p>
           </button>
         </div>
         <input
           value={comment}
           onChange={handleInputChange}
-          className="h-8 flex justify-center border border-black text-center text-white bg-gray-light rounded-custom w-2/3 "
+          className="h-8 flex justify-center border border-black text-center bg-gray-light rounded-custom w-2/3 "
           placeholder="Comment here..."
           style={innerInputStyles}
         ></input>

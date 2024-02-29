@@ -63,7 +63,7 @@ const SearchBar = () => {
             type="text"
             onChange={handleInputChange}
             id="default-search"
-            className="w-full  text-md text-white border border-black rounded-custom px-4 py-1 "
+            className="w-full text-md border border-black rounded-custom px-4 py-1 "
             style={navbarStyles}
             placeholder="Search SkySocial"
             required
