@@ -106,8 +106,8 @@ const Profile = () => {
 	return (
 		<div className=" h-screen" style={profileStyles}>
 			<Navbar />
-			<div className="  flex flex-wrap justify-evenly w-full h-auto   ">
-          <div className="w-auto lg:order-1 md:order-2" >
+			<div className="  flex flex-wrap justify-evenly w-full h-auto ">
+          <div className="w-auto lg:order-1 md:order-2">
 					{Auth.getProfile()?.data._id === profile._id && (
 						<Itinerary	itinerary={profile.wishlist.filter((trip) => trip.itinerary)}	/>	)}
 
