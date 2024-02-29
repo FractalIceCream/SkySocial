@@ -21,8 +21,8 @@ const Home = () => {
 					...homeStyles,
 				}} id="home">
       <Navbar />
-      <div className="w-full overflow-y-auto flex justify-center items-center rounded-custom min-h-full">
-        <TripContainer />
+      <div className="w-full overflow-y-auto flex justify-center items-start rounded-custom min-h-full">
+    
         <PostContainer />
       </div>
       <Footer />

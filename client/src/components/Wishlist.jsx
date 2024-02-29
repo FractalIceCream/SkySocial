@@ -114,7 +114,7 @@ const Wishlist = ({ authUser, wishlist }) => {
             onClick={() => authUser ? setShowInputBox(true) : null}>Add Trip</button>
         {showInputBox && (
           <div className="absolute inset-0 w-full flex items-center justify-center">
-            <div className="relative bg-gray text-center border rounded-full border-black shadow-custom max-w-md w-full">
+            <div className="relative text-center border rounded-full border-black shadow-custom max-w-md w-full" style={wishlistStyles}>
               <h2 className="text-2xl text-center text-white font-semibold mb-4">
                 Add a city to your wishlist!</h2>
               <div className="mb-4">
@@ -127,7 +127,7 @@ const Wishlist = ({ authUser, wishlist }) => {
               <div className="flex justify-center">
                 <button
                   onClick={handleFormSubmit}
-                  className="bg-green-200 text-black border border-black rounded-custom px-4 py-2 mr-2">Submit</button>
+                  className=" border border-black rounded-custom px-4 py-2 mr-2" style={buttonStyles}>Submit</button>
                 <button
                   className=" text-white px-4 py-2 rounded-md"
                   onClick={handleClose}>Cancel</button>

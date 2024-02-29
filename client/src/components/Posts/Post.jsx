@@ -185,7 +185,7 @@ const Post = ({ post }) => {
         </div>
         <div className="flex">
           <button onClick={() => handleFetchedUser(post.postAuthor)} value={post.postAuthor}>
-            <h2 className=" mt-2">{post.postAuthor}</h2>
+            <h1 className="mt-2">{post.postAuthor}</h1>
           </button>
           <h2 className="ml-5 mr-2 mt-2">posted on {post.createdAt}</h2>
         </div>

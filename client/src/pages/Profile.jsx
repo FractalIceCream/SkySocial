@@ -72,7 +72,7 @@ const Profile = () => {
 	const { profileId } = useParams();
 
 	const [themeState, themeDispatch] = useTheme();
-
+  
   const profileStyles = {
     background: themeState.darkTheme
       ? "linear-gradient(180deg, rgba(6,179,250,1) 13%, rgba(6,179,250,1) 13%, rgba(6,179,250,1) 18%, rgba(123,217,255,1) 51%, rgba(161,228,255,1) 65%, rgba(182,234,255,1) 73%, rgba(214,243,255,1) 85%, rgba(255,255,255,1) 100%)"

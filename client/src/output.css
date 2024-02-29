@@ -1371,11 +1371,6 @@ video {
   .md\:p-5 {
     padding: 1.25rem;
   }
-
-  .md\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
 }
 
 @media screen and (min-width: 1024px) {
