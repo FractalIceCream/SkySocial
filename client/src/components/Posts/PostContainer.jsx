@@ -18,19 +18,22 @@ const PostContainer = ({ userPosts }) => {
 	const posts = userPosts || data?.posts || [];
 
 	return (
-		<div
-			className="w-postContainer overflow-y-auto flex flex-col bg-transparent items-center h-postContainer rounded-custom"
-			style={{
-				overflow: "auto",
-				scrollbarWidth: "thin",
-				scrollbarColor: "transparent transparent",
-				msOverflowStyle: "none",
-				...postContainerStyles,
-			}}>
-			<SubmitPost />
-			{posts.slice().reverse().map(post => (
-				<Post key={post._id} post={post} />))}
-		</div>
+			<div
+				className=" h-postContainer overflow-y-auto  bg-transparent   rounded-custom"
+				style={{
+					overflow: "auto",
+					scrollbarWidth: "thin",
+					scrollbarColor: "transparent transparent",
+					msOverflowStyle: "none",
+					...postContainerStyles,
+				}}
+			>
+				<SubmitPost />
+				{posts.slice().reverse().map(post => (
+						<Post key={post._id} post={post} />
+			
+				))}
+			</div>
 	)
 };
 

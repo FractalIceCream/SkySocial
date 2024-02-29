@@ -44,7 +44,7 @@ const Itinerary = ({ itinerary }) => {
 		}
 	};
 	return (
-		<div className="box-border h-72 w-itinerary-width flex-wrap items-center justify-center rounded-custom shadow-2xl" style={itineraryStyles}>
+		<div className="box-border h-wishlist-height w-itinerary-width flex-wrap flex-auto items-center justify-center rounded-custom shadow-2xl" style={itineraryStyles}>
 			<div className="text-2xl">
 				<h2 className="text-center">Itinerary</h2>
 			</div>
@@ -68,7 +68,6 @@ const Itinerary = ({ itinerary }) => {
 		{isOpen && (
 			<div>
 				<ItineraryModal tripId={itineraryModal._id} tripInfo={itineraryModal} name={itineraryModal.name} onHide={() => setIsOpen(false)} />
-				<button onClick={() => setIsOpen(false)}>Close Modal</button>
 			</div>)}
 		</div>
 	);

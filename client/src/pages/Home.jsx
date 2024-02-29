@@ -13,7 +13,13 @@ const Home = () => {
 		color: themeState.darkTheme ? '#fff' : '#fff',
 	}
   return (
-    <div className="w-full min-h-full" style={homeStyles} id="home">
+    <div className="h-10" style={{
+					overflow: "auto",
+					scrollbarWidth: "thin",
+					scrollbarColor: "transparent transparent",
+					msOverflowStyle: "none",
+					...homeStyles,
+				}} id="home">
       <Navbar />
       <div className="w-full overflow-y-auto flex justify-center items-center rounded-custom min-h-full">
         <TripContainer />

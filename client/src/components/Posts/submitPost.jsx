@@ -74,19 +74,12 @@ const SubmitPosts = () => {
   };
 
   return (
-    <div
-      className="flex-shrink h-submitPost w-submitPost mt-5 border border-black font-custom  box-border flex flex-wrap items-center justify-center flex-col rounded-custom "
-      style={submitPostStyles}
-    >
-      <input
-        value={postValue}
-        onChange={handleInputChange}
-        className=" border border-black text-2xl shadow-inner-strongest text-center w-inputSubmitPost h-inputSubmitPost rounded-custom"
-        style={innerSubmitStyles}
+    <div  className="grow max-w-custom h-submitPost mt-5 border border-black   box-border    flex-col rounded-custom "style={submitPostStyles}>
+      <input   value={postValue} onChange={handleInputChange} className=" text-2xl shadow-inner-strongest text-center flex w-full h-inputSubmitPost rounded-custom"  style={innerSubmitStyles}
         placeholder="Share your thoughts..."
       />
-      <div className="bg-black w-2/3 mt-3 h-line"></div>
-      <div className=" flex-shrink w-inputSubmitPost h-12 mt-4 flex flex-wrap justify-evenly items-center">
+      
+      <div className="   h-12 mt-4  flex  justify-evenly items-center text-white">
         <div className=" flex justify-around w-5/12">
           <input
             type="url"
@@ -111,6 +104,6 @@ const SubmitPosts = () => {
       </div>
     </div>
   );
-};
+}; 
 
 export default SubmitPosts;

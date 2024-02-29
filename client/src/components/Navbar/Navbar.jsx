@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="w-full p-2 flex justify-evenly items-center bg-transparent">
+      <div className="w-full p-2 flex shrink flex-wrap justify-evenly items-center bg-transparent">
       <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/" className="text-2xl">
               skySocial  <i className="fa-solid fa-cloud"></i>
             </Link>
