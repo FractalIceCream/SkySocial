@@ -44,7 +44,7 @@ const Itinerary = ({ itinerary }) => {
 		}
 	};
 	return (
-		<div className="box-border h-wishlist-height w-itinerary-width flex-wrap flex-auto items-center justify-center rounded-custom shadow-2xl" style={itineraryStyles}>
+		<div className="box-border  h-wishlist-height w-itinerary-width  flex-wrap flex-auto items-center justify-center rounded-custom shadow-2xl" style={itineraryStyles}>
 			<div className="text-2xl">
 				<h2 className="text-center">Itinerary</h2>
 			</div>

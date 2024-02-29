@@ -1361,27 +1361,9 @@ video {
   --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
 }
 
-@media (min-width: 768px) {
-  .md\:inset-0 {
-    inset: 0px;
-  }
 
-  .md\:p-5 {
-    padding: 1.25rem;
-  }
 
-  .md\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-}
 
-@media (min-width: 1024px) {
-  .lg\:text-3xl {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-}
 
 @media (prefers-color-scheme: dark) {
   .dark\:border-gray-500 {

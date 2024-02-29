@@ -72,7 +72,7 @@ const Profile = () => {
 	const { profileId } = useParams();
 
 	const [themeState, themeDispatch] = useTheme();
-
+  
   const profileStyles = {
     background: themeState.darkTheme
       ? "linear-gradient(180deg, rgba(6,179,250,1) 13%, rgba(6,179,250,1) 13%, rgba(6,179,250,1) 18%, rgba(123,217,255,1) 51%, rgba(161,228,255,1) 65%, rgba(182,234,255,1) 73%, rgba(214,243,255,1) 85%, rgba(255,255,255,1) 100%)"
@@ -106,8 +106,8 @@ const Profile = () => {
 	return (
 		<div className=" h-screen" style={profileStyles}>
 			<Navbar />
-			<div className="  flex flex-wrap justify-evenly w-full h-auto ">
-          <div className="w-auto">
+			<div className="  flex flex-wrap justify-evenly w-full h-auto   ">
+          <div className="w-auto lg:order-1 md:order-2" >
 					{Auth.getProfile()?.data._id === profile._id && (
 						<Itinerary	itinerary={profile.wishlist.filter((trip) => trip.itinerary)}	/>	)}
 
@@ -116,11 +116,11 @@ const Profile = () => {
 				      	)}
                 </div>
 			
-				<div className=" flex justify-center">
+				<div className=" flex justify-center lg:order-2 md:order-1">
 					<PostContainer userPosts={profile.posts} allPosts={Post} />
 				</div>
 				<h2 className="card-header"><FollowProfileButton profileId={profile._id} /></h2>
-				<div className="flex justify-center flex-col">
+				<div className="flex justify-center flex-col lg:order-3 md:order-3">
 					{Auth.getProfile()?.data._id === profile._id && (
 						<Following following={profile.following} />
 					)}
