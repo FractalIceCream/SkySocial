@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
@@ -18,16 +17,9 @@ const Navbar = () => {
     themeDispatch({ type: 'TOGGLE_THEME', payload: themeState.darkTheme });
   };
 
-  // Update the Navbar styling based on the theme
-  // const navbarStyles = {
-  //   background: themeState.darkTheme ? '#333' : '',
-  //   color: themeState.darkTheme ? '#fff' : '#fff',
-  //   // Add other styles as needed
-  // };
-
   return (
     <>
-      <div className="w-full p-2 flex justify-evenly items-center bg-transparent">
+      <div className="w-full p-2 flex shrink flex-wrap justify-evenly items-center bg-transparent">
       <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/" className="text-2xl">
               skySocial  <i className="fa-solid fa-cloud"></i>
             </Link>
@@ -48,14 +40,12 @@ const Navbar = () => {
           {Auth.loggedIn() ? (
             <>
               <Nav.Link className="p-4" as={Link} onClick={()=>window.location.href = '/me'}>
-              {/* ///to="/me"> */}
                 {" "}
                 Profile{" "}
               </Nav.Link>
               <Nav.Link className="p-4" onClick={Auth.logout}>
                 Logout
               </Nav.Link>{" "}
-              {/* Conditionally Renders this Logout Button if the user is already logged in */}
             </>
           ) : (
             <div className="w-72 flex justify-center  items-center">
@@ -67,9 +57,8 @@ const Navbar = () => {
               </Nav.Link>
             </div>
           )}
-          {/* Add the light/dark mode toggle button */}
           <button onClick={handleThemeToggle}>
-            Toggle Theme
+          <i className="fa-solid fa-rocket"></i>
           </button>
         </div>
       </div>
@@ -79,7 +68,6 @@ const Navbar = () => {
         onHide={() => setShowModal(false)}
         aria-labelledby="signup-modal"
       >
-        {/* tab container to do either signup or login component */}
         <Tab.Container defaultActiveKey="login">
           <Modal.Header closeButton>
             <Modal.Title id="signup-modal">

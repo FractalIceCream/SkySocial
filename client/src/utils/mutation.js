@@ -1,9 +1,5 @@
 import { gql } from '@apollo/client';
 
-// double check tmrw
-
-// did not do createTrip
-
 export const ADD_PROFILE = gql`
 mutation Mutation($name: String!, $email: String!, $password: String!) {
     addProfile(name: $name, email: $email, password: $password) {
@@ -254,6 +250,8 @@ mutation Mutation($tripId: ID!, $tripInfo: TripInput!) {
     departureCode
     arrivalDate
     arrivalCode
+    departureDateR
+    arrivalDateR
     price
   }
 }`;
@@ -282,6 +280,8 @@ mutation Mutation($tripId: ID!, $itinerary: ItineraryInput!) {
       departureCode
       arrivalDate
       arrivalCode
+      departureDateR
+      arrivalDateR
       price
     }
     count
