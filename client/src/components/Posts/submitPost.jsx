@@ -1,6 +1,6 @@
 import { CREATE_POST } from "../../utils/mutation";
-import React, { useState, useEffect } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
 
 import { QUERY_POST, QUERY_ME } from "../../utils/queries";
@@ -14,24 +14,8 @@ const SubmitPosts = () => {
   const [createPost, { error }] = useMutation(CREATE_POST, {
     refetchQueries:
       window.location.pathname === "/me" ? [QUERY_ME] : [QUERY_POST],
-    // [
-    //   QUERY_POST, 'posts',
-    //   QUERY_ME, 'me',
-    // ]
   });
 
-  // const [createPost, { error }] = useMutation
-  // (CREATE_POST, {
-  //   update(cache, { data:{createPost}}){
-  //     const {posts} = cache.readQuery({query: QUERY_POST});
-  //     cache.writeQuery({
-  //       query: QUERY_POST,
-  //       data: {posts: posts.concat([createPost])}
-  //     })
-  //   },
-  // });
-
-  // const {loading} = useQuery(QUERY_ME);
   const handleInputChange = (event) => {
     const postText = event.target.value;
     setPostValue(postText);
@@ -41,10 +25,6 @@ const SubmitPosts = () => {
     const url = event.target.value;
     setImageUrl(url);
   };
-
-  // useEffect(() => {
-  //   console.log("Updated Image URL:", imageURL);
-  // }, [imageUrl]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -63,9 +43,6 @@ const SubmitPosts = () => {
           imageUrl,
         },
       });
-
-      // console.log("server response:", data);
-
       setPostValue("");
       setImageUrl("");
     } catch (err) {

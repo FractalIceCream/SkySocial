@@ -149,7 +149,7 @@ const Profile = () => {
 					<PostContainer userPosts={profile.posts} allPosts={Post} />
 				</div>
 				<div className="flex justify-center">
-					{Auth.getProfile().data._id === profile._id && (
+					{Auth.getProfile()?.data._id === profile._id && (
 						<Following following={profile.following} />
 					)}
 				</div>
