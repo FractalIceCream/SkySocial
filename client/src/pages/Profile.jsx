@@ -12,6 +12,7 @@ import Following from "../components/Following";
 import { FOLLOW_PROFILE, UNFOLLOW_PROFILE } from "../utils/mutation";
 import Post from "../components/Posts/Post";
 import { useTheme } from "../utils/ThemeContext";
+import TripContainer from "../components/Trips/TripContainer";
 
 const FollowProfileButton = ({ profileId }) => {
   const [followProfile] = useMutation(FOLLOW_PROFILE, {
@@ -119,7 +120,7 @@ const Profile = () => {
 					<PostContainer userPosts={profile.posts} allPosts={Post} />
 				</div>
 				<h2 className="card-header"><FollowProfileButton profileId={profile._id} /></h2>
-				<div className="flex justify-center">
+				<div className="flex justify-center flex-col">
 					{Auth.getProfile()?.data._id === profile._id && (
 						<Following following={profile.following} />
 					)}

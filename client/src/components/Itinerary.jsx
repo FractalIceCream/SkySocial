@@ -68,7 +68,6 @@ const Itinerary = ({ itinerary }) => {
 		{isOpen && (
 			<div>
 				<ItineraryModal tripId={itineraryModal._id} tripInfo={itineraryModal} name={itineraryModal.name} onHide={() => setIsOpen(false)} />
-				<button onClick={() => setIsOpen(false)}>Close Modal</button>
 			</div>)}
 		</div>
 	);

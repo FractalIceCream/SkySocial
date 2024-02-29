@@ -74,15 +74,8 @@ const SubmitPosts = () => {
   };
 
   return (
-    <div
-      className="grow max-w-custom h-submitPost mt-5 border border-black   box-border    flex-col rounded-custom "
-      style={submitPostStyles}
-    >
-      <input
-        value={postValue}
-        onChange={handleInputChange}
-        className=" text-2xl shadow-inner-strongest text-center flex w-full h-inputSubmitPost rounded-custom"
-        style={innerSubmitStyles}
+    <div  className="grow max-w-custom h-submitPost mt-5 border border-black   box-border    flex-col rounded-custom "style={submitPostStyles}>
+      <input   value={postValue} onChange={handleInputChange} className=" text-2xl shadow-inner-strongest text-center flex w-full h-inputSubmitPost rounded-custom"  style={innerSubmitStyles}
         placeholder="Share your thoughts..."
       />
       
@@ -111,6 +104,6 @@ const SubmitPosts = () => {
       </div>
     </div>
   );
-};
+}; 
 
 export default SubmitPosts;
