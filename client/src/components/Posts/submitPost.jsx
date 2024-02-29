@@ -64,7 +64,7 @@ const SubmitPosts = () => {
       ? "linear-gradient(180deg, rgba(183,226,255,1) 17%, rgba(235,240,249,1) 75%, rgba(218,224,241,1) 100%)"
       : "linear-gradient(180deg, rgba(34,34,34,1) 28%, rgba(62,62,62,1) 58%, rgba(87,87,87,0.8547794117647058) 100%)",
 
-    color: themeState.darkTheme ? "#333" : "#333",
+    color: themeState.darkTheme ? "#333" : "white",
   };
   const buttonStyles = {
     background: themeState.darkTheme
@@ -86,7 +86,7 @@ const SubmitPosts = () => {
         placeholder="Share your thoughts..."
       />
       <div className="bg-black w-2/3 mt-3 h-line"></div>
-      <div className=" flex-shrink w-inputSubmitPost h-12 mt-4  flex flex-wrap justify-evenly items-center text-white">
+      <div className=" flex-shrink w-inputSubmitPost h-12 mt-4 flex flex-wrap justify-evenly items-center">
         <div className=" flex justify-around w-5/12">
           <input
             type="url"
