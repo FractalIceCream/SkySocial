@@ -55,14 +55,16 @@ const FollowProfileButton = ({ profileId }) => {
       Auth.getProfile().data._id === profileId ? null : isFollowing ? (
         <button
           onClick={handleUnfollow}
-          className="ml-3 px-2 py-1 bg-red-500 text-white rounded"
+          className="ml-3 px-4 py-4 bg-red-500 text-white rounded-custom"
+		//   style={{position: 'relative', bottom: '400px', right: '150px'}}
         >
           Unfollow
         </button>
       ) : (
         <button
           onClick={handleFollow}
-          className="ml-3 px-2 py-1 bg-blue-500 text-white rounded"
+          className="ml-3 px-4 py-4 bg-blue-500 text-white rounded-custom"
+		//   style={{position: 'relative', bottom: '400px', right: '150px'}}
         >
           Follow
         </button>
@@ -148,17 +150,18 @@ const Profile = () => {
 				<div className="flex">
 					<PostContainer userPosts={profile.posts} allPosts={Post} />
 				</div>
+				<h2 className="card-header"><FollowProfileButton profileId={profile._id} /></h2>
 				<div className="flex justify-center">
 					{Auth.getProfile()?.data._id === profile._id && (
 						<Following following={profile.following} />
+						
 					)}
 				</div>
-				<h2 className="card-header">
+				
           {/* {profile ? `${profile.name}` : "No name retrieved"}
           {profileId ? `${profile.name}'s` : "No name retrieved"} */}
-          <FollowProfileButton profileId={profile._id} />
+          
 		  {/* <Actions /> */}
-        </h2>
 			</div>
 			{/* profile?.wishlist?.itinerary */}
 
