@@ -251,7 +251,7 @@ const Post = ({ post }) => {
         <input
           value={comment}
           onChange={handleInputChange}
-          className="h-8 flex justify-center border border-black text-center text-white bg-gray-light rounded-custom w-2/3 "
+          className="h-8 flex justify-center border border-black text-center bg-gray-light rounded-custom w-2/3 "
           placeholder="Comment here..."
           style={innerInputStyles}
         ></input>
