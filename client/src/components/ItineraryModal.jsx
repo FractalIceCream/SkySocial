@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_ITINERARY, UPDATE_TRIP } from "../utils/mutation";
 import { QUERY_TRIPS_INFO } from "../utils/queries";
 import Auth from '../utils/auth';
-
+import { useTheme } from "../utils/ThemeContext";
 const ItineraryModal = ({ tripId, tripInfo, name, onHide }) => {
 
   const [tripFormData, setTripFormData] = useState(tripInfo);
@@ -46,23 +46,33 @@ const ItineraryModal = ({ tripId, tripInfo, name, onHide }) => {
     }
   }
 
+  const [themeState] = useTheme();
+  const itineraryStyles = {
+    background: themeState.darkTheme ? 'linear-gradient(172deg, rgba(13,107,204,1) 17%, rgba(137,186,241,1) 63%, rgba(186,206,235,1) 79%, rgba(218,224,241,1) 89%)' : 'linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)',
+		color: themeState.darkTheme ? 'white' : 'white',
+  };
+  const buttonStyles = {
+    background: themeState.darkTheme ? `linear-gradient(313deg, rgba(13,107,204,1) 17%, rgba(218,224,241,1) 99%)` : `linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(40,39,39,1) 63%, rgba(79,78,78,0.8855917366946778) 100%)`,
+    color: themeState.darkTheme ? 'white' : 'white',
+  }
   return (
 
-    <div className="absolute inset-0 w-full flex items-center justify-center">
-      <div className="relative text-center bg-gray rounded-custom shadow-custom max-w-md w-full">
+    <div className="absolute inset-0 w-full flex items-center justify-center" 
+    >
+      <div className="relative text-center  rounded-custom shadow-custom max-w-md w-full"  style={itineraryStyles}>
         <h2 className="text-2xl text-center text-white font-semibold mb-4">Trip Itinerary to {name}!</h2>
 
         <div className="mb-4 flex flex-col items-center justify-center ">
-          <label htmlFor="departureDate" className="block text-md font-medium text-white my-2">DESTINATION FLIGHT:</label><div></div>
-          <label htmlFor="departureDate" className="block text-md font-medium text-white">Departure Date: {tripFormData.itinerary.departureDate}</label>
-          <label htmlFor="departureCode" className="block text-md font-medium text-white">Departure Airport: {tripFormData.itinerary.departureCode}</label>
-          <label htmlFor="arrivalDate" className="block text-md font-medium text-white">Arrival Date: {tripFormData.itinerary.arrivalDate}</label>
-          <label htmlFor="arrivalCode" className="block text-md font-medium text-white">Arrival Airport: {tripFormData.itinerary.arrivalCode}</label>
+          <label htmlFor="departureDate" className="block text-md font-medium  my-2">DESTINATION FLIGHT:</label><div></div>
+          <label htmlFor="departureDate" className="block text-md font-medium ">Departure Date: {tripFormData.itinerary.departureDate}</label>
+          <label htmlFor="departureCode" className="block text-md font-medium ">Departure Airport: {tripFormData.itinerary.departureCode}</label>
+          <label htmlFor="arrivalDate" className="block text-md font-medium ">Arrival Date: {tripFormData.itinerary.arrivalDate}</label>
+          <label htmlFor="arrivalCode" className="block text-md font-medium ">Arrival Airport: {tripFormData.itinerary.arrivalCode}</label>
           <label className="block text-md font-medium text-white my-2">RETURN FLIGHT</label>
-          <label htmlFor="departureDate" className="block text-md font-medium text-white">Departure Date: {tripFormData.itinerary.departureDateR}</label>
-          <label htmlFor="departureDate" className="block text-md font-medium text-white">Departure Code: {tripFormData.itinerary.arrivalCode}</label>
-          <label htmlFor="departureDate" className="block text-md font-medium text-white">Arrival Date: {tripFormData.itinerary.arrivalDateR}</label>
-          <label htmlFor="departureDate" className="block text-md font-medium text-white">Arrival Code: {tripFormData.itinerary.departureCode}</label>
+          <label htmlFor="departureDate" className="block text-md font-medium ">Departure Date: {tripFormData.itinerary.departureDateR}</label>
+          <label htmlFor="departureDate" className="block text-md font-medium ">Departure Code: {tripFormData.itinerary.arrivalCode}</label>
+          <label htmlFor="departureDate" className="block text-md font-medium ">Arrival Date: {tripFormData.itinerary.arrivalDateR}</label>
+          <label htmlFor="departureDate" className="block text-md font-medium ">Arrival Code: {tripFormData.itinerary.departureCode}</label>
           <label htmlFor="price" className="block text-md font-medium text-white my-4">Price: ${tripFormData.itinerary.price}</label>
           <h2>Update Your Trip Below!</h2>
         </div>
@@ -78,12 +88,12 @@ const ItineraryModal = ({ tripId, tripInfo, name, onHide }) => {
 
         <div className="mb-4">
           <label htmlFor="departureDate" className="block text-sm font-medium ">Departure Date</label>
-          <input onChange={handleInputChange} type="date" value={tripFormData.departureDate} id="departureDate" className="mt-1 text-black rounded-custom bg-white p-2 border  w-72" />
+          <input onChange={handleInputChange} type="date" value={tripFormData.departureDate} id="departureDate" className="mt-1 text-center text-black rounded-custom bg-white p-2 border  w-72" />
         </div>
 
         <div className="mb-4">
           <label htmlFor="returnDate" className="block text-sm font-medium ">Return Date</label>
-          <input onChange={handleInputChange} type="date" value={tripFormData.returnDate} id="returnDate" className="mt-1 text-black rounded-custom bg-white p-2 border  w-72" />
+          <input onChange={handleInputChange} type="date" value={tripFormData.returnDate} id="returnDate" className="mt-1 text-center text-black rounded-custom bg-white p-2 border  w-72" />
         </div>
 
         <div className="mb-4">
@@ -92,7 +102,7 @@ const ItineraryModal = ({ tripId, tripInfo, name, onHide }) => {
         </div>
 
         <div className="flex justify-center">
-          <button onClick={handleFormSubmit} className="bg-green-200 text-black rounded-custom px-4 py-2  mr-2">Update</button>
+          <button onClick={handleFormSubmit} className="rounded-custom px-4 py-2  mr-2" style={buttonStyles}>Update</button>
           <button className="bg-gray-300  px-4 py-2 " onClick={onHide}>Cancel</button>
         </div>
       </div>
