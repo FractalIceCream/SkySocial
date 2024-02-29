@@ -157,7 +157,7 @@ const Profile = () => {
           {/* {profile ? `${profile.name}` : "No name retrieved"}
           {profileId ? `${profile.name}'s` : "No name retrieved"} */}
           <FollowProfileButton profileId={profile._id} />
-		  <Actions />
+		  {/* <Actions /> */}
         </h2>
 			</div>
 			{/* profile?.wishlist?.itinerary */}

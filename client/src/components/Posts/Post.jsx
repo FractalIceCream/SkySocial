@@ -109,7 +109,7 @@ const Post = ({ post }) => {
       console.error("Error removing post", error);
     }
   };
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(post.likes.map(user => user._id).includes(AuthService.getProfile()?.data._id));
   const [addLike, { likeError }] = useMutation(ADD_LIKE, {
     refetchQueries: [QUERY_POST, "posts"],
   });
