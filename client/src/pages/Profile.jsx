@@ -172,7 +172,7 @@ const Profile = () => {
 			{/* <Actions /> */}
 			<Footer />
 		</div>
-	);
+	); 
 };
 
 export default Profile;
