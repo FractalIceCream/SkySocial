@@ -34,7 +34,7 @@ Once downloaded users/contributors will need to verify installation of Node.js i
 
 ## Usage
 
-Once the user is at the homepage the user is able view other users posts as well as a wish list for future trips. As a new user, the user will need to navigate to the top right of the page and click on the login/sign up option. After the new user enters the correct creditals, the user will be then led to their newly created profile. At that point, they are free to add to their itinerary, wishlist, and share their thoughts, images, and post content. The user also will have visibilty of their friends list. The user can search for friends with at the top of the homepage. 
+Once the user is at the homepage the user is able view other users posts as well as a wish list for future trips. As a new user, the user will need to navigate to the top right of the page and click on the login/sign up option. After the new user enters the correct creditals, the user will be then led to their newly created profile. At that point, they are free to add to their itinerary, wishlist, and share their thoughts, images, and post content. The user also will have visibilty of their friends list. The user can search for friends at the top of the homepage in the search bar and then view friends profile. 
 
 ## Features
 
@@ -45,7 +45,15 @@ Once the user is at the homepage the user is able view other users posts as well
 - A component that allows users to add to a travel wishlist
 
 ## Screenshots
+![image](https://github.com/FractalIceCream/SkySocial/assets/142925597/1ca96a19-b095-4f5b-923c-b40e4328f59a)
 
+![image](https://github.com/FractalIceCream/SkySocial/assets/142925597/362ea3c3-0ded-4ccb-b67c-eafd66bff53b)
+
+![image](https://github.com/FractalIceCream/SkySocial/assets/142925597/dedae5d1-4624-4185-95a4-007c818bb48d)
+
+![image](https://github.com/FractalIceCream/SkySocial/assets/142925597/bb164878-ddb2-4f8d-9029-0718e9ad8e65)
+
+![image](https://github.com/FractalIceCream/SkySocial/assets/142925597/a65c4ea6-93a4-40e6-ade6-45e7aeb15551)
 
 
 ## Deployed Application Link
