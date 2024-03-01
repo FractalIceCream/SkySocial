@@ -49,7 +49,7 @@ Once the user is at the homepage the user is able view other users posts as well
 
 ![image](https://github.com/FractalIceCream/SkySocial/assets/142925597/362ea3c3-0ded-4ccb-b67c-eafd66bff53b)
 
-![image](https://github.com/FractalIceCream/SkySocial/assets/112839617/8ed6a102-1335-42dc-b96a-bcd5bd80845a)
+![image](https://github.com/FractalIceCream/SkySocial/assets/112839617/7a7b8d2f-5f6f-4291-91bd-ff54e24e365d)
 
 ![image](https://github.com/FractalIceCream/SkySocial/assets/142925597/bb164878-ddb2-4f8d-9029-0718e9ad8e65)
 
